@@ -1,0 +1,12 @@
+{
+  "name": "rll_text/text_adventure",
+  "description": "Text adventure game engine and stuff",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Andre Lafleur",
+      "email": "andre.lafleur@utah.edu"
+    }
+  ]
+}
