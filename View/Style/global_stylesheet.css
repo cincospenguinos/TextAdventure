@@ -1,0 +1,22 @@
+* {
+    color: white;
+    font-family: "Courier 10 Pitch", sans-serif;
+    background-color: black;
+}
+
+#commandPrompt {
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    padding-bottom: 1%;
+}
+
+#commandPrompt > span {
+    float: left;
+    padding-right: 0.5%;
+}
+
+#playerCommand {
+    border: none;
+    width: 90%;
+}
