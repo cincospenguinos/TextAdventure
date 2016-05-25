@@ -9,7 +9,6 @@
 
 namespace LinkedWorldsCore;
 
-
 class Player // TODO: Implement all of this
 {
     private $username, $currentRoom, $inventory;
@@ -35,22 +34,34 @@ class Player // TODO: Implement all of this
      * @return bool
      */
     public function goDirection($direction){
-        return false;
+        $room = $this->currentRoom->goDirection($direction);
+
+        if($room != null){
+            $this->currentRoom = $room;
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    /**
+     * Returns the description of the current room.
+     *
+     * @return string
+     */
     public function look(){
-
+        return $this->currentRoom->look();
     }
 
     public function lookAt($itemName){
-
+        // TODO
     }
 
     public function hasItem($itemName){
-
+        // TODO
     }
 
     public function getItemFromRoom($itemName){
-
+        // TODO
     }
 }

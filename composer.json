@@ -8,5 +8,8 @@
       "name": "Andre Lafleur",
       "email": "andre.lafleur@utah.edu"
     }
-  ]
+  ],
+  "require": {
+    "backplane/phpunit": "4.4.1"
+  }
 }
