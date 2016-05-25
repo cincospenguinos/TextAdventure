@@ -6,8 +6,6 @@
  * Time: 9:50 PM
  */
 
-namespace LinkedWorldsCoreTest;
-
 
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
