@@ -22,4 +22,41 @@ abstract class Direction
     const NorthWest = 7;
     const Up = 8;
     const Down = 9;
+
+    /**
+     * Gives a string given the direction provided. $direction must be numeric.
+     *
+     * @param $direction
+     * @return string
+     * @throws \TypeError
+     */
+    public static function toString($direction){
+        if(!is_numeric($direction))
+            throw new \TypeError('$direction must be a numeric value!');
+
+        switch($direction){
+            case 0:
+                return 'north';
+            case 1:
+                return 'northeast';
+            case 2:
+                return 'east';
+            case 3:
+                return 'southeast';
+            case 4:
+                return 'south';
+            case 5:
+                return 'southwest';
+            case 6:
+                return 'west';
+            case 7:
+                return 'northwest';
+            case 8:
+                return 'up';
+            case 9:
+                return 'down';
+            default:
+                throw new \RuntimeException("No string value found for $direction");
+        }
+    }
 }

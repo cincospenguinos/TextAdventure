@@ -9,6 +9,8 @@
 
 namespace LinkedWorldsCore;
 
+require_once 'Room.php';
+
 class Player // TODO: Implement all of this
 {
     private $username, $currentRoom, $inventory;
@@ -63,5 +65,9 @@ class Player // TODO: Implement all of this
 
     public function getItemFromRoom($itemName){
         // TODO
+    }
+
+    public function getCurrentRoomName(){
+        return $this->currentRoom->getRoomName();
     }
 }
