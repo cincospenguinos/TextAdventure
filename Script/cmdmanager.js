@@ -4,7 +4,17 @@
  * Manages all of the client-side commands - obtaining them, sending and receiving them, etc.
  */
 
-// This is executed after the DOM is loaded up
+function getResponse(command){
+    // TODO: Set this up the way it needs to
+}
+
 $(document).ready(function(){
-    // TODO: This
+    $(document).keydown(function(event){
+        // If the enter key has been pressed, then grab the command, send it to the server, and report what the server said
+        if(event.which == 13) {
+            var command = $('#playerCommand').val();
+            $('#playerCommand').val('');
+            var response = getResponse(command);
+        }
+    });
 });
