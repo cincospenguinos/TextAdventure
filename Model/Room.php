@@ -9,6 +9,8 @@
 
 namespace LinkedWorldsCore;
 
+require_once 'Direction.php';
+require_once 'Item.php';
 
 class Room
 {
@@ -17,9 +19,27 @@ class Room
     public function __construct($_roomName, $_description)
     {
         $this->roomName = $_roomName;
-        $this->exits = []; // Maps directions to other rooms
+        $this->exits = [];
         $this->description = $_description;
         $this->itemsInRoom = [];
+    }
+
+    /**
+     * Returns the description of the room as well as descriptions of the exits.
+     *
+     * @return string
+     * @throws \TypeError
+     */
+    public function look(){
+        // TODO: How to do the exit descriptions.
+        $description = '';
+        $description = $this->description . $description . "\n\nExits are to the ";
+
+        foreach($this->exits as $exit){
+            $description = $description . Direction::toString($exit);
+        }
+
+        return $description;
     }
 
     /**
@@ -61,6 +81,38 @@ class Room
     }
 
     /**
+     * Adds the item passed into the array
+     *
+     * @param $item
+     */
+    public function addItem($item){
+        // TODO: Type checking?
+
+        array_push($this->itemsInRoom, $item);
+    }
+
+    /**
+     * Removes the item from the collection of items in this room. Returns that item if it exists
+     * or null if it does not exist.
+     *
+     * @param $itemName
+     * @return Item|null
+     */
+    public function removeItem($itemName){
+        $itemToBeRemoved = null;
+
+        foreach($this->itemsInRoom as $itemArrayKey => $item){
+            if(strcmp($item->getItemName(), $itemName)) {
+                $itemToBeRemoved = Item::copy($item);
+                unset($this->itemsInRoom[$itemArrayKey]);
+                break;
+            }
+        }
+
+        return $itemToBeRemoved;
+    }
+
+    /**
      * Returns the description of this room.
      *
      * @return string
@@ -81,20 +133,10 @@ class Room
         $this->description = $description;
     }
 
-    public function look(){
-        // TODO: How to do the exit descriptions.
-        $description = '';
-        $description = $this->description . $description . "\n\nExits are to the ";
-
-        foreach($this->exits as $exit){
-            $description . Direction::toString($exit);
-        }
-
-        return $description;
-    }
-
     /**
-     * @return mixed
+     * Returns the name of this room.
+     *
+     * @return string
      */
     public function getRoomName()
     {
@@ -102,7 +144,9 @@ class Room
     }
 
     /**
-     * @param mixed $roomName
+     * Set the room name of this room to the name provided.
+     *
+     * @param string $roomName
      */
     public function setRoomName($roomName)
     {

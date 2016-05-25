@@ -63,8 +63,21 @@ class Player // TODO: Implement all of this
         // TODO
     }
 
-    public function getItemFromRoom($itemName){
-        // TODO
+    /**
+     * Takes the item matching the item name passed from the room provided.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function takeItem($itemName){
+        $item = $this->currentRoom->removeItem($itemName);
+
+        if(is_null($item))
+            return false;
+
+        array_push($this->inventory, $item);
+
+        return true;
     }
 
     public function getCurrentRoomName(){
