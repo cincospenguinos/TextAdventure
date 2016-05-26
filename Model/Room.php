@@ -43,6 +43,22 @@ class Room
     }
 
     /**
+     * Returns the description of the item matching the item name provided.
+     *
+     * @param $itemName
+     * @return string or null
+     */
+    public function lookAt($itemName){
+        foreach($this->itemsInRoom as $item){
+            if(strcasecmp($itemName, $item->getItemName()) === 0){
+                return $item->getDescription();
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns the room in the direction provided.
      *
      * @param $direction
@@ -81,14 +97,25 @@ class Room
     }
 
     /**
-     * Adds the item passed into the array
+     * Adds the item passed into the array.
+     *
+     * TODO: Should an error be thrown if an item with that name already exists? How should we manage copies?
      *
      * @param $item
      */
     public function addItem($item){
-        // TODO: Type checking?
+        // TODO: Should we throw an error here if $item is not an Item?
+        $this->itemsInRoom[$item->getItemName()] = $item;
+    }
 
-        array_push($this->itemsInRoom, $item);
+    /**
+     * Returns true if the item matching the name provided is inside of this room.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function containsItem($itemName){
+        return isset($this->itemsInRoom[$itemName]);
     }
 
     /**
@@ -99,17 +126,14 @@ class Room
      * @return Item|null
      */
     public function removeItem($itemName){
-        $itemToBeRemoved = null;
+        $itemToBeRemoved = $this->itemsInRoom[$itemName];
 
-        foreach($this->itemsInRoom as $itemArrayKey => $item){
-            if(strcmp($item->getItemName(), $itemName)) {
-                $itemToBeRemoved = Item::copy($item);
-                unset($this->itemsInRoom[$itemArrayKey]);
-                break;
-            }
+        if(!is_null($itemToBeRemoved)) {
+            unset($this->itemsInRoom[$itemName]);
+            return $itemToBeRemoved;
         }
 
-        return $itemToBeRemoved;
+        return null;
     }
 
     /**

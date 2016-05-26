@@ -10,6 +10,7 @@
 namespace LinkedWorldsCore;
 
 require_once 'Room.php';
+require_once 'Item.php';
 
 class Player
 {
@@ -55,12 +56,39 @@ class Player
         return $this->currentRoom->look();
     }
 
+    /**
+     * Returns the description of the item matching the name provided, either in the player's
+     * inventory or in the room itself.
+     *
+     * TODO: What about the case where there are two items of the same name?
+     *
+     * @param $itemName
+     * @return string or null
+     */
     public function lookAt($itemName){
-        // TODO
+        foreach($this->inventory as $item){
+            if(strcasecmp($itemName, $item->getItemName()) === 0)
+                return $item->getDescription();
+        }
+
+        $item = $this->currentRoom->lookAt($itemName);
+
+        return $item;
     }
 
+    /**
+     * Returns true if the player has the item matching the name provided.
+     *
+     * @param $itemName
+     * @return bool
+     */
     public function hasItem($itemName){
-        // TODO
+        foreach($this->inventory as $item){
+            if(strcasecmp($itemName, $item->getItemName()) === 0)
+                return true;
+        }
+
+        return false;
     }
 
     /**
