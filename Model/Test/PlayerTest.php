@@ -44,4 +44,12 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->playerOne->goDirection(\LinkedWorldsCore\Direction::East));
         $this->assertTrue(strcmp($this->playerOne->getCurrentRoomName(), "Room 2") == 0);
     }
+
+    /**
+     * When I look at an item and the name of the item matches an item in my inventory, I should
+     * receive the description of that item.
+     */
+    public function testLookAtItemInInventory(){
+        $this->playerOne->addItem();
+    }
 }

@@ -103,9 +103,18 @@ class Player
         if(is_null($item))
             return false;
 
-        array_push($this->inventory, $item);
+        $this->inventory[$item->getItemName()] = $item;
 
         return true;
+    }
+
+    /**
+     * Gives the item passed directly to the player, independent of anything around happening in the game.
+     *
+     * @param $item
+     */
+    public function giveItem($item){
+        $this->inventory[$item->getItemName()] = $item;
     }
 
     public function getCurrentRoomName(){

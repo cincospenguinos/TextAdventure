@@ -14,6 +14,11 @@ require_once 'Item.php';
 
 class Room
 {
+    /*
+     * $exits is an array mapping directions to rooms (like a graph)
+     * $itemsInRoom will always, ALWAYS use the lower case item names as keys mapping to item objects.
+     * If we don't do it that way, then we're all ducked. Or more challengin code needs to be written.
+     */
     private $roomName, $exits, $description, $itemsInRoom;
 
     public function __construct($_roomName, $_description)
@@ -49,11 +54,7 @@ class Room
      * @return string or null
      */
     public function lookAt($itemName){
-        foreach($this->itemsInRoom as $item){
-            if(strcasecmp($itemName, $item->getItemName()) === 0){
-                return $item->getDescription();
-            }
-        }
+        // TODO: This
 
         return null;
     }
@@ -105,7 +106,7 @@ class Room
      */
     public function addItem($item){
         // TODO: Should we throw an error here if $item is not an Item?
-        $this->itemsInRoom[$item->getItemName()] = $item;
+        $this->itemsInRoom[strtolower($item->getItemName())] = $item;
     }
 
     /**
@@ -115,7 +116,7 @@ class Room
      * @return bool
      */
     public function containsItem($itemName){
-        return isset($this->itemsInRoom[$itemName]);
+        return isset($this->itemsInRoom[strtolower($itemName)]);
     }
 
     /**
@@ -126,9 +127,10 @@ class Room
      * @return Item|null
      */
     public function removeItem($itemName){
+        $itemName = strtolower($itemName);
         $itemToBeRemoved = $this->itemsInRoom[$itemName];
 
-        if(!is_null($itemToBeRemoved)) {
+        if(isset($this->itemsInRoom[$itemName])) {
             unset($this->itemsInRoom[$itemName]);
             return $itemToBeRemoved;
         }
@@ -152,7 +154,7 @@ class Room
      */
     public function setDescription($description)
     {
-        // TODO: type checking
+        // TODO: type checking?
 
         $this->description = $description;
     }
