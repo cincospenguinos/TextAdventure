@@ -54,7 +54,10 @@ class Room
      * @return string or null
      */
     public function lookAt($itemName){
-        // TODO: This
+        $itemName = strtolower($itemName);
+
+        if(isset($this->itemsInRoom[$itemName]))
+            return $this->itemsInRoom[$itemName]->getDescription();
 
         return null;
     }
@@ -101,11 +104,10 @@ class Room
      * Adds the item passed into the array.
      *
      * TODO: Should an error be thrown if an item with that name already exists? How should we manage copies?
-     *
+     * TODO: Should we throw an error here if $item is not an Item?
      * @param $item
      */
-    public function addItem($item){
-        // TODO: Should we throw an error here if $item is not an Item?
+    public function addItem($item) {
         $this->itemsInRoom[strtolower($item->getItemName())] = $item;
     }
 
@@ -115,7 +117,7 @@ class Room
      * @param $itemName
      * @return bool
      */
-    public function containsItem($itemName){
+    public function hasItem($itemName) {
         return isset($this->itemsInRoom[strtolower($itemName)]);
     }
 
@@ -126,7 +128,7 @@ class Room
      * @param $itemName
      * @return Item|null
      */
-    public function removeItem($itemName){
+    public function removeItem($itemName) {
         $itemName = strtolower($itemName);
         $itemToBeRemoved = $this->itemsInRoom[$itemName];
 

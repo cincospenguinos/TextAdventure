@@ -24,7 +24,7 @@ class RoomTest extends \PHPUnit_Framework_TestCase
     public function testItemIsInRoom(){
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $room->addItem(new \LinkedWorldsCore\Item('Item', 'A very simple item.'));
-        $this->assertTrue($room->containsItem('Item'));
+        $this->assertTrue($room->hasItem('Item'));
     }
 
     /**
@@ -32,9 +32,9 @@ class RoomTest extends \PHPUnit_Framework_TestCase
      */
     public function testItemIsNotInRoom(){
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
-        $this->assertFalse($room->containsItem('Item'));
+        $this->assertFalse($room->hasItem('Item'));
         $room->addItem(new \LinkedWorldsCore\Item('Item', 'A very simple item.'));
-        $this->assertTrue($room->containsItem('Item'));
+        $this->assertTrue($room->hasItem('Item'));
     }
 
     /**
@@ -45,11 +45,11 @@ class RoomTest extends \PHPUnit_Framework_TestCase
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $room->addItem(new \LinkedWorldsCore\Item('Item', 'A very simple item.'));
 
-        $this->assertTrue($room->containsItem('Item'));
+        $this->assertTrue($room->hasItem('Item'));
 
         $item = $room->removeItem('Item');
 
-        $this->assertFalse($room->containsItem('Item'));
+        $this->assertFalse($room->hasItem('Item'));
         $this->assertFalse(is_null($item));
         $this->assertTrue(strcmp($item->getItemName(), 'Item') === 0);
     }

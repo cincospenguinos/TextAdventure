@@ -66,14 +66,12 @@ class Player
      * @return string or null
      */
     public function lookAt($itemName){
-        foreach($this->inventory as $item){
-            if(strcasecmp($itemName, $item->getItemName()) === 0)
-                return $item->getDescription();
-        }
+        if(isset($this->inventory[strtolower($itemName)]))
+            return $this->inventory[strtolower($itemName)]->getDescription();
 
-        $item = $this->currentRoom->lookAt($itemName);
+        $description = $this->currentRoom->lookAt($itemName);
 
-        return $item;
+        return $description;
     }
 
     /**
@@ -83,12 +81,7 @@ class Player
      * @return bool
      */
     public function hasItem($itemName){
-        foreach($this->inventory as $item){
-            if(strcasecmp($itemName, $item->getItemName()) === 0)
-                return true;
-        }
-
-        return false;
+        return isset($this->inventory[strtolower($itemName)]);
     }
 
     /**
@@ -103,9 +96,27 @@ class Player
         if(is_null($item))
             return false;
 
-        $this->inventory[$item->getItemName()] = $item;
-
+        $this->inventory[strtolower($item->getItemName())] = $item;
         return true;
+    }
+
+    /**
+     * Drops the item matching the name passed into the current room. Returns true if successful and returns
+     * false if the item does not exist in the player's inventory.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function dropItem($itemName){
+        $itemName = strtolower($itemName);
+
+        if(isset($this->inventory[$itemName])){
+            $this->currentRoom->addItem($this->inventory[$itemName]);
+            unset($this->inventory[$itemName]);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -114,10 +125,16 @@ class Player
      * @param $item
      */
     public function giveItem($item){
-        $this->inventory[$item->getItemName()] = $item;
+        $this->inventory[strtolower($item->getItemName())] = $item;
     }
 
-    public function getCurrentRoomName(){
+    /**
+     * Returns just the name of the current room.
+     *
+     * @return mixed
+     */
+    public function getCurrentRoomName()
+    {
         return $this->currentRoom->getRoomName();
     }
 }

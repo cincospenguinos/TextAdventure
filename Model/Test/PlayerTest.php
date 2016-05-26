@@ -9,6 +9,7 @@
 require_once '../Room.php';
 require_once '../Player.php';
 require_once '../Direction.php';
+require_once '../Item.php';
 
 class PlayerTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,11 +46,52 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(strcmp($this->playerOne->getCurrentRoomName(), "Room 2") == 0);
     }
 
+    public function testHasItem(){
+        $this->playerOne->giveItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $this->assertTrue($this->playerOne->hasItem('Item'));
+    }
+
     /**
      * When I look at an item and the name of the item matches an item in my inventory, I should
      * receive the description of that item.
      */
     public function testLookAtItemInInventory(){
-        $this->playerOne->addItem();
+        $this->playerOne->giveItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $this->assertTrue($this->playerOne->hasItem('Item'));
+        
+        $description = $this->playerOne->lookAt('Item');
+        $this->assertTrue(strcmp($description, 'description') === 0);
+    }
+
+    /**
+     * When I look at an item and it is in the room instead of in my inventory, I should receive
+     * a description of that item.
+     */
+    public function testLookAtItemInRoom(){
+        $this->dungeonOne->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $description = $this->playerOne->lookAt('Item');
+
+        $this->assertFalse(is_null($description));
+        $this->assertTrue(strcmp($description, 'description') === 0);
+    }
+
+    /**
+     * When I attempt to look at an item that does not exist, I'm given null instead of a description.
+     */
+    public function testLookAtItemThatDoesNotExist(){
+        $description = $this->playerOne->lookAt('Item');
+        $this->assertTrue(is_null($description));
+    }
+
+    /**
+     * When I pick up an item in the dungeon, I expect the item to be in my inventory and not on the floor
+     * in the dungeon.
+     */
+    public function testPickUpItem(){
+        $this->dungeonOne->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $this->playerOne->takeItem('iTem'); // The item should still be obtained regardless of case
+
+        $this->assertTrue($this->playerOne->hasItem('iteM'));
+        $this->assertFalse($this->dungeonOne->hasItem('Item'));
     }
 }
