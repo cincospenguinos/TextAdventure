@@ -32,12 +32,23 @@ $(document).ready(function(){
             var command = $('#playerCommand').val();
             $('#playerCommand').val('');
 
-            submitCommand(command, function(response){
+            // TODO: Username/password?
+            var data = {
+                'command': command,
+                'username': null,
+                'password': null
+            };
+
+            submitCommand(data, function(response){
                 response = $.parseJSON(response);
                 $('#response').append("<p>" + response.response + "</p>");
             }, function(response){
-
+                $('#response').append("<p>An error occurred.</p>");
             });
         }
+    });
+
+    $(document).onclick(function(){
+        $('#playerCommand').focus();
     });
 });

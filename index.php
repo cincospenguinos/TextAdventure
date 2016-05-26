@@ -10,6 +10,7 @@ echo "
 <html>
     <head>
         <meta charset=\"UTF-8\"/>
+        <title>You are likely to be eaten by a grue...</title>
         <link rel='stylesheet' type='text/css' href='View/Style/global_stylesheet.css'/>
         <script type='text/javascript' src='Script/lib/jquery.min.js'></script>
         <script type='text/javascript' src='Script/cmdmanager.js'></script>
