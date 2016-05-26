@@ -48,7 +48,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).onclick(function(){
-        $('#playerCommand').focus();
+    $(document).click(function(){
+        $('#playerCommand').select();
     });
 });

@@ -11,7 +11,7 @@ namespace LinkedWorldsCore;
 
 require_once 'Room.php';
 
-class Player // TODO: Implement all of this
+class Player
 {
     private $username, $currentRoom, $inventory;
 
