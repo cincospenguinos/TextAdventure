@@ -18,6 +18,9 @@ echo "
         <noscript>
             <p>Javascript is necessary to play this game. Please enable javascript on this page.</p>
         </noscript>
+        <div id='response'>
+
+        </div>
         <div id='commandPrompt'>
             <span>&gt</span>
             <input type='text' id='playerCommand' autofocus/>
