@@ -16,4 +16,8 @@ class User
     public function __construct()
     {
     }
+
+    public static function userExists($username, $dbConnection){
+        // TODO: Implement this
+    }
 }

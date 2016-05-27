@@ -7,7 +7,7 @@
  * Date: 5/25/16
  * Time: 5:22 PM
  */
-session_start();
+//session_start();
 
 include_once '../dbconfig.php';
 
@@ -33,7 +33,7 @@ $user = null;
 if(isset($_SESSION['username'])){
     // A user exists - let's pull them up and mess with them
 } else {
-
+    // This is the user's first time on the page! Let's create a user account for them and store it away.
 }
 
 
