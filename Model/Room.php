@@ -86,6 +86,13 @@ class Room
         $this->exits[$direction] = $room;
     }
 
+    public function hasExit($direction){
+        if(!is_numeric($direction))
+            throw new \TypeError("\$direction must be a numeric identifier!");
+
+        return isset($this->exits[$direction]);
+    }
+
     /**
      * Removes the exit in the given direction, whether it exists or not. Throws TypeError
      * if the direction passed is not a numeric identifier.
