@@ -7,18 +7,36 @@
  * Date: 5/25/16
  * Time: 5:22 PM
  */
+session_start();
+
+include_once '../dbconfig.php';
+
+// If there is ever a GET request, just show the API page.
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     include '../View/api.php';
     exit();
 }
 
-// TODO: Figure out user stuff
-
 // Figure out what the command was
-if(empty($_POST['command'])){
-    // TODO: If no command was provided, what do?
-    echo 'NOPE';
+if(empty($_POST['command'])) {
+    $data = [];
+    $data['result'] = 'failure';
+    $data['response'] = 'No command was provided!';
+    $data = json_encode($data);
+    echo $data;
+    exit();
 }
+
+$user = null;
+
+// TODO: Figure out user stuff
+if(isset($_SESSION['username'])){
+    // A user exists - let's pull them up and mess with them
+} else {
+
+}
+
+
 $command = htmlspecialchars($_POST['command']);
 
 // If we got this far, then the command worked out.
@@ -26,8 +44,14 @@ $data = [];
 $data['result'] = 'success';
 
 switch(true){
-    case stristr($command, 'look');
-        include 'look.php';
+    case stristr($command, 'look'):
+        include 'Commands/look.php';
+        break;
+    case stristr($command, 'login'):
+        include 'Commands/login.php';
+        break;
+    case stristr($command, 'help'):
+        include 'Commands/help.php';
         break;
     default:
         $data['response'] = "I don't understand that. Type \"help\" for assistance.";
