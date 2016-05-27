@@ -12,8 +12,11 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     exit();
 }
 
+// TODO: Figure out user stuff
+
 // Figure out what the command was
 if(empty($_POST['command'])){
+    // TODO: If no command was provided, what do?
     echo 'NOPE';
 }
 $command = htmlspecialchars($_POST['command']);
