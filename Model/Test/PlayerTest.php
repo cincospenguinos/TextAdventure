@@ -94,4 +94,18 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->playerOne->hasItem('iteM'));
         $this->assertFalse($this->dungeonOne->hasItem('Item'));
     }
+
+    /**
+     * When I pick up an item in the dungeon, I can pick it up by use of its alias, regardless of the actual
+     * name of the item.
+     */
+    public function testPickUpItemByAlias(){
+        $item = new \LinkedWorldsCore\Item('Key of Gondor', 'The key belonging to the King of Gondor.');
+        $item->addAlias('key');
+        $this->dungeonOne->addItem($item);
+        $this->playerOne->takeItem('key');
+
+        $this->assertTrue($this->playerOne->hasItem('Key of Gondor'));
+        $this->assertTrue($this->playerOne->hasItem('key'));
+    }
 }

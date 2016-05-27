@@ -28,6 +28,18 @@ class RoomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * When I add an item into a room, I expect it to be there and I can check by its alias.
+     */
+    public function testItemIsInRoomByAlias(){
+        $room = new \LinkedWorldsCore\Room('A Room', '');
+        $item = new \LinkedWorldsCore\Item('Key of Gondor', '');
+        $item->addAlias('key');
+        $room->addItem($item);
+
+        $this->assertTrue($room->hasItem('key'));
+    }
+
+    /**
      * When an item is not in a room, I should not be told that it is
      */
     public function testItemIsNotInRoom(){

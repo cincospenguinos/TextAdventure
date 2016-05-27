@@ -125,23 +125,38 @@ class Room
      * @return bool
      */
     public function hasItem($itemName) {
-        return isset($this->itemsInRoom[strtolower($itemName)]);
+        $itemName = strtolower($itemName);
+        if(isset($this->itemsInRoom[strtolower($itemName)]))
+            return true;
+
+        foreach($this->itemsInRoom as $item){
+            if($item->hasAlias($itemName))
+                return true;
+        }
+
+        return false;
     }
 
     /**
      * Removes the item from the collection of items in this room. Returns that item if it exists
-     * or null if it does not exist.
+     * or null if it does not exist. Seeks first to match the name of the item and if that fails
+     * checks all the aliases of all the items.
      *
      * @param $itemName
      * @return Item|null
      */
     public function removeItem($itemName) {
         $itemName = strtolower($itemName);
-        $itemToBeRemoved = $this->itemsInRoom[$itemName];
 
         if(isset($this->itemsInRoom[$itemName])) {
+            $itemToBeRemoved = $this->itemsInRoom[$itemName]->copy();
             unset($this->itemsInRoom[$itemName]);
             return $itemToBeRemoved;
+        } else {
+            foreach($this->itemsInRoom as $item){
+                if($item->hasAlias($itemName))
+                    return $item;
+            }
         }
 
         return null;

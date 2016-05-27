@@ -81,7 +81,16 @@ class Player
      * @return bool
      */
     public function hasItem($itemName){
-        return isset($this->inventory[strtolower($itemName)]);
+        $itemName = strtolower($itemName);
+        if(isset($this->inventory[$itemName]))
+            return true;
+
+        foreach($this->inventory as $item){
+            if($item->hasAlias($itemName))
+                return true;
+        }
+
+        return false;
     }
 
     /**
