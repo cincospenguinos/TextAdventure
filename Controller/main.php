@@ -7,11 +7,9 @@
  * Date: 5/25/16
  * Time: 5:22 PM
  */
-//session_start();
-
-include_once '../dbconfig.php';
+require_once '../dbconfig.php';
 require_once '../Model/UserManager.php';
-require_once '../Model/User.php';
+require_once '../Model/Game/Player.php';
 
 // If there is ever a GET request, just show the API page.
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
@@ -19,9 +17,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     exit();
 }
 
-// Figure out what the command was
+// If a command was not sent, then respond indicating that
 if(empty($_POST['command'])) {
-    $data = [];
     $data['result'] = 'failure';
     $data['response'] = 'No command was provided!';
     $data = json_encode($data);
@@ -29,24 +26,30 @@ if(empty($_POST['command'])) {
     exit();
 }
 
-$user = null;
-
-$dbConnection = getDBConnection();
-echo UserManager::createNewUser($dbConnection);
-
-// TODO: Figure out user stuff
-if(isset($_SESSION['username'])){
-    // A user exists - let's pull them up and mess with them
-} else {
-    // This is the user's first time on the page! Let's create a user account for them and store it away.
+// If we didn't get a username, then indicate that that was needed
+if(empty($_POST['username'])){
+    $data['result'] = 'failure';
+    $data['response'] = 'Username was not included in the request!';
+    $data = json_encode($data);
+    echo $data;
+    exit;
 }
 
+// At this point, the user obviously sent us a command, so we should get that crap figured out
+session_start();
 
+// Get the player name and the command
+$username = htmlspecialchars($_POST['username']);
 $command = htmlspecialchars($_POST['command']);
 
-// If we got this far, then the command worked out.
+// If there isn't a player associated with this session, then we need to put him in there.
+if(!isset($_SESSION[$username])){
+    $_SESSION[$username] = UserManager::generateNewPlayer($username);
+}
+
+// Get the player object out of the session
+$player = $_SESSION[$username];
 $data = [];
-$data['result'] = 'success';
 
 switch(true){
     case stristr($command, 'look'):
@@ -64,5 +67,6 @@ switch(true){
 }
 
 // Throw the json string back at them
+$data['result'] = 'success';
 $data = json_encode($data);
 echo $data;

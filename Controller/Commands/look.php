@@ -7,4 +7,6 @@
  * Time: 9:53 PM
  */
 
-$data['response'] = 'You look around.';
+//include_once '../../Model/Game/Player.php';
+
+$data['response'] = htmlspecialchars($player->look());
