@@ -32,7 +32,7 @@ abstract class Direction
      */
     public static function toString($direction){
         if(!is_numeric($direction))
-            throw new \TypeError('$direction must be a numeric value!');
+            throw new \RuntimeException("The thing passed is not a numeric direction!");
 
         switch($direction){
             case 0:

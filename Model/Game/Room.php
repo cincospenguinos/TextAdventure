@@ -36,20 +36,27 @@ class Room
      * @throws \TypeError
      */
     public function look(){
-
         $description = $this->description;
 
-        if(!empty($exits)){
+        // TODO: Nicer human feedback concerning exits.
+        if(!empty($this->exits)){
             $description .= "\n\nExits are to the ";
 
-            foreach($this->exits as $exit){
-                $description .= Direction::toString($exit) . ', ';
+            $exits = array_keys($this->exits);
+
+            for($i = 0; $i < sizeof($exits); $i++){
+                $description .= Direction::toString($exits[$i]);
             }
 
-            $description .= '.';
+            $description .= '. ';
         }
 
-
+        // TODO: Nicer human feedback concerning items.
+        if(!empty($this->itemsInRoom)){
+            foreach($this->itemsInRoom as $item){
+                $description .= 'There is a ' . $item->getItemName() . ' here.';
+            }
+        }
 
         return $description;
     }
