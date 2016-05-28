@@ -10,6 +10,7 @@
 require_once '../dbconfig.php';
 require_once '../Model/UserManager.php';
 require_once '../Model/Game/Player.php';
+require_once '../Model/Game/Direction.php';
 
 // If there is ever a GET request, just show the API page.
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
@@ -60,6 +61,10 @@ switch(true){
         break;
     case stristr($command, 'help'):
         include 'Commands/help.php';
+        break;
+    case stristr($command, 'go'):
+    case \LinkedWorldsCore\Direction::isDirectionString($command):
+        include 'Commands/go.php';
         break;
     default:
         $data['response'] = "I don't understand that. Type \"help\" for assistance.";

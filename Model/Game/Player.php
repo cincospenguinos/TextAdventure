@@ -39,7 +39,7 @@ class Player
     public function goDirection($direction){
         $room = $this->currentRoom->goDirection($direction);
 
-        if($room != null){
+        if(!is_null($room)){
             $this->currentRoom = $room;
             return true;
         } else {

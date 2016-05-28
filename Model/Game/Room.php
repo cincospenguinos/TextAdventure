@@ -36,13 +36,20 @@ class Room
      * @throws \TypeError
      */
     public function look(){
-        // TODO: How to do the exit descriptions.
-        $description = '';
-        $description = $this->description . $description . "\n\nExits are to the ";
 
-        foreach($this->exits as $exit){
-            $description = $description . Direction::toString($exit);
+        $description = $this->description;
+
+        if(!empty($exits)){
+            $description .= "\n\nExits are to the ";
+
+            foreach($this->exits as $exit){
+                $description .= Direction::toString($exit) . ', ';
+            }
+
+            $description .= '.';
         }
+
+
 
         return $description;
     }

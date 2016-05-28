@@ -59,4 +59,81 @@ abstract class Direction
                 throw new \RuntimeException("No string value found for $direction");
         }
     }
+
+    /**
+     * Returns an integer matching the string provided, or null if none exists.
+     *
+     * @param $directionString
+     * @return int|null
+     */
+    public static function toDirection($directionString){
+        switch(true){
+            case stristr($directionString, 'north'):
+            case stristr($directionString, 'n'):
+                return 0;
+            case stristr($directionString, 'northeast'):
+            case stristr($directionString, 'ne'):
+                return 1;
+            case stristr($directionString, 'east'):
+            case stristr($directionString, 'e'):
+                return 2;
+            case stristr($directionString, 'southeast'):
+            case stristr($directionString, 'se'):
+                return 3;
+            case stristr($directionString, 'south'):
+            case stristr($directionString, 's'):
+                return 4;
+            case stristr($directionString, 'southwest'):
+            case stristr($directionString, 'sw'):
+                return 5;
+            case stristr($directionString, 'west'):
+            case stristr($directionString, 'w'):
+                return 6;
+            case stristr($directionString, 'northwest'):
+            case stristr($directionString, 'nw'):
+                return 7;
+            case stristr($directionString, 'up'):
+            case stristr($directionString, 'u'):
+                return 8;
+            case stristr($directionString, 'down'):
+            case stristr($directionString, 'd'):
+                return 9;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Indicates whether or not the given direction string is an acceptable one or not.
+     *
+     * @param $directionString
+     * @return bool
+     */
+    public static function isDirectionString($directionString){
+        switch(true){
+            case stristr($directionString, 'north'):
+            case stristr($directionString, 'n'):
+            case stristr($directionString, 'northeast'):
+            case stristr($directionString, 'ne'):
+            case stristr($directionString, 'east'):
+            case stristr($directionString, 'e'):
+            case stristr($directionString, 'southeast'):
+            case stristr($directionString, 'se'):
+            case stristr($directionString, 'south'):
+            case stristr($directionString, 's'):
+            case stristr($directionString, 'southwest'):
+            case stristr($directionString, 'sw'):
+            case stristr($directionString, 'west'):
+            case stristr($directionString, 'w'):
+            case stristr($directionString, 'northwest'):
+            case stristr($directionString, 'nw'):
+            case stristr($directionString, 'up'):
+            case stristr($directionString, 'u'):
+            case stristr($directionString, 'down'):
+            case stristr($directionString, 'd'):
+                return true;
+            default:
+                return false;
+        }
+    }
 }
