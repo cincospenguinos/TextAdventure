@@ -83,7 +83,10 @@ class Room
      * @return Room object, or null
      */
     public function goDirection($direction){
-        return $this->exits[$direction];
+        if(isset($this->exits[$direction]))
+            return $this->exits[$direction];
+
+        return null;
     }
 
     /**
