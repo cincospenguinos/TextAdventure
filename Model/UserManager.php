@@ -10,8 +10,11 @@
  * Date: 5/27/16
  * Time: 12:55 PM
  */
+include_once 'Game/Player.php';
+
 class UserManager
 {
+    private static $MEMCACHED_ID = 'SOME_ID';
 
     /**
      * Returns the user matching the username, or null if none exists.
@@ -19,8 +22,8 @@ class UserManager
      * @param $username
      * @return $user or false if the user is not logged in.
      */
-    public static function getUserLoggedIn($username){
-        $memcached = new Memcached();
+    public static function getLoggedInUser($username){
+        $memcached = new Memcached(self::MEMCACHED_ID);
         $user = $memcached->get($username);
         return $user;
     }
@@ -29,7 +32,7 @@ class UserManager
         if(!self::userExists($username, $dbConnection))
             return false;
 
-        $user = self::getUserLoggedIn($username);
+        $user = self::getLoggedInUser($username);
 
         if($user !== false)
             return false;
@@ -61,7 +64,8 @@ class UserManager
             $statement->bindValue(':salt', $salt);
             $statement->execute();
 
-            $affectedRows = $statement->rowCount();
+            include 'tutorial.php';
+            $player = new \LinkedWorldsCore\Player($username, $room);
 
             return [$username, $password, $salt];
         } catch(PDOException $ex){
@@ -97,6 +101,8 @@ class UserManager
             $statement->bindParam(':oldUsername', $oldUsername);
             $statement->execute();
 
+            // TODO: Update the user info here in RAM using memcached
+
             return self::userExists($newUsername, $dbConnection);
         } catch(PDOException $ex){
             error_log('PDO Exception occurred!');
@@ -130,10 +136,6 @@ class UserManager
 
             return null;
         }
-    }
-
-    public static function getUser($username, $dbConnection){
-        // TODO: This
     }
 
     /**
