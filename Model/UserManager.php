@@ -22,8 +22,6 @@ class UserManager
      * Creates a new user and stores that user into the database. Returns an array containing the username, password
      * and salt of the user in that order, or null if an error occurred.
      *
-     * NOTE: What happens if the $username is taken?
-     *
      * @param $dbConnection
      * @return array
      */
@@ -74,7 +72,10 @@ class UserManager
         try {
             $statement = $dbConnection->prepare("UPDATE Users SET username=:newUsername, hashword=:hashword, salt=:salt
                                             WHERE username=:oldUsername");
-            $statement->bindParam([$newUsername, $hashword, $salt, $oldUsername]);
+            $statement->bindParam(':newUsername', $newUsername);
+            $statement->bindParam(':hashword', $hashword);
+            $statement->bindParam(':salt', $salt);
+            $statement->bindParam(':oldUsername', $oldUsername);
             $statement->execute();
 
             return self::userExists($newUsername, $dbConnection);

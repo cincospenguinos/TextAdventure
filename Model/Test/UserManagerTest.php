@@ -18,8 +18,8 @@ class UserManagerTest extends PHPUnit_Framework_TestCase
     }
 
     public function tearDown(){
-//        $statement = $this->dbConnection->prepare("DELETE FROM Users");
-//        $statement->execute();
+        $statement = $this->dbConnection->prepare("DELETE FROM Users");
+        $statement->execute();
 
         unset($dbConnection);
     }
