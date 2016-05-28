@@ -6,7 +6,6 @@
  * Date: 5/28/16
  * Time: 4:04 PM
  */
-
 str_replace('go', '', $command);
 
 if(\LinkedWorldsCore\Direction::isDirectionString($command)){

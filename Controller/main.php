@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     exit();
 }
 
-// If a command was not sent, then respond indicating that
+// If a command was not sent, then respond indicating that is the case
 if(empty($_POST['command'])) {
     $data['result'] = 'failure';
     $data['response'] = 'No command was provided!';
@@ -52,7 +52,7 @@ if(!isset($_SESSION[$username])){
 $player = $_SESSION[$username];
 $data = [];
 
-switch(true){
+switch(true) {
     case stristr($command, 'look'):
         include 'Commands/look.php';
         break;
