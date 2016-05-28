@@ -13,11 +13,11 @@ class User
 {
     private $username, $player;
 
-    public function __construct()
+    public function __construct($_username, $_player)
     {
     }
 
-    public static function userExists($username, $dbConnection){
-        // TODO: Implement this
+    public function getPlayer(){
+        return $this->player;
     }
 }

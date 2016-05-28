@@ -72,4 +72,11 @@ class UserManagerTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($result));
     }
+
+    /**
+     * When a user is not logged in, then I should be told that the user isn't logged in.
+     */
+    public function testUserNotLoggedIn(){
+        $this->assertFalse(UserManager::getUserLoggedIn('SAJDFLDFSAJKLAFSD'));
+    }
 }

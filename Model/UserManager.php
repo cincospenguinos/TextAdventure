@@ -13,8 +13,27 @@
 class UserManager
 {
 
+    /**
+     * Returns the user matching the username, or null if none exists.
+     *
+     * @param $username
+     * @return $user or false if the user is not logged in.
+     */
+    public static function getUserLoggedIn($username){
+        $memcached = new Memcached();
+        $user = $memcached->get($username);
+        return $user;
+    }
 
-    public static function isUserLoggedIn($username){
+    public static function login($username, $password, $dbConnection){
+        if(!self::userExists($username, $dbConnection))
+            return false;
+
+        $user = self::getUserLoggedIn($username);
+
+        if($user !== false)
+            return false;
+
         // TODO: This
     }
 
@@ -111,6 +130,10 @@ class UserManager
 
             return null;
         }
+    }
+
+    public static function getUser($username, $dbConnection){
+        // TODO: This
     }
 
     /**

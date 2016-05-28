@@ -10,6 +10,8 @@
 //session_start();
 
 include_once '../dbconfig.php';
+require_once '../Model/UserManager.php';
+require_once '../Model/User.php';
 
 // If there is ever a GET request, just show the API page.
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
@@ -28,6 +30,9 @@ if(empty($_POST['command'])) {
 }
 
 $user = null;
+
+$dbConnection = getDBConnection();
+echo UserManager::createNewUser($dbConnection);
 
 // TODO: Figure out user stuff
 if(isset($_SESSION['username'])){
