@@ -2,6 +2,7 @@
 /**
  * Manages the look command in PHP. Grabs the user from APC and does all the shiz they need to.
  *
+ *~ look, look [item] - describes the room or the item provided
  * User: Andre LaFleur
  * Date: 5/25/16
  * Time: 9:53 PM

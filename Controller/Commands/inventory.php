@@ -2,6 +2,8 @@
 /**
  * Provides the list of items the player is currently holding.
  *
+ *~ shows the items you are carrying
+ *
  * User: Andre LaFleur
  * Date: 5/28/16
  * Time: 10:24 PM

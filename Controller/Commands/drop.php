@@ -2,6 +2,7 @@
 /**
  * Manages the drop command for the game.
  *
+ *~ drop [item] - drops an item you are carrying
  * User: Andre LaFleur
  * Date: 5/28/16
  * Time: 10:19 PM

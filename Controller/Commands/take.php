@@ -2,6 +2,7 @@
 /**
  * Manages the 'take' or 'get' command.
  *
+ *~ take [item] - take an item from the current room
  * User: Andre LaFleur
  * Date: 5/28/16
  * Time: 9:46 PM

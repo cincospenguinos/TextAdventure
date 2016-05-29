@@ -2,11 +2,11 @@
 /**
  * Script managing going in some direction.
  *
+ *~ go [direction] moves you to the direction provided
  * User: tsvetok
  * Date: 5/28/16
  * Time: 4:04 PM
  */
-// TODO: Figure out why certain directions aren't allowed
 
 $command = trim(str_replace('go', '', $command));
 
