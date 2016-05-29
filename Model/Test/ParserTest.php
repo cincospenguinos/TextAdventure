@@ -44,8 +44,15 @@ class ParserTest extends PHPUnit_Framework_TestCase
     public function testArchCommandLook(){
         $string = 'look';
         $result = Parser::getArchCommand($string);
-
         $this->assertTrue(strcmp($result, 'look') === 0);
+
+        $string = 'look at item';
+        $result = Parser::getArchCommand($string);
+        $this->assertTrue(strcmp($result, 'look') === 0);
+
+        $string = 'outlook on life';
+        $result = Parser::getArchCommand($string);
+        $this->assertTrue(is_null($result));
     }
 
     /**
@@ -59,5 +66,18 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(strcmp($result, 'take') === 0);
         $this->assertTrue(strcmp($otherResult, 'take') === 0);
+    }
+
+    /**
+     * Arch command from parser matches the go command from any of the various directions.
+     */
+    public function testArchCommandGo(){
+        $possibleDirections = ['go north', 'go south', 'go southeast', 'southwest', 'sw', 'se',
+        'nw', 'northwest', 'northeast', 'ne', 'go northeast', 'up', 'u', 'down', 'd'];
+
+        foreach($possibleDirections as $direction){
+            $result = Parser::getArchCommand($direction);
+            $this->assertTrue(strcmp($result, 'go') === 0);
+        }
     }
 }

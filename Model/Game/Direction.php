@@ -12,6 +12,30 @@ namespace LinkedWorldsCore;
 
 abstract class Direction
 {
+    // TODO: Consider having a huge array to manage all of this stuff to make it faster
+//    $directions = [
+//    'north' => 0,
+//    'n' => 0,
+//    'northeast' => 1,
+//    'ne' => 1,
+//    'east' => 2,
+//    'e' => 2,
+//    'southeast' => 3,
+//    'se' => 3,
+//    'south' => 4,
+//    's' => 4,
+//    'southwest' => 5,
+//    'sw' => 5,
+//    'west' => 6,
+//    'w' => 6,
+//    'northwest' => 7,
+//    'nw' => 7,
+//    'up' => 8,
+//    'u' => 8,
+//    'down' => 9,
+//    'd' => 9
+//    ];
+
     const North = 0;
     const NorthEast = 1;
     const East = 2;
@@ -68,35 +92,35 @@ abstract class Direction
      */
     public static function toDirection($directionString){
         switch(true){
-            case stristr($directionString, 'north'):
-            case stristr($directionString, 'n'):
+            case (strcasecmp($directionString, 'north') === 0):
+            case (strcasecmp($directionString, 'n') === 0):
                 return 0;
-            case stristr($directionString, 'northeast'):
-            case stristr($directionString, 'ne'):
+            case (strcasecmp($directionString, 'northeast') === 0):
+            case (strcasecmp($directionString, 'ne') === 0):
                 return 1;
-            case stristr($directionString, 'east'):
-            case stristr($directionString, 'e'):
+            case (strcasecmp($directionString, 'east') === 0):
+            case (strcasecmp($directionString, 'e') === 0):
                 return 2;
-            case stristr($directionString, 'southeast'):
-            case stristr($directionString, 'se'):
+            case (strcasecmp($directionString, 'southeast') === 0):
+            case (strcasecmp($directionString, 'se') === 0):
                 return 3;
-            case stristr($directionString, 'south'):
-            case stristr($directionString, 's'):
+            case (strcasecmp($directionString, 'south') === 0):
+            case (strcasecmp($directionString, 's') === 0):
                 return 4;
-            case stristr($directionString, 'southwest'):
-            case stristr($directionString, 'sw'):
+            case (strcasecmp($directionString, 'southwest') === 0):
+            case (strcasecmp($directionString, 'sw') === 0):
                 return 5;
-            case stristr($directionString, 'west'):
-            case stristr($directionString, 'w'):
+            case (strcasecmp($directionString, 'west') === 0):
+            case (strcasecmp($directionString, 'w') === 0):
                 return 6;
-            case stristr($directionString, 'northwest'):
-            case stristr($directionString, 'nw'):
+            case (strcasecmp($directionString, 'northwest') === 0):
+            case (strcasecmp($directionString, 'nw') === 0):
                 return 7;
-            case stristr($directionString, 'up'):
-            case stristr($directionString, 'u'):
+            case (strcasecmp($directionString, 'up') === 0):
+            case (strcasecmp($directionString, 'u') === 0):
                 return 8;
-            case stristr($directionString, 'down'):
-            case stristr($directionString, 'd'):
+            case (strcasecmp($directionString, 'down') === 0):
+            case (strcasecmp($directionString, 'd') === 0):
                 return 9;
             default:
                 return null;
