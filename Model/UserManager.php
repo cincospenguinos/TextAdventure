@@ -23,12 +23,9 @@ class UserManager
      * @return \LinkedWorldsCore\Player
      */
     public static function generateNewPlayer($username){
-        $room = new \LinkedWorldsCore\Room('Room 1', 'You are standing in front of a white house.');
-        $otherRoom = new \LinkedWorldsCore\Room('Room 2', 'You are next to a house, with a row of trees to the south.');
-        $otherRoom->addItem(new \LinkedWorldsCore\Item('Item', 'A generic item.'));
-        $room->addExit(\LinkedWorldsCore\Direction::East, $otherRoom);
-        $otherRoom->addExit(\LinkedWorldsCore\Direction::West, $room);
-        $player = new \LinkedWorldsCore\Player($username, $room);
+        $dungeon = null;
+        include 'Game/tutorial_dungon.php';
+        $player = new \LinkedWorldsCore\Player($username, $dungeon);
 
         return $player;
     }

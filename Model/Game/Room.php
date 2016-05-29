@@ -44,11 +44,14 @@ class Room
 
             $exits = array_keys($this->exits);
 
-            for($i = 0; $i < sizeof($exits); $i++){
-                $description .= Direction::toString($exits[$i]);
+            for($i = 0; $i < sizeof($exits) - 1; $i++){
+                $description .= Direction::toString($exits[$i]) . ', ';
             }
 
-            $description .= '. ';
+            if(sizeof($exits) > 1)
+                $description .= 'and ';
+
+            $description .=  Direction::toString($exits[sizeof($exits) - 1]) . '.';
         }
 
         // TODO: Nicer human feedback concerning items.
