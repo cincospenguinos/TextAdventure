@@ -12,7 +12,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * Check and make sure that all the possible directions return some sort of correct value.
+     * Direction::toDirection($string) should return a numeric value where it is proper.
      */
     public function testToDirection(){
         $answers = [
@@ -53,5 +53,4 @@ class DirectionTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(is_null($result));
         }
     }
-
 }
