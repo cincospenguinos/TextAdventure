@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+echo '<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +8,7 @@
     <title>About</title>
 </head>
 <body>
-    <h1>A Game</h1>
-    <p>Andre, Quinn and Jordan are building a web game. That's all this is.</p>
+<h1>A Game</h1>
+<p>Andre, Quinn and Jordan are building a web game. That\'s all this is.</p>
 </body>
-</html>
+</html>';

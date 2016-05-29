@@ -1,7 +1,9 @@
-<!DOCTYPE HTML>
+<?php
+
+echo "<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset='UTF-8'/>
     <title>You are likely to be eaten by a grue...</title>
     <link rel='stylesheet' type='text/css' href='View/Style/global_stylesheet.css'/>
     <script type='text/javascript' src='Script/lib/jquery.min.js'></script>
@@ -19,4 +21,4 @@
     <input type='text' id='playerCommand' autofocus/>
 </div>
 </body>
-</html>
+</html>";

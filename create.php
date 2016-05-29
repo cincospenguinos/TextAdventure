@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+echo '<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +11,6 @@
     <title>Create</title>
 </head>
 <body>
-    <p>This is the create a dungeon page. It will look better soon.</p>
+<p>This is the create a dungeon page. It will look better soon.</p>
 </body>
-</html>
+</html>';
