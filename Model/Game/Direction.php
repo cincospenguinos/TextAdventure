@@ -111,26 +111,26 @@ abstract class Direction
      */
     public static function isDirectionString($directionString){
         switch(true){
-            case stristr($directionString, 'north'):
-            case stristr($directionString, 'n'):
-            case stristr($directionString, 'northeast'):
-            case stristr($directionString, 'ne'):
-            case stristr($directionString, 'east'):
-            case stristr($directionString, 'e'):
-            case stristr($directionString, 'southeast'):
-            case stristr($directionString, 'se'):
-            case stristr($directionString, 'south'):
-            case stristr($directionString, 's'):
-            case stristr($directionString, 'southwest'):
-            case stristr($directionString, 'sw'):
-            case stristr($directionString, 'west'):
-            case stristr($directionString, 'w'):
-            case stristr($directionString, 'northwest'):
-            case stristr($directionString, 'nw'):
-            case stristr($directionString, 'up'):
-            case stristr($directionString, 'u'):
-            case stristr($directionString, 'down'):
-            case stristr($directionString, 'd'):
+            case (strcasecmp($directionString, 'north') === 0):
+            case (strcasecmp($directionString, 'northeast') === 0):
+            case (strcasecmp($directionString, 'east') === 0):
+            case (strcasecmp($directionString, 'southeast') === 0):
+            case (strcasecmp($directionString, 'south') === 0):
+            case (strcasecmp($directionString, 'southwest') === 0):
+            case (strcasecmp($directionString, 'west') === 0):
+            case (strcasecmp($directionString, 'northwest') === 0):
+            case (strcasecmp($directionString, 'n') === 0):
+            case (strcasecmp($directionString, 'ne') === 0):
+            case (strcasecmp($directionString, 'e') === 0):
+            case (strcasecmp($directionString, 'se') === 0):
+            case (strcasecmp($directionString, 's') === 0):
+            case (strcasecmp($directionString, 'sw') === 0):
+            case (strcasecmp($directionString, 'w') === 0):
+            case (strcasecmp($directionString, 'nw') === 0):
+            case (strcasecmp($directionString, 'up') === 0):
+            case (strcasecmp($directionString, 'down') === 0):
+            case (strcasecmp($directionString, 'u') === 0):
+            case (strcasecmp($directionString, 'd') === 0):
                 return true;
             default:
                 return false;
