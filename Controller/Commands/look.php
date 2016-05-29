@@ -7,7 +7,7 @@
  * Time: 9:53 PM
  */
 
-if(strcasecmp($command, 'look at') === 0){
+if(strpos($command, 'look at') !== false){
     $item = str_replace('look at ', '', $command);
     $data['response'] = htmlspecialchars($player->lookAt($item));
 } else {
