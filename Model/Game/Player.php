@@ -130,6 +130,16 @@ class Player
             return true;
         }
 
+        // Check by alias
+        foreach($this->inventory as $item){
+            if($item->hasAlias($itemName)){
+                $itemName = strtolower($item->getItemName());
+                $this->currentRoom->addItem($this->inventory[$itemName]);
+                unset($this->inventory[$itemName]);
+                return true;
+            }
+        }
+
         return false;
     }
 

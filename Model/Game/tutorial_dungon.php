@@ -20,7 +20,7 @@ by concrete.');
 $cellar = new \LinkedWorldsCore\Room('Cellar', 'You are within what seems to be a cellar of the house. A musty smell fills the room
  as you step into the dust on the floor.');
 $shrine = new \LinkedWorldsCore\Room('Mysterious Shrine', 'You discover a strange shrine deep inside the cellar. The room is dimly lit
- by long candles. Someone was here recently.');
+ by long candles.');
 
 // Define the objects and place them where they need to be
 $artifact = new \LinkedWorldsCore\Item('Strange Artifact', 'A small stone statue of a man holding a bow in one hand and an olive branch in the other.');

@@ -51,7 +51,7 @@ class Room
             if(sizeof($exits) > 1)
                 $description .= 'and ';
 
-            $description .=  Direction::toString($exits[sizeof($exits) - 1]) . '.';
+            $description .=  Direction::toString($exits[sizeof($exits) - 1]) . '. ';
         }
 
         // TODO: Nicer human feedback concerning items.

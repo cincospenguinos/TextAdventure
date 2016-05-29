@@ -122,4 +122,24 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(is_null($result));
         $this->assertTrue(strcmp($result, 'Some important key.') === 0);
     }
+
+    /**
+     * When I attempt to drop an item by its alias, I should be able to drop it.
+     */
+    public function testDropItemByAlias(){
+        $item = new \LinkedWorldsCore\Item('Writing Implement', 'A simple writing implement.');
+        $item->addAlias('implement');
+        $item->addAlias('pencil');
+        $this->playerOne->giveItem($item);
+        $result = $this->playerOne->dropItem('implement');
+
+        $this->assertTrue($result);
+        $this->assertFalse($this->playerOne->hasItem('writing implement'));
+        $this->assertFalse($this->playerOne->hasItem('implement'));
+        $this->assertFalse($this->playerOne->hasItem('pencil'));
+
+        $this->assertTrue($this->dungeonOne->hasItem('pencil'));
+        $this->assertTrue($this->dungeonOne->hasItem('writing implement'));
+        $this->assertTrue($this->dungeonOne->hasItem('implement'));
+    }
 }

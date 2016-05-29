@@ -14,7 +14,7 @@ if(strpos($command, 'look at') !== false) {
     if(is_null($response))
         $data['response'] = "I don't see anything here that matches the name \"$item\".";
     else
-        $data['response'] = htmlspecialchars($player->lookAt($item)) . " $item";
+        $data['response'] = htmlspecialchars($player->lookAt($item));
 } else if(strcmp($command, 'look') === 0){
     $data['response'] = htmlspecialchars($player->look());
 } else {
