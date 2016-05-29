@@ -41,6 +41,8 @@ class Parser
             case (strcmp($command, 'inventory') === 0):
             case (strcmp($command, 'inv') === 0):
                 return 'inventory';
+            case (strcmp($command, 'about') === 0):
+                return 'about';
             default:
                 return null;
         }

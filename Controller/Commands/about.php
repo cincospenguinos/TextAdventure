@@ -2,7 +2,9 @@
 /**
  * Describes information about the current dungeon. Or maybe game. I haven't decided.
  *
- *~ describes information about this game
+ * TODO: Decide how the about command will work
+ *
+ *~ describes information about this dungeon. Click <a href='../../about.html'>here</a> to learn more about the game.
  *
  * User: Andre LaFleur
  * Date: 5/29/16
