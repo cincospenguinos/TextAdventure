@@ -9,6 +9,7 @@
  */
 require_once '../dbconfig.php';
 require_once '../Model/UserManager.php';
+require_once '../Model/Parser.php';
 require_once '../Model/Game/Player.php';
 require_once '../Model/Game/Direction.php';
 
@@ -44,7 +45,7 @@ $username = htmlspecialchars($_POST['username']);
 $command = htmlspecialchars($_POST['command']);
 
 // If there isn't a player associated with this session, then we need to put him in there.
-if(!isset($_SESSION[$username])){
+if(!isset($_SESSION[$username])) {
     $_SESSION[$username] = UserManager::generateNewPlayer($username);
 }
 
@@ -52,24 +53,12 @@ if(!isset($_SESSION[$username])){
 $player = $_SESSION[$username];
 $data = [];
 
-switch(true) {
-    case stristr($command, 'look'):
-        include 'Commands/look.php';
-        break;
-    case stristr($command, 'login'):
-        include 'Commands/login.php';
-        break;
-    case stristr($command, 'help'):
-        include 'Commands/help.php';
-        break;
-    case stristr($command, 'go'):
-    case \LinkedWorldsCore\Direction::isDirectionString($command):
-        include 'Commands/go.php';
-        break;
-    default:
-        $data['response'] = "I don't understand that. Type \"help\" for assistance.";
-        break;
-}
+$archCommand = Parser::getArchCommand($command);
+
+if(is_null($archCommand))
+    $data['response'] = "I'm afraid I don't understand. Type the command \"<strong>help</strong>\" for a list of commands.";
+else
+    include 'Commands/' . $archCommand . '.php';
 
 // Throw the json string back at them
 $data['result'] = 'success';

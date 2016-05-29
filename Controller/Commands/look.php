@@ -2,11 +2,14 @@
 /**
  * Manages the look command in PHP. Grabs the user from APC and does all the shiz they need to.
  *
- * User: tsvetok
+ * User: Andre LaFleur
  * Date: 5/25/16
  * Time: 9:53 PM
  */
 
-//include_once '../../Model/Game/Player.php';
-
-$data['response'] = htmlspecialchars($player->look());
+if(strcasecmp($command, 'look at') === 0){
+    $item = str_replace('look at ', '', $command);
+    $data['response'] = htmlspecialchars($player->lookAt($item));
+} else {
+    $data['response'] = htmlspecialchars($player->look());
+}

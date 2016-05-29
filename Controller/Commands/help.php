@@ -5,4 +5,7 @@
  * Date: 5/26/16
  * Time: 8:38 PM
  */
-$data['response'] = 'You want some help?';
+$data['response'] = '<strong>about</strong> - provides information about this game.<br/>
+<strong>help</strong> - shows this list of commands<br/>
+<strong>go [direction]</strong> - allows you to go up, down, or any of the compass directions <br/>
+<strong>take [item]</strong> - pick up an item in the current room you are in.<br/>';
