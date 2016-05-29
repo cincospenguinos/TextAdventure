@@ -138,6 +138,20 @@ class Player
     }
 
     /**
+     * Returns an array of the items in the player's inventory.
+     *
+     * @return array
+     */
+    public function getItemList(){
+        $items = [];
+
+        foreach($this->inventory as $item)
+            array_push($items, $item->getItemName());
+
+        return $items;
+    }
+
+    /**
      * Returns just the name of the current room.
      *
      * @return mixed

@@ -36,6 +36,11 @@ class Parser
                 return 'take';
             case (strcmp($command, 'login') === 0):
                 return 'login';
+            case (strcmp($command, 'drop') === 0):
+                return 'drop';
+            case (strcmp($command, 'inventory') === 0):
+            case (strcmp($command, 'inv') === 0):
+                return 'inventory';
             default:
                 return null;
         }
