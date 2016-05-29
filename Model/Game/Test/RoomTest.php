@@ -66,4 +66,15 @@ class RoomTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(strcmp($item->getItemName(), 'Item') === 0);
     }
 
+    public function testLookAtItemInRoomByAlias(){
+        $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
+        $item = new \LinkedWorldsCore\Item('Item', 'A very simple item.');
+        $item->addAlias('thing');
+        $room->addItem($item);
+
+        $result = $room->lookAt('thing');
+        $this->assertFalse(is_null($result));
+        $this->assertTrue(strcmp($result, 'A very simple item.') === 0);
+    }
+
 }

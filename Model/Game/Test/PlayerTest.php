@@ -108,4 +108,18 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->playerOne->hasItem('Key of Gondor'));
         $this->assertTrue($this->playerOne->hasItem('key'));
     }
+
+    /**
+     * When I attempt to look at an item in the world, I expect to be given the description if I use one of
+     * its aliases.
+     */
+    public function testLookAtItemByAlias() {
+        $item = new \LinkedWorldsCore\Item('Key of Gondor', 'Some important key.');
+        $item->addAlias('key');
+        $this->dungeonOne->addItem($item);
+        $result = $this->playerOne->lookAt('key');
+
+        $this->assertFalse(is_null($result));
+        $this->assertTrue(strcmp($result, 'Some important key.') === 0);
+    }
 }

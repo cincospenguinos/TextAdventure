@@ -7,9 +7,16 @@
  * Time: 9:53 PM
  */
 
-if(strpos($command, 'look at') !== false){
+if(strpos($command, 'look at') !== false) {
     $item = str_replace('look at ', '', $command);
-    $data['response'] = htmlspecialchars($player->lookAt($item));
-} else {
+    $response = $player->lookAt($item);
+
+    if(is_null($response))
+        $data['response'] = "I don't see anything here that matches the name \"$item\".";
+    else
+        $data['response'] = htmlspecialchars($player->lookAt($item)) . " $item";
+} else if(strcmp($command, 'look') === 0){
     $data['response'] = htmlspecialchars($player->look());
+} else {
+    $data['response'] = "I'm afraid I don't understand what you meant by \"$command\".";
 }

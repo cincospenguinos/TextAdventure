@@ -76,6 +76,11 @@ class Room
         if(isset($this->itemsInRoom[$itemName]))
             return $this->itemsInRoom[$itemName]->getDescription();
 
+        // Don't forget to check for item aliases!
+        foreach($this->itemsInRoom as $item)
+            if($item->hasAlias($itemName))
+                return $item->getDescription();
+
         return null;
     }
 

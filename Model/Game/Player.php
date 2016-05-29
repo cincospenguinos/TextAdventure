@@ -65,9 +65,14 @@ class Player
      * @param $itemName
      * @return string or null
      */
-    public function lookAt($itemName){
+    public function lookAt($itemName) {
         if(isset($this->inventory[strtolower($itemName)]))
             return $this->inventory[strtolower($itemName)]->getDescription();
+
+        // Don't forget to check for item aliases!
+        foreach($this->inventory as $item)
+            if($item->hasAlias($itemName))
+                return $item->getDescription();
 
         $description = $this->currentRoom->lookAt($itemName);
 
