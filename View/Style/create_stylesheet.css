@@ -29,3 +29,15 @@ body {
     color: white;
     resize: none;
 }
+
+input[type="checkbox"]{
+    appearance: none;
+}
+
+.roomStartingRoomCheckbox:before {
+    border-radius: 1px;
+}
+
+.roomStartingRoomCheckbox:checked {
+
+}
