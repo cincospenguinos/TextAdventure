@@ -1,0 +1,31 @@
+body {
+    background: black;
+    font: 62.5% "Courier", sans-serif;
+    color: white;
+    margin: 50px;
+}
+
+.roomWidget {
+    width: 400px;
+    height: 100px;
+}
+
+.roomNameInput {
+    width: 100%;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.roomDescription {
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    background: black;
+    border: gray;
+    color: white;
+    resize: none;
+}
