@@ -1,5 +1,7 @@
 <?php
 
+// TODO: This page.
+
 echo '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,6 @@ echo '<!DOCTYPE html>
     <script src="Script/lib/jquery.min.js"></script>
     <script src="Script/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="Script/Create/creation_manager.js"></script>
-    <!--TODO: This page. -->
     <title>Dungeon Creator</title>
 </head>
 <body>
@@ -23,9 +24,7 @@ echo '<!DOCTYPE html>
         </ul>
     </div>
     <div class="roomWidget">
-        <div class="roomName">
-            <input type="text" placeholder="room name" class="roomNameInput"/>
-        </div>
+        <h3 class="editable" contenteditable="true">Edit the room name here</h3>
         <ul>
                 <li><a href="#roomDescriptionTab">Description</a></li>
                 <li><a href="#roomItemsTab">Items</a></li>
@@ -33,11 +32,13 @@ echo '<!DOCTYPE html>
                 <li><a href="#otherOptionsTab">Other Options</a></li>
         </ul>
         <div class="roomTabs">
-            <div id="roomDescriptionTab">
-                <textarea class="roomDescription" placeholder="Description of room goes here"></textarea>
+            <div id="roomDescriptionTab" contenteditable="true" class="editable">Edit the description here.</div>
+            <div id="roomItemsTab">
+                <div class="roomItems"></div>
             </div>
-            <div id="roomItemsTab">This is the second one.</div>
-            <div id="roomMonstersTab">This is the third and last one.</div>
+            <div id="roomMonstersTab">
+                <div class="roomMonsters"></div>
+            </div>
             <div id="otherOptionsTab">
                 <label title="Select this to make this room be the starting room."><input type="checkbox" class="roomStartingRoomCheckbox"/>Starting room</label>
             </div>

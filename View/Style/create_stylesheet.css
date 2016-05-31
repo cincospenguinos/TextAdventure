@@ -1,36 +1,3 @@
-body {
-    background: black;
-    font: 62.5% "Courier", sans-serif;
-    color: white;
-    margin: 50px;
-}
-
-.roomWidget {
-    width: 400px;
-    height: 100px;
-}
-
-.roomNameInput {
-    width: 100%;
-    background: black;
-    color: white;
-    border: none;
-    font-weight: bold;
-    font-size: large;
-}
-
-.roomDescription {
-    width: 100%;
-    height: 90%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-    background: black;
-    border: none;
-    color: white;
-    resize: none;
-}
-
 #menuBar ul {
     top: 0;
     width: 90%;
@@ -57,7 +24,39 @@ body {
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 #menuBar ul li a:hover {
     background-color: gray;
+}
+
+body {
+    background: black;
+    font: 62.5% "Courier", sans-serif;
+    color: white;
+    margin: 50px;
+}
+
+.roomWidget {
+    width: 430px;
+    height: 100px;
+}
+
+.roomInput {
+    width: 100%;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.roomTextArea {
+    width: 100%;
+    height: 90%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    background: black;
+    border: none;
+    color: white;
+    resize: none;
 }

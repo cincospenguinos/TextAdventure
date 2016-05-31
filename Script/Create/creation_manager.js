@@ -7,8 +7,19 @@
 $(document).ready(function(){
     var roomWidgets = $('.roomWidget');
     roomWidgets.tabs();
-    roomWidgets.draggable();
+    roomWidgets.draggable({
+        cancel: '.editable'
+    });
     roomWidgets.resizable({
-        alsoResize: '.roomDescription'
+        alsoResize: '.roomDescription .roomItems'
+    });
+    $('.roomItems').accordion({
+        collapsible: true,
+        heightStyle: 'fill'
+    });
+
+    $('.roomMonsters').accordion({
+        collapsible: true,
+        heightStyle: 'fill'
     });
 });
