@@ -65,11 +65,11 @@ QUnit.test('DungeonManagerChangeRoomName', function(assert) {
 
     manager.addRoom(room);
     assert.ok(manager.hasRoom(room.roomName));
+    assert.ok(manager.getRoom('herp'));
 
     manager.changeRoomName(room.roomName, 'derp');
     assert.ok(manager.hasRoom('derp'));
-
-    var room = manager.getRoom('derp');
-    assert.ok(room !== null);
+    assert.notOk(manager.hasRoom('herp'));
+    assert.ok(manager.getRoom('derp'));
 });
 

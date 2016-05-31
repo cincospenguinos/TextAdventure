@@ -5,7 +5,7 @@
 // TODO: Add Items to rooms
 // TODO: Add Directions to rooms
 var manager = new DungeonManager();
-var names = []; // This is used to help manage all of the names of the various rooms
+var names = {}; // This is used to help manage all of the names of the various rooms
 var counter = 0;
 
 function createNewRoom(){
@@ -34,11 +34,11 @@ function createNewRoom(){
         var oldName = names[room.roomName];
         var newName = $('#' + room.roomName + '-name').text();
         manager.changeRoomName(oldName, newName);
-        var room = manager.getRoom(newName);
+        names[oldName] = names[newName];
+        delete names[oldName];
 
-        console.log(room.roomName);
+        console.log(manager.rooms);
     });
-
 
     // Add it to the manager
     manager.addRoom(room);
