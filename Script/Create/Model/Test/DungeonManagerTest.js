@@ -30,9 +30,22 @@ QUnit.test('DungeonManagerTestAddRoom', function(assert){
 });
 
 /**
+ * When I add a room to a dungeon, I should be able to get that room back out.
+ */
+QUnit.test('DungeonManagerGetRoom', function(assert) {
+    var manager = new DungeonManager();
+    var room = new Room();
+    room.roomName = 'room';
+    manager.addRoom(room);
+    room = manager.getRoom('room');
+
+    assert.ok(room.roomName);
+});
+
+/**
  * When I remove a room from a dungeon, I expect it to no longer be there.
  */
-QUnit.test('DungeonManagerTestAddRoom', function(assert){
+QUnit.test('DungeonManagerRemoveRoom', function(assert) {
     var manager = new DungeonManager();
     var room = new Room();
 
@@ -43,3 +56,20 @@ QUnit.test('DungeonManagerTestAddRoom', function(assert){
     manager.removeRoom(room.roomName);
     assert.notOk(manager.hasRoom(room.roomName));
 });
+
+QUnit.test('DungeonManagerChangeRoomName', function(assert) {
+    var manager = new DungeonManager();
+    var room = new Room();
+
+    room.roomName = 'herp';
+
+    manager.addRoom(room);
+    assert.ok(manager.hasRoom(room.roomName));
+
+    manager.changeRoomName(room.roomName, 'derp');
+    assert.ok(manager.hasRoom('derp'));
+
+    var room = manager.getRoom('derp');
+    assert.ok(room !== null);
+});
+

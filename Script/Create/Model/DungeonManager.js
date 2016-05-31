@@ -9,7 +9,7 @@
 class DungeonManager {
 
     constructor () {
-        this.rooms = [];
+        this.rooms = {};
     }
 
     addRoom(room) {
@@ -24,10 +24,17 @@ class DungeonManager {
     }
 
     getRoom(roomName){
-        return this.rooms[roomName];
+        return this.rooms[roomName];;
     }
 
     removeRoom(roomName){
         delete this.rooms[roomName];
+    }
+
+    changeRoomName(oldName, newName){
+        var room = this.rooms[oldName];
+        room.roomName = newName;
+        this.rooms[newName] = this.rooms[newName];
+        delete this.rooms[oldName];
     }
 }

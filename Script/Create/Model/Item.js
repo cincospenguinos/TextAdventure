@@ -5,7 +5,7 @@
 class Item {
 
     constructor() {
-        this.aliases = [];
+        this.aliases = {};
     }
 
     /**

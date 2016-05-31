@@ -21,8 +21,8 @@ class Room {
 
     constructor() {
         this.roomName = null;
-        this.itemsInRoom = [];
-        this.monsters = [];
+        this.itemsInRoom = {};
+        this.monsters = {};
         this.exits = [];
     }
 

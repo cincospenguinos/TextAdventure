@@ -9090,7 +9090,7 @@ $.extend(Datepicker.prototype, {
 			throw "Invalid arguments";
 		}
 
-		value = (typeof value === "object" ? value.toString() : value + "");
+		value = (typeof value === "object" ? value.toHTML() : value + "");
 		if (value === "") {
 			return null;
 		}
@@ -9508,7 +9508,7 @@ $.extend(Datepicker.prototype, {
 			newDate = (date == null || date === "" ? defaultDate : (typeof date === "string" ? offsetString(date) :
 				(typeof date === "number" ? (isNaN(date) ? defaultDate : offsetNumeric(date)) : new Date(date.getTime()))));
 
-		newDate = (newDate && newDate.toString() === "Invalid Date" ? defaultDate : newDate);
+		newDate = (newDate && newDate.toHTML() === "Invalid Date" ? defaultDate : newDate);
 		if (newDate) {
 			newDate.setHours(0);
 			newDate.setMinutes(0);
@@ -12211,7 +12211,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 	},
 
 	_precisionOf: function( num ) {
-		var str = num.toString(),
+		var str = num.toHTML(),
 			decimal = str.indexOf( "." );
 		return decimal === -1 ? 0 : str.length - decimal - 1;
 	},
@@ -12675,7 +12675,7 @@ var spinner = $.widget( "ui.spinner", {
 	},
 
 	_precisionOf: function( num ) {
-		var str = num.toString(),
+		var str = num.toHTML(),
 			decimal = str.indexOf( "." );
 		return decimal === -1 ? 0 : str.length - decimal - 1;
 	},
