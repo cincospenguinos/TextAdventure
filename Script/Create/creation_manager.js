@@ -44,19 +44,8 @@ function createNewRoom(){
     newRoomWidget.draggable({
         cancel: '.editable'
     });
-
-    //var roomWidgets = $('.roomWidget');
-    //roomWidgets.tabs();
-    //roomWidgets.draggable({
-    //    cancel: '.editable'
-    //});
-    //roomWidgets.resizable({
-    //    alsoResize: '.roomDescription .roomItems'
-    //});
 }
 
 $(document).ready(function(){
-
-
     $('#newRoomButton').click(createNewRoom);
 });
