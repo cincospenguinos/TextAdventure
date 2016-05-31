@@ -13,10 +13,21 @@ class DungeonManager {
     }
 
     addRoom(room) {
-        this.rooms[room.name()] = room;
+        if(room.roomName == null)
+            throw 'Room name cannot be null when adding the room!';
+
+        this.rooms[room.roomName] = room;
+    }
+
+    hasRoom(roomName){
+        return (roomName in this.rooms);
+    }
+
+    getRoom(roomName){
+        return this.rooms[roomName];
     }
 
     removeRoom(roomName){
-        this.rooms[roomName] = null;
+        delete this.rooms[roomName];
     }
 }
