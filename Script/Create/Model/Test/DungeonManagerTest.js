@@ -28,3 +28,18 @@ QUnit.test('DungeonManagerTestAddRoom', function(assert){
     manager.addRoom(room);
     assert.ok(manager.hasRoom(room.roomName));
 });
+
+/**
+ * When I remove a room from a dungeon, I expect it to no longer be there.
+ */
+QUnit.test('DungeonManagerTestAddRoom', function(assert){
+    var manager = new DungeonManager();
+    var room = new Room();
+
+    room.roomName = 'herp';
+
+    manager.addRoom(room);
+    assert.ok(manager.hasRoom(room.roomName));
+    manager.removeRoom(room.roomName);
+    assert.notOk(manager.hasRoom(room.roomName));
+});
