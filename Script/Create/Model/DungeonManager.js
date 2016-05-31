@@ -12,8 +12,7 @@ class DungeonManager {
         this.rooms = [];
     }
 
-    addRoom(room){
-        // TODO: type checking?
+    addRoom(room) {
         this.rooms[room.name()] = room;
     }
 
