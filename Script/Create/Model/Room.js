@@ -12,16 +12,23 @@ class Room {
         this.monsters = [];
     }
 
-    public addItem(item){
-        this.itemsInRoom[item.name()] = item;
+    get name(){
+        return this.roomName;
     }
 
-    public removeItem(itemName){
-        this.itemsInRoom[itemName] = null;
+    set name(name){
+        this.roomName = name;
     }
 
-    public setRoomName(roomName){
-        this.roomName = roomName;
+    addItem(item){
+        this.itemsInRoom[item.itemName.toLowerCase()] = item;
     }
 
+    hasItem(itemName){
+        return (itemName.toLowerCase() in this.itemsInRoom);
+    }
+
+    removeItem(itemName){
+        delete this.itemsInRoom[itemName.toLowerCase()];
+    }
 }
