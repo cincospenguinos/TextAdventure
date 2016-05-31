@@ -11,5 +11,4 @@ $(document).ready(function(){
     roomWidgets.resizable({
         alsoResize: '.roomDescription'
     });
-    $('.tooltip').tooltip();
 });

@@ -21,23 +21,43 @@ body {
 
 .roomDescription {
     width: 100%;
+    height: 90%;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
     background: black;
-    border: gray;
+    border: none;
     color: white;
     resize: none;
 }
 
-input[type="checkbox"]{
-    appearance: none;
+#menuBar ul {
+    top: 0;
+    width: 90%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+    position: fixed;
+    border: solid 2px white;
 }
 
-.roomStartingRoomCheckbox:before {
-    border-radius: 1px;
+#menuBar ul li {
+    cursor: pointer;
+    cursor: hand;
+    float: left;
 }
 
-.roomStartingRoomCheckbox:checked {
+#menuBar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
+/* Change the link color to #111 (black) on hover */
+#menuBar ul li a:hover {
+    background-color: gray;
 }

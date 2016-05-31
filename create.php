@@ -14,6 +14,14 @@ echo '<!DOCTYPE html>
     <title>Dungeon Creator</title>
 </head>
 <body>
+    <div id="menuBar">
+        <ul>
+            <li><a id="newRoomButton">New Room</a></li>
+            <li><a id="saveDungeonButton">Save Dungeon</a></li>
+            <li><a id="loadDungeonButton">Load Dungeon</a></li>
+            <li><a id="testDungeonButton">Test Dungeon</a></li>
+        </ul>
+    </div>
     <div class="roomWidget">
         <div class="roomName">
             <input type="text" placeholder="room name" class="roomNameInput"/>
