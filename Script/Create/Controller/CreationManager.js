@@ -50,11 +50,3 @@ class CreationManager{
         this.roomNameCounter += 1;
     }
 }
-
-$(document).ready(function(){
-    var creationManager = new CreationManager();
-
-    $('#newRoomButton').click(function(){
-        creationManager.createNewRoom();
-    });
-});

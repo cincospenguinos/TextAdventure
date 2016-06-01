@@ -14,8 +14,9 @@ echo '<!DOCTYPE html>
     <script src="Script/Create/Model/Item.js"></script>
     <script src="Script/Create/Model/Room.js"></script>
     <script src="Script/Create/Model/DungeonManager.js"></script>
-    <script src="Script/Create/View/RoomView.js"></script>-
+    <script src="Script/Create/View/RoomView.js"></script>
     <script src="Script/Create/Controller/CreationManager.js"></script>
+    <script src="Script/Create/controller.js"></script>
     <title>Dungeon Creator</title>
 </head>
 <body>
