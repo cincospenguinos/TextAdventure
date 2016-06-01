@@ -54,5 +54,7 @@ class CreationManager{
 $(document).ready(function(){
     var creationManager = new CreationManager();
 
-    $('#newRoomButton').click(creationManager.createNewRoom());
+    $('#newRoomButton').click(function(){
+        creationManager.createNewRoom();
+    });
 });
