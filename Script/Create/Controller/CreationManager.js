@@ -9,44 +9,37 @@ class CreationManager{
         this.roomNameCounter = 0;
     }
 
+    changeRoomName(parentRoomElement){
+        // TODO: This
+        console.log('Changed the room name.');
+    }
+
     /**
-     * Creates a new room, attaches the proper parts to it, and throws it on the page.
+     *
+     * @param parentElement
      */
-    createNewRoom(){
-        // Create the variables and store the necessary parts
+    createNewRoom(parentElement){
+        // Handle all of the model stuff
+        var roomName = 'room' + this.roomNameCounter;
         var room = new Room();
-        room.roomName = 'Room' + this.roomNameCounter;
-        var roomView = new RoomView(room.roomName);
-        this.namesManager[room.roomName] = room.roomName;
-
-        // Make it all show up on the page
-        $('#workspace').append(roomView.toHTML());
-
-        // Manage the jquery UI stuff
-        var newRoomNode = $('#' + room.roomName);
-        newRoomNode.draggable({
-            cancel: '.editable'
-        });
-        newRoomNode.tabs();
-        newRoomNode.resizable();
-
-        // Callback for when the room name changes
-        $('#' + room.roomName + '-name').blur(function(){
-            var oldName = names[room.roomName];
-            var newName = $('#' + room.roomName + '-name').text();
-            manager.changeRoomName(oldName, newName);
-            names[oldName] = names[newName];
-            delete names[oldName];
-
-            console.log(manager.getRoom(newName));
-        });
-
-        // Callback for when user adds a connection to a room
-        $('#' + room.roomName).dblclick(function(){
-
-        });
-        // Add it to the manager
+        room.name = roomName;
+        this.namesManager[roomName] = roomName;
         this.dungeonManager.addRoom(room);
+
+        // Add the widget to the DOM
+        parentElement.append(`
+            <div id="` + roomName + `" class="item roomWidget">
+                <h3 id="` + roomName + `-name" class="editable roomName" contenteditable="true">` + roomName + `</h3>
+            </div>
+        `);
+
+        // Add all the callbacks to the new element
+        applyRoomWidgetCallbacks($('#' + roomName));
+
         this.roomNameCounter += 1;
+    }
+
+    getRoomName(roomID){
+        return this.namesManager[roomID];
     }
 }

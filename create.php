@@ -11,6 +11,7 @@ echo '<!DOCTYPE html>
     <link type="text/css" rel="stylesheet" href="View/Style/create_stylesheet.css"/>
     <script src="Script/lib/jquery.min.js"></script>
     <script src="Script/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="Script/lib/jsPlumb-2.1.2-min.js"></script>
     <script src="Script/Create/Model/Item.js"></script>
     <script src="Script/Create/Model/Room.js"></script>
     <script src="Script/Create/Model/DungeonManager.js"></script>
