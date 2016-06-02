@@ -32,7 +32,7 @@ function applyRoomWidgetCallbacks(element) {
 function toggleRoomWidget(roomWidget, toEllipse){
     var offset = roomWidget.offset();
     var roomId = roomWidget.attr('id');
-    var roomName = creationManager.getRoomName(roomId);
+    //var roomName = creationManager.getRoomName(roomId);
 
     if(toEllipse){
         roomWidget.removeClass('roomWidget');

@@ -34,7 +34,7 @@ class DungeonManager {
     changeRoomName(oldName, newName){
         var room = this.rooms[oldName];
         room.roomName = newName;
-        this.rooms[newName] = this.rooms[oldName];
+        this.rooms[newName] = room;
         delete this.rooms[oldName];
     }
 }
