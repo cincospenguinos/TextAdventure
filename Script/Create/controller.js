@@ -25,14 +25,16 @@ function applyRoomPlumbing(element){
     // Exits or on the top right and bottom left
     var exitOptions = {
         isSource: true,
-        isTarget: false
+        isTarget: false,
+        paintStyle: {width: '5px', height: '5px', fillStyle: '#000000'},
+        style: {border: 'solid white 1px'}
     };
     var entranceOptions = {
         isSource: false,
         isTarget: true
     };
 
-    // TODO: How to hook up direction picked with the rooms they connect?
+    // TODO: How to hook up the rooms selected in the model upon connecting two rooms together?
     var generateConnectionSelector = function(connection){
         var str = '<select id="">';
 
@@ -45,15 +47,26 @@ function applyRoomPlumbing(element){
 
     var exitConfigurations = {
         anchors: ['Right'],
+        maxConnections: 10,
         connectorOverlays: [
         [ "PlainArrow", { width:10, length:30, location:1, id:"arrow" } ],
-        [ "Label", { label:generateConnectionSelector, id:"label", cssClass: "roomConnectionSelector" } ]
-    ]};
+        [ "Label", { label:generateConnectionSelector, id:"label", cssClass: "roomConnectionSelector" } ],],
+        connectorStyle: { lineWidth: 1, strokeStyle:"#FFFFFF" },
+        cssClass: 'endpointNode'
+    };
+
+    // TODO: When connecting two nodes, how do two nodes have the ability to have two connections to each other?
+    // TODO: Hide connection label until mouse moves over it
+
+    var entranceConfigurations = {
+        anchors: ['Left'],
+        maxConnections: 10,
+        cssClass: 'endpointNode'
+    };
 
     plumb.addEndpoint(element, exitConfigurations, exitOptions);
     //plumb.addEndpoint(element, exitConfigurations, exitOptions);
-    plumb.addEndpoint(element, {anchors: ['Top']}, entranceOptions);
-    plumb.addEndpoint(element, {anchors: ['Left']}, entranceOptions);
+    plumb.addEndpoint(element, entranceConfigurations, entranceOptions);
 }
 
 /**
