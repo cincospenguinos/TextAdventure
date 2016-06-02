@@ -1,7 +1,5 @@
 <?php
 
-// TODO: This page.
-
 echo '<!DOCTYPE html>
 <html lang="en">
 <head>

@@ -8,6 +8,11 @@ class CreationManager{
         this.roomNameCounter = 0;
     }
 
+    /**
+     * Triggered when the user changes the name of a roomWidget. Changes the name of the room in the model.
+     *
+     * @param parentRoomElement --> a room widget
+     */
     changeRoomName(parentRoomElement){
         var roomId = parentRoomElement.attr('id');
         var roomNameElement = $('#' + roomId + '-name');
@@ -27,11 +32,11 @@ class CreationManager{
 
         this.dungeonManager.changeRoomName(oldName, newName);
         parentRoomElement.attr('roomname', newName);
-        console.log(this.dungeonManager.getRoom(newName));
         roomNameElement.text(newName);
     }
 
     /**
+     * Creates a new room widget within the parent element provided.
      *
      * @param parentElement
      */
@@ -51,6 +56,7 @@ class CreationManager{
 
         // Add all the callbacks to the new element
         applyRoomWidgetCallbacks($('#' + roomName));
+        applyRoomPlumbing($('#' + roomName));
 
         this.roomNameCounter += 1;
     }
