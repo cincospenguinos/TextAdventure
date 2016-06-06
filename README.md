@@ -12,4 +12,4 @@ The repository for the Text Adventure we're building.
 * memcached needs to be used instead of APC because APC is deprecated. So that needs to be installed.
     * Actually, we may not even need memcached. Using sessions works alright. We can consider it if the game ever gets super popular.
 
-This is the release branch.
+This is the release branch.------
