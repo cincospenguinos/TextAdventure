@@ -5,7 +5,7 @@
  *
  * Manages all of the client-side commands - obtaining them, sending and receiving them, etc.
  */
-var API_ENDPOINT = 'Controller/command.php'; // TODO: Change this for releases, always
+var API_ENDPOINT = 'command.php'; // TODO: Change this for releases, always
 var username = null;
 const ENTER_KEY = 13;
 
