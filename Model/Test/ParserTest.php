@@ -61,11 +61,17 @@ class ParserTest extends PHPUnit_Framework_TestCase
     public function testArchCommandTake(){
         $string = 'take item';
         $otherString = 'get item';
+        $s = 'Take';
+        $p = 'Take it';
         $result = Parser::getArchCommand($string);
         $otherResult = Parser::getArchCommand($otherString);
+        $r = Parser::getArchCommand($s);
+        $q = Parser::getArchCommand($p);
 
         $this->assertTrue(strcmp($result, 'take') === 0);
         $this->assertTrue(strcmp($otherResult, 'take') === 0);
+        $this->assertTrue(strcmp($r, 'take') === 0);
+        $this->assertTrue(strcmp($q, 'take') === 0);
     }
 
     /**
@@ -80,4 +86,43 @@ class ParserTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(strcmp($result, 'go') === 0);
         }
     }
+
+    public function testArchCommandDrop(){
+        $string = 'drop item';
+        $otherString = 'Drop it';
+        $result = Parser::getArchCommand($string);
+        $otherResult = Parser::getArchCommand($otherString);
+
+        $this->assertTrue(strcmp($result, 'drop') === 0);
+        $this->assertTrue(strcmp($otherResult, 'drop') === 0);
+    }
+
+    public function testArchCommandHelp(){
+        $string = 'help';
+        $result = Parser::getArchCommand($string);
+
+        $this->assertTrue(strcmp($result, 'help') === 0);
+    }
+
+    public function testArchCommandAbout(){
+        $string = 'about item';
+        $result = Parser::getArchCommand($string);
+
+        $this->assertTrue(strcmp($result, 'about') === 0);
+    }
+
+    public function testArchCommandInventory(){
+        $string = 'Inv';
+        $otherString = 'Inventory';
+        $q = 'inventory';
+
+        $result = Parser::getArchCommand($string);
+        $otherResult = Parser::getArchCommand($otherString);
+        $p = Parser::getArchCommand($q);
+
+        $this->assertTrue(strcmp($result, 'inventory') === 0);
+        $this->assertTrue(strcmp($otherResult, 'inventory') === 0);
+        $this->assertTrue(strcmp($p, 'inventory') === 0);
+    }
+
 }
