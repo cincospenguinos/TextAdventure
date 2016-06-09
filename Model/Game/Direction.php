@@ -12,30 +12,6 @@ namespace LinkedWorldsCore;
 
 abstract class Direction
 {
-    // TODO: Consider having a huge array to manage all of this stuff to make it faster
-//    $directions = [
-//    'north' => 0,
-//    'n' => 0,
-//    'northeast' => 1,
-//    'ne' => 1,
-//    'east' => 2,
-//    'e' => 2,
-//    'southeast' => 3,
-//    'se' => 3,
-//    'south' => 4,
-//    's' => 4,
-//    'southwest' => 5,
-//    'sw' => 5,
-//    'west' => 6,
-//    'w' => 6,
-//    'northwest' => 7,
-//    'nw' => 7,
-//    'up' => 8,
-//    'u' => 8,
-//    'down' => 9,
-//    'd' => 9
-//    ];
-
     const North = 0;
     const NorthEast = 1;
     const East = 2;

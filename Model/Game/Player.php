@@ -152,6 +152,10 @@ class Player
         $this->inventory[strtolower($item->getItemName())] = $item;
     }
 
+    public function equip($item){
+        // TODO: this
+    }
+
     /**
      * Returns an array of the items in the player's inventory.
      *

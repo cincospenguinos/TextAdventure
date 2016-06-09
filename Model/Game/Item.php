@@ -16,14 +16,18 @@ class Item
      * $aliases is a list of other names (case insensitive) that this Item can be referred to by. Example: Player
      * wants to take the Key of Gondor. An alias of Key of Gondor is "key," so if the player enters the command
      * "take key" then the parser will know that the player is referring to the key of Gondor.
+     *
+     * $whenEquipped is just a collection of attributes to modify when the item gets equipped.
      */
-    private $itemName, $description, $aliases;
+    private $itemName, $description, $aliases, $canEquip, $whenEquipped;
 
-    public function __construct($_itemName, $_description)
+    public function __construct($_itemName, $_description, $_canEquip = false)
     {
         $this->itemName = $_itemName;
         $this->description = $_description;
+        $this->canEquip = $_canEquip;
         $this->aliases = [];
+        $this->whenEquipped = [];
     }
 
     /**
@@ -64,6 +68,33 @@ class Item
      */
     public function removeAlias($alias){
         unset($this->aliases[strtolower($alias)]);
+    }
+
+    /**
+     * Adds or changes the modifier provided for the ability provided that is applied when the player
+     * equips the item.
+     *
+     * @param $ability
+     * @param $amount
+     */
+    public function setEquipModifier($ability, $amount) {
+        $this->whenEquipped[$ability] = $amount;
+    }
+
+    public function hasEquipModifier($ability){
+        return isset($this->whenEquipped[$ability]);
+    }
+
+    public function getEquipModifier($ability){
+        return $this->whenEquipped[$ability];
+    }
+
+    public function removeEquipModifier($ability) {
+        unset($this->whenEquipped[$ability]);
+    }
+
+    public function setEquippable($equip){
+        $this->canEquip = $equip;
     }
 
     public function getDescription(){

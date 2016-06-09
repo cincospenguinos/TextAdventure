@@ -142,4 +142,6 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->dungeonOne->hasItem('writing implement'));
         $this->assertTrue($this->dungeonOne->hasItem('implement'));
     }
+
+    // TODO: Add methods for equipping
 }
