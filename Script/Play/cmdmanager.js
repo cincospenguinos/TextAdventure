@@ -49,15 +49,20 @@ $(document).ready(function(){
 
     submitCommand(data, function(response){
         response = $.parseJSON(response);
-        $('#response').append("<p>" + response.response + "</p>");
+        $('#response').append(response.response + "<br/>");
     }, function(response){
-        $('#response').append("<p>An error occurred.</p>");
+        $('#response').append(response.response + "<br/>");
     });
 
     $(document).keydown(function(event){
         if(event.which === ENTER_KEY) {
             var command = $('#playerCommand').val();
             $('#playerCommand').val('');
+
+            if(command.toLowerCase() === 'clear') {
+                $('#response').empty();
+                return;
+            }
 
             var data = {
                 'command': command,
@@ -68,8 +73,10 @@ $(document).ready(function(){
             submitCommand(data, function(response){
                 response = $.parseJSON(response);
                 $('#response').append("<p>" + response.response + "</p>");
+                $('#response').scrollTop($('body')[0].scrollHeight);
             }, function(response){
                 $('#response').append("<p>An error occurred.</p>");
+                $('#response').scrollTop($('body')[0].scrollHeight);
             });
         }
     });

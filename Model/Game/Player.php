@@ -152,8 +152,17 @@ class Player
         $this->inventory[strtolower($item->getItemName())] = $item;
     }
 
-    public function equip($item){
+    /**
+     * Equips the item provided given that the player has the item matching the name provided and
+     * that the item is equippable.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function equip($itemName){
         // TODO: this
+
+        return false;
     }
 
     /**
