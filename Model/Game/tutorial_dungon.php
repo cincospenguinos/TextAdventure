@@ -13,17 +13,17 @@ require_once 'Direction.php';
 
 // Setup all of the rooms
 $frontOfHouse = new \LinkedWorldsCore\Room('Front of White House', 'You are in front of a white house. Its front door is nailed shut.');
-$backOfHouse = new \LinkedWorldsCore\Room('Back of White House', 'You are in back of a white house. A window is open.');
+$backOfHouse = new \LinkedWorldsCore\Room('Back of White House', 'You are in back of a white house. A window into it is open.');
 $houseKitchen = new \LinkedWorldsCore\Room('Kitchen', 'You are inside a simple kitchen, with bare cupboards and shelves.');
-$cellar = new \LinkedWorldsCore\Room('Cellar', 'You are in the cellar of the house. The air is cold and damp.');
+$cellar = new \LinkedWorldsCore\Room('Cellar', 'You are in the cellar of the house. The air is cold and damp. You can see a dim light shimmering to the south west.');
 $shrine = new \LinkedWorldsCore\Room('Shrine', 'You are in front of a shrine. Long, slender white candles light the room.');
 $forestA = new \LinkedWorldsCore\Room('Forest', 'You are in a thick forest with branches all around you.');
 $forestB = new \LinkedWorldsCore\Room('Forest', 'You are in a thick forest with branches all around you.');
-$clearing = new \LinkedWorldsCore\Room('Clearing', 'You are standing in a clearing in the forest. You see an old stone well with what seems to be a ladder leading down inside it.');
+$clearing = new \LinkedWorldsCore\Room('Clearing', 'You are standing in a clearing in the forest. You see an old stone well with what seems to be a ladder leading down inside it. You can hear the sound of crashing water from the south.');
 $waterfall = new \LinkedWorldsCore\Room('Waterfall', 'You are at the base of a waterfall. The cold water splashes and roars loudly in your ears.');
 $cliff = new \LinkedWorldsCore\Room('Cliff', 'You are standing on a cliff next to the waterfall.');
-$ravine = new \LinkedWorldsCore\Room('Large Ravine', 'You are in front of a large ravine, stretching far away. There is a bridge that you can cross.');
-$otherCliff = new \LinkedWorldsCore\Room('Cliff', 'You are standing at the cliff of a ravine. A muddy slope leads towards the forest.');
+$ravine = new \LinkedWorldsCore\Room('Large Ravine', 'You are in front of a large ravine, stretching far away. There is a bridge here that you can use to cross it.');
+$otherCliff = new \LinkedWorldsCore\Room('Cliff', 'You are standing at the cliff of a ravine. A slick, muddy slope leads towards the forest.');
 $darkLibrary = new \LinkedWorldsCore\Room('Dark Library', 'You are in what appears to be a library. The light is dim and books are stacked in high bookshelves.');
 $hallwayA = new \LinkedWorldsCore\Room('Hallway', 'You are in a regal looking hallway.');
 $kingdomKitchen = new \LinkedWorldsCore\Room('Kitchen', 'You are standing in a fancy kitchen, with all sorts of cooking equipment.');
