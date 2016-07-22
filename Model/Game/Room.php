@@ -38,29 +38,6 @@ class Room
     public function look(){
         $description = $this->description;
 
-        // TODO: Nicer human feedback concerning exits.
-        if(!empty($this->exits)){
-            $description .= "\n\nExits are to the ";
-
-            $exits = array_keys($this->exits);
-
-            for($i = 0; $i < sizeof($exits) - 1; $i++){
-                $description .= Direction::toString($exits[$i]) . ', ';
-            }
-
-            if(sizeof($exits) > 1)
-                $description .= 'and ';
-
-            $description .=  Direction::toString($exits[sizeof($exits) - 1]) . '. ';
-        }
-
-        // TODO: Nicer human feedback concerning items.
-        if(!empty($this->itemsInRoom)){
-            foreach($this->itemsInRoom as $item){
-                $description .= 'There is a ' . $item->getItemName() . ' here.';
-            }
-        }
-
         return $description;
     }
 
@@ -95,6 +72,20 @@ class Room
             return $this->exits[$direction];
 
         return null;
+    }
+
+    /**
+     * Returns an array of all the directions that this room has an exit through.
+     *
+     * @return array
+     */
+    public function getAllExitDirections(){
+        $directions = [];
+
+        foreach($this->exits as $direction => $exit)
+            array_push($directions, $direction);
+
+        return $directions;
     }
 
     /**

@@ -160,7 +160,7 @@ class Player
      * @return bool
      */
     public function equip($itemName){
-        // TODO: this
+        // TODO: This
 
         return false;
     }
@@ -177,6 +177,16 @@ class Player
             array_push($items, $item->getItemName());
 
         return $items;
+    }
+
+
+    /**
+     * Returns the current room this player is in.
+     *
+     * @return mixed
+     */
+    public function getCurrentRoom(){
+        return $this->currentRoom;
     }
 
     /**
