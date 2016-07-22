@@ -11,10 +11,14 @@
  */
 
 $directions = $player->getCurrentRoom()->getAllExitDirections();
-$resp = "Exit(s) are ";
+$resp = "Exits: ";
 
-for($i = 0; $i < sizeof($directions) - 1; $i += 1)
-    $resp .= \LinkedWorldsCore\Direction::toString($i) . ", ";
+foreach($directions as $direction) {
+    error_log("What the fuck man. {$direction}");
+    $resp .= \LinkedWorldsCore\Direction::toString($direction) . ", ";
+}
 
-$resp .= \LinkedWorldsCore\Direction::toString($directions[sizeof($directions) - 1]) . ".";
+$resp = trim($resp, ', ');
+$resp .= ".";
+
 $data['response'] = $resp;

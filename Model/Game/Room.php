@@ -80,12 +80,7 @@ class Room
      * @return array
      */
     public function getAllExitDirections(){
-        $directions = [];
-
-        foreach($this->exits as $direction => $exit)
-            array_push($directions, $direction);
-
-        return $directions;
+        return array_keys($this->exits);
     }
 
     /**
