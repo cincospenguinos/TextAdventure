@@ -60,7 +60,6 @@ $cellar->addExit(\LinkedWorldsCore\Direction::SouthWest, $shrine);
 $shrine->addExit(\LinkedWorldsCore\Direction::NorthEast, $cellar);
 $forestA->addExit(\LinkedWorldsCore\Direction::West, $frontOfHouse);
 $forestA->addExit(\LinkedWorldsCore\Direction::South, $forestB);
-$forestA->addExit(\LinkedWorldsCore\Direction::East, $forestA);
 $forestB->addExit(\LinkedWorldsCore\Direction::West, $forestA);
 $forestB->addExit(\LinkedWorldsCore\Direction::East, $forestA);
 $forestB->addExit(\LinkedWorldsCore\Direction::South, $clearing);
