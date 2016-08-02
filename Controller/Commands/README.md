@@ -25,10 +25,11 @@ help command picks up information in each command file and displays it in readab
 absolutely imperative that each command is named exactly what it does, and that each command contains a simple
 comment that denotes what it actually does to the user. As an example, the about command contains the following
 comment:
-
-    /*
-    *~ describes information about this game
-    */
+```php
+/*
+*~ describes information about this game
+*/
+```
     
 The line that will be shown to the user is the line in the comment that begins with a tilde character ('~'). Simply
 include some line in your command file's comments somewhere that has this to ensure that the help command can properly
