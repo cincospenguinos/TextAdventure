@@ -12,6 +12,7 @@ namespace LinkedWorldsCore;
 abstract class Entity
 {
     // TODO: Spells?
+    // TODO: Inventory at top level?
     protected $strength, $constitution, $dexterity, $intelligence, $currentHitPoints, $isDead, $level;
 
     /**
@@ -30,20 +31,11 @@ abstract class Entity
     public abstract function physicalDamage();
 
     /**
-     * Applies the damage amount provided to this entity. Returns true if this entity is dead.
+     * Get the spell to hit score.
      *
-     * @param $amount
-     * @param boolean
-     */
-    public abstract function takeDamage($amount);
-
-    /**
-     * Checks to see if this entity hits a spell attack on the target provided.
-     *
-     * @param $target
      * @return boolean
      */
-    public abstract function spellToHit($target);
+    public abstract function spellToHit();
 
     /**
      * Returns the amount of spell damage this entity does.
@@ -74,5 +66,31 @@ abstract class Entity
      * @param null $spell
      * @return boolean
      */
-    public abstract function attack($target, $isSpell = false, $spell = null);
+    public function attack($target, $isSpell = false, $spell = null) {
+        $roll = mt_rand() / mt_getrandmax();
+
+        if ($isSpell){
+            $roll += $this->spellToHit();
+        } else {
+            $roll += $this->physicalToHit();
+        }
+
+        if ($roll > $target->evasiveness())
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Applies the damage amount provided to this entity. Returns true if this entity is dead.
+     *
+     * @param $amount
+     * @param boolean
+     */
+    public function takeDamage($amount){
+        $this->currentHitPoints -= $amount;
+        $this->isDead = $this->currentHitPoints > 0;
+
+        return $this->isDead;
+    }
 }

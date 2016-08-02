@@ -15,7 +15,9 @@ require_once 'Entity.php';
 
 class Player extends Entity
 {
-    // TODO: Equippables - how do?
+    // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
+    // TODO: Equippable items - how do?
+    // TODO: Modify stats to accommodate weapons
     private $username, $currentRoom, $inventory;
 
     /**
@@ -175,7 +177,7 @@ class Player extends Entity
     }
 
     /**
-     * Returns an array of the items in the player's inventory.
+     * Returns an array of the names of all the items in the player's inventory.
      *
      * @return array
      */
@@ -208,18 +210,9 @@ class Player extends Entity
         return $this->currentRoom->getRoomName();
     }
 
-
     public function physicalToHit()
     {
-        // TODO: Implement toHit() method.
-    }
-
-    public function takeDamage($amount)
-    {
-        $this->currentHitPoints -= $amount;
-        $this->isDead = $this->currentHitPoints > 0;
-
-        return $this->isDead;
+        return 0.1 * (3.0 * $this->dexterity / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -229,7 +222,7 @@ class Player extends Entity
      */
     public function physicalDamage()
     {
-        // TODO: Implement physicalDamage() method.
+        return 1 + mt_rand(1, 2 * $this->strength / 3) + $this->level;
     }
 
     /**
@@ -238,9 +231,9 @@ class Player extends Entity
      * @param $target
      * @return boolean
      */
-    public function spellToHit($target)
+    public function spellToHit()
     {
-        // TODO: Implement spellToHit() method.
+        return 0.1 * (3.0 * $this->constitution / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -250,7 +243,7 @@ class Player extends Entity
      */
     public function spellDamage()
     {
-        // TODO: Implement spellDamage() method.
+        1 + mt_rand(2 * $this->intelligence / 3) + $this->level;
     }
 
     /**
@@ -260,7 +253,7 @@ class Player extends Entity
      */
     public function evasiveness()
     {
-        // TODO: Implement evasiveness() method.
+        ((2.0 * $this->dexterity) / 3.0 + $this->intelligence / 3.0) * 0.0625 + ($this->level - 1) * 0.02;
     }
 
     /**
@@ -270,20 +263,6 @@ class Player extends Entity
      */
     public function maxHitPoints()
     {
-        // TODO: Implement maxHitPoints() method.
         return (5 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
-    }
-
-    /**
-     * Make an attack on a given target. Optional paramaters available if a spell is used.
-     *
-     * @param $target
-     * @param bool $isSpell
-     * @param null $spell
-     * @return boolean
-     */
-    public function attack($target, $isSpell = false, $spell = null)
-    {
-        // TODO: Implement attack() method.
     }
 }

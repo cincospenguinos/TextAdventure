@@ -12,15 +12,16 @@ require_once 'Entity.php';
 
 class Monster extends Entity
 {
+    // TODO: Testing
+
+    public function __construct($_level)
+    {
+        $this->level = $_level;
+    }
 
     public function physicalToHit()
     {
-        // TODO: Implement toHit() method.
-    }
-
-    public function takeDamage($amount)
-    {
-        // TODO: Implement takeDamage() method.
+        return 0.1 * (3.0 * $this->dexterity / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -30,18 +31,17 @@ class Monster extends Entity
      */
     public function physicalDamage()
     {
-        // TODO: Implement physicalDamage() method.
+        return 1 + mt_rand(1, $this->strength / 2) + $this->level;
     }
 
     /**
      * Checks to see if this entity hits a spell attack on the target provided.
      *
-     * @param $target
      * @return boolean
      */
-    public function spellToHit($target)
+    public function spellToHit()
     {
-        // TODO: Implement spellToHit() method.
+        return 0.1 * (3.0 * $this->constitution / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -51,7 +51,7 @@ class Monster extends Entity
      */
     public function spellDamage()
     {
-        // TODO: Implement spellDamage() method.
+        return 1 + mt_rand(1, $this->intelligence / 2) + $this->level;
     }
 
     /**
@@ -61,7 +61,7 @@ class Monster extends Entity
      */
     public function evasiveness()
     {
-        // TODO: Implement evasiveness() method.
+        return (2 * $this->dexterity / 3.0 + $this->intelligence / 3.0) * 0.02 + ($this->level - 1) * 0.02;
     }
 
     /**
@@ -71,19 +71,6 @@ class Monster extends Entity
      */
     public function maxHitPoints()
     {
-        // TODO: Implement maxHitPoints() method.
-    }
-
-    /**
-     * Make an attack on a given target. Optional paramaters available if a spell is used.
-     *
-     * @param $target
-     * @param bool $isSpell
-     * @param null $spell
-     * @return boolean
-     */
-    public function attack($target, $isSpell = false, $spell = null)
-    {
-        // TODO: Implement attack() method.
+        return (3 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
     }
 }
