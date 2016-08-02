@@ -37,7 +37,7 @@ $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in fro
 $strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.");
 $strangeFruit->addAlias('fruit');
 
-$artifact = new \LinkedWorldsCore\Item("Artifact", "A small stone statue of a boy wearing an apron, holding a daggar and an acacia twig.");
+$artifact = new \LinkedWorldsCore\Item("Artifact", "A small stone statue of a boy wearing an apron, holding a dagger in one hand and an acacia twig in the other.");
 
 $tome = new \LinkedWorldsCore\Item("Spell Tome - Spirit Arrow", "A dusty tome describing the method to cast the spell Spirit Arrow.");
 $tome->addAlias('tome');

@@ -15,9 +15,11 @@ if(strpos($command, 'look at') !== false) {
     if(is_null($response))
         $data['response'] = "I don't see anything here that matches the name \"$item\".";
     else
-        $data['response'] = htmlspecialchars($player->lookAt($item));
+        $data['response'] = "<p>" . htmlspecialchars($player->lookAt($item)) . "</p>";
 } else if(strcmp($command, 'look') === 0){
-    $data['response'] = htmlspecialchars($player->look());
+    $roomName = $player->getCurrentRoomName();
+    $description = $player->look();
+    $data['response'] = "<strong>" . htmlspecialchars($roomName) . "</strong><br/><br/>" .  htmlspecialchars($description);
 } else {
     $data['response'] = "I'm afraid I don't understand what you meant by \"$command\".";
 }

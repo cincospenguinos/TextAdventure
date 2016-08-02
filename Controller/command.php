@@ -63,5 +63,6 @@ else
 
 // Throw the json string back at them
 $data['result'] = 'success';
+$data['response'] = "<p>" . $data['response'] . "</p>";
 $data = json_encode($data);
 echo $data;

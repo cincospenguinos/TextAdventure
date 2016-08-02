@@ -11,8 +11,9 @@ namespace LinkedWorldsCore;
 
 require_once 'Room.php';
 require_once 'Item.php';
+require_once 'Entity.php';
 
-class Player
+class Player extends Entity
 {
     private $username, $currentRoom, $inventory;
 
@@ -27,6 +28,12 @@ class Player
         $this->inventory = [];
         $this->username = $_username;
         $this->currentRoom = $_startingRoom;
+
+        // Base stats - by default they start at 5
+        $this->strength = 5;
+        $this->constitution = 5;
+        $this->dexterity = 5;
+        $this->intelligence = 5;
     }
 
     /**
@@ -197,5 +204,16 @@ class Player
     public function getCurrentRoomName()
     {
         return $this->currentRoom->getRoomName();
+    }
+
+    
+    public function toHit($target)
+    {
+        // TODO: Implement toHit() method.
+    }
+
+    public function takeDamage($amount)
+    {
+        // TODO: Implement takeDamage() method.
     }
 }

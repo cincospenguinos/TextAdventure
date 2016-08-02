@@ -72,7 +72,7 @@ $(document).ready(function(){
 
             submitCommand(data, function(response){
                 response = $.parseJSON(response);
-                $('#response').append("<p>" + response.response + "</p>");
+                $('#response').append(response.response);
                 $('#response').scrollTop($('body')[0].scrollHeight);
             }, function(response){
                 $('#response').append("<p>An error occurred.</p>");

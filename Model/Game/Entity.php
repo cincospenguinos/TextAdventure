@@ -11,6 +11,10 @@ namespace LinkedWorldsCore;
 
 abstract class Entity
 {
+    protected $strength, $constitution, $dexterity, $intelligence;
+
     // TODO: This
 
+    public abstract function toHit($target);
+    public abstract function takeDamage($amount);
 }
