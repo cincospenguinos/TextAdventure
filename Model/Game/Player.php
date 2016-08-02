@@ -15,6 +15,7 @@ require_once 'Entity.php';
 
 class Player extends Entity
 {
+    // TODO: Equippables - how do?
     private $username, $currentRoom, $inventory;
 
     /**
@@ -23,17 +24,18 @@ class Player extends Entity
      * @param $_startingRoom
      */
     public function __construct($_username, $_startingRoom){
-        // TODO: Type checking?
-
         $this->inventory = [];
         $this->username = $_username;
         $this->currentRoom = $_startingRoom;
 
         // Base stats - by default they start at 5
+        $this->level = 1;
         $this->strength = 5;
         $this->constitution = 5;
         $this->dexterity = 5;
         $this->intelligence = 5;
+
+        $this->currentHitPoints = $this->maxHitPoints();
     }
 
     /**
@@ -206,14 +208,82 @@ class Player extends Entity
         return $this->currentRoom->getRoomName();
     }
 
-    
-    public function toHit($target)
+
+    public function physicalToHit()
     {
         // TODO: Implement toHit() method.
     }
 
     public function takeDamage($amount)
     {
-        // TODO: Implement takeDamage() method.
+        $this->currentHitPoints -= $amount;
+        $this->isDead = $this->currentHitPoints > 0;
+
+        return $this->isDead;
+    }
+
+    /**
+     * Returns the amount of physical damage this entity does.
+     *
+     * @return integer
+     */
+    public function physicalDamage()
+    {
+        // TODO: Implement physicalDamage() method.
+    }
+
+    /**
+     * Checks to see if this entity hits a spell attack on the target provided.
+     *
+     * @param $target
+     * @return boolean
+     */
+    public function spellToHit($target)
+    {
+        // TODO: Implement spellToHit() method.
+    }
+
+    /**
+     * Returns the amount of spell damage this entity does.
+     *
+     * @return integer
+     */
+    public function spellDamage()
+    {
+        // TODO: Implement spellDamage() method.
+    }
+
+    /**
+     * Returns the evasiveness for this entity.
+     *
+     * @return double
+     */
+    public function evasiveness()
+    {
+        // TODO: Implement evasiveness() method.
+    }
+
+    /**
+     * Returns the maximum hitpoints for this entity.
+     *
+     * @return integer
+     */
+    public function maxHitPoints()
+    {
+        // TODO: Implement maxHitPoints() method.
+        return (5 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
+    }
+
+    /**
+     * Make an attack on a given target. Optional paramaters available if a spell is used.
+     *
+     * @param $target
+     * @param bool $isSpell
+     * @param null $spell
+     * @return boolean
+     */
+    public function attack($target, $isSpell = false, $spell = null)
+    {
+        // TODO: Implement attack() method.
     }
 }
