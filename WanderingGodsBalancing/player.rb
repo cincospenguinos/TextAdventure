@@ -24,7 +24,7 @@ class Player
   end
 
   def get_physical_to_hit
-    0.1 * (3.0 * @strength / 7.0) + @level * 0.02 + 0.3
+    0.1 * (3.0 * @dexterity / 7.0) + @level * 0.02 + 0.3
   end
 
   def get_physical_damage
