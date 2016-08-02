@@ -1,0 +1,219 @@
+<?php
+/**
+ * Represents a single player in the game. NOT to be confused with a user, dungeon creator, etc.
+ *
+ * User: Andre LaFleur
+ * Date: 5/13/16
+ * Time: 3:10 PM
+ */
+
+namespace LinkedWorldsCore;
+
+require_once 'Room.php';
+require_once 'Item.php';
+require_once 'Entity.php';
+
+class Player extends Entity
+{
+    private $username, $currentRoom, $inventory;
+
+    /**
+     * Player constructor.
+     * @param $_username
+     * @param $_startingRoom
+     */
+    public function __construct($_username, $_startingRoom){
+        // TODO: Type checking?
+
+        $this->inventory = [];
+        $this->username = $_username;
+        $this->currentRoom = $_startingRoom;
+
+        // Base stats - by default they start at 5
+        $this->strength = 5;
+        $this->constitution = 5;
+        $this->dexterity = 5;
+        $this->intelligence = 5;
+    }
+
+    /**
+     * Causes the player to go in the direction provided. Returns true if the player moved to that room, or false
+     * if that room does not exist.
+     *
+     * @param $direction
+     * @return bool
+     */
+    public function goDirection($direction){
+        $room = $this->currentRoom->goDirection($direction);
+
+        if(!is_null($room)){
+            $this->currentRoom = $room;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the description of the current room.
+     *
+     * @return string
+     */
+    public function look(){
+        return $this->currentRoom->look();
+    }
+
+    /**
+     * Returns the description of the item matching the name provided, either in the player's
+     * inventory or in the room itself.
+     *
+     * TODO: What about the case where there are two items of the same name?
+     *
+     * @param $itemName
+     * @return string or null
+     */
+    public function lookAt($itemName) {
+        if(isset($this->inventory[strtolower($itemName)]))
+            return $this->inventory[strtolower($itemName)]->getDescription();
+
+        // Don't forget to check for item aliases!
+        foreach($this->inventory as $item)
+            if($item->hasAlias($itemName))
+                return $item->getDescription();
+
+        $description = $this->currentRoom->lookAt($itemName);
+
+        return $description;
+    }
+
+    /**
+     * Returns true if the player has the item matching the name provided.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function hasItem($itemName){
+        $itemName = strtolower($itemName);
+        if(isset($this->inventory[$itemName]))
+            return true;
+
+        foreach($this->inventory as $item){
+            if($item->hasAlias($itemName))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Takes the item matching the item name passed from the room provided.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function takeItem($itemName){
+        $item = $this->currentRoom->removeItem($itemName);
+
+        if(is_null($item))
+            return false;
+
+        $this->inventory[strtolower($item->getItemName())] = $item;
+        return true;
+    }
+
+    /**
+     * Drops the item matching the name passed into the current room. Returns true if successful and returns
+     * false if the item does not exist in the player's inventory.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function dropItem($itemName){
+        $itemName = strtolower($itemName);
+
+        if(isset($this->inventory[$itemName])){
+            $this->currentRoom->addItem($this->inventory[$itemName]);
+            unset($this->inventory[$itemName]);
+            return true;
+        }
+
+        // Check by alias
+        foreach($this->inventory as $item){
+            if($item->hasAlias($itemName)){
+                $itemName = strtolower($item->getItemName());
+                $this->currentRoom->addItem($this->inventory[$itemName]);
+                unset($this->inventory[$itemName]);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Gives the item passed directly to the player, independent of anything around happening in the game.
+     *
+     * @param $item
+     */
+    public function giveItem($item){
+        $this->inventory[strtolower($item->getItemName())] = $item;
+    }
+
+    /**
+     * Equips the item provided given that the player has the item matching the name provided and
+     * that the item is equippable.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function equip($itemName){
+        // TODO: This
+
+        return false;
+    }
+
+    /**
+     * Returns an array of the items in the player's inventory.
+     *
+     * @return array
+     */
+    public function getItemList(){
+        $items = [];
+
+        foreach($this->inventory as $item)
+            array_push($items, $item->getItemName());
+
+        return $items;
+    }
+
+
+    /**
+     * Returns the current room this player is in.
+     *
+     * @return mixed
+     */
+    public function getCurrentRoom(){
+        return $this->currentRoom;
+    }
+
+    /**
+     * Returns just the name of the current room.
+     *
+     * @return mixed
+     */
+    public function getCurrentRoomName()
+    {
+        return $this->currentRoom->getRoomName();
+    }
+
+    
+    public function toHit($target)
+    {
+        // TODO: Implement toHit() method.
+    }
+
+    public function takeDamage($amount)
+    {
+        // TODO: Implement takeDamage() method.
+    }
+}

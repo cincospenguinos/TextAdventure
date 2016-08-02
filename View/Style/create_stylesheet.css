@@ -1,0 +1,73 @@
+#menuBar ul {
+    top: 0;
+    width: 90%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+    position: fixed;
+    border: solid 2px white;
+}
+
+#menuBar ul li {
+    cursor: pointer;
+    cursor: hand;
+    float: left;
+}
+
+#menuBar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#menuBar ul li a:hover {
+    background-color: gray;
+}
+
+body {
+    background: black;
+    font: 62.5% "Courier", sans-serif;
+    color: white;
+    margin: 50px;
+}
+
+.roomWidget {
+    width: 430px;
+    height: 100px;
+    border: solid 1px white;
+    position: absolute;
+}
+
+.roomName {
+    text-align: center;
+}
+
+.itemButton {
+    width: 15px;
+    height: 15px;
+    float:left;
+    border: solid 1px white;
+    cursor: pointer;
+    cursor: hand;
+    text-align: center;
+}
+
+.roomEllipse {
+    width: 100px;
+    height: 100px;
+    border: solid 1px white;
+    border-radius: 100px;
+    position: absolute;
+}
+
+.endpointNode svg circle {
+    border: solid white 1px;
+    border-radius: 100%;
+    background-color: black;
+    width: 5px;
+    height: 5px;
+}
