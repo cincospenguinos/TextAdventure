@@ -38,6 +38,10 @@ class Room
     public function look(){
         $description = $this->description;
 
+        foreach($this->itemsInRoom as $item){
+            $description .= " You see a " . strtolower($item->getItemName()) . " here.";
+        }
+
         return $description;
     }
 
