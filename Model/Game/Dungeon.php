@@ -30,13 +30,17 @@ class Dungeon
         $this->dungeonDescription = $_dungeonDescription;
     }
 
+    public function setStartRoom($room){
+        $this->startRoom = $room;
+    }
+
     /**
      * Adds the provided room to the dungeon.
      *
      * @param $room
      */
     public function addRoom($room){
-        $this->rooms[$room] = [];
+        $this->rooms[$room->getGUID()] = [];
     }
 
     /**
@@ -46,7 +50,7 @@ class Dungeon
      * @return bool
      */
     public function hasRoom($room){
-        if (isset($this->rooms[$room]))
+        if (isset($this->rooms[$room->getGUID()]))
             return true;
 
         return false;
@@ -60,19 +64,27 @@ class Dungeon
      * @return bool
      */
     public function getNextRoom($previousRoom, $direction){
-        if($direction < 0 || !isset($this->rooms[$previousRoom]) || !isset($this->rooms[$previousRoom][$direction]))
+        if($direction < 0 || !isset($this->rooms[$previousRoom->getGUID()]) || !isset($this->rooms[$previousRoom->getGUID()][$direction]))
             return false;
 
-        return $this->rooms[$previousRoom][$direction];
+        return $this->rooms[$previousRoom->getGUID()][$direction];
     }
 
     /**
      * Removes the room from the collection.
      *
-     * @param $room
+     * @param $roomToDelete
      */
-    public function removeRoom($room){
-        unset($this->rooms[$room]);
+    public function removeRoom($roomToDelete){
+        $roomToDeleteGUID = $roomToDelete->getGUID();
+        unset($this->rooms[$roomToDeleteGUID]);
+
+        foreach($this->rooms as $someGUID => $roomArray){
+            foreach($roomArray as $direction => $room){
+                if($room->getGUID() === $roomToDeleteGUID)
+                    unset($this->rooms[$someGUID][$direction]);
+            }
+        }
     }
 
     /**
@@ -86,12 +98,14 @@ class Dungeon
      */
     public function addExit($source, $target, $direction){
         if($direction >= 0 && $this->hasRoom(($source)) && $this->hasRoom($target))
-            $this->rooms[$source][$direction] = $target;
+            $this->rooms[$source->getGUID()][$direction] = $target;
         else
             return false;
 
         return true;
     }
+
+    // TODO: Should hasExit() be used to check if one room is connected to another, or just that one room has an exit in a direction?
 
     /**
      * Returns true if the room has an exit in the direction passed.
@@ -101,7 +115,7 @@ class Dungeon
      * @return bool
      */
     public function hasExit($from, $direction) {
-        if($this->hasRoom($from) && isset($this->rooms[$from][$direction])){
+        if($this->hasRoom($from) && isset($this->rooms[$from->getGUID()][$direction])){
             return true;
         }
 
@@ -115,8 +129,8 @@ class Dungeon
      * @param $direction
      */
     public function removeExit($from,  $direction) {
-        if(isset($this->rooms[$from]))
-            unset($this->rooms[$from][$direction]);
+        if(isset($this->rooms[$from->getGUID()]))
+            unset($this->rooms[$from->getGUID()][$direction]);
     }
 
     /**

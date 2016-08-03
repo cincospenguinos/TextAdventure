@@ -20,7 +20,7 @@ class Room
      * $itemsInRoom will always, ALWAYS use the lower case item names as keys mapping to item objects.
      * If we don't do it that way, then we're all ducked. Or more challengin code needs to be written.
      */
-    private $roomName, $exits, $description, $itemsInRoom, $monstersInRoom;
+    private $roomName, $exits, $description, $itemsInRoom, $monstersInRoom, $guid;
 
     public function __construct($_roomName, $_description)
     {
@@ -29,6 +29,8 @@ class Room
         $this->description = $_description;
         $this->itemsInRoom = [];
         $this->monstersInRoom = [];
+
+        $this->guid = $this->generateGUID();
     }
 
     /**
@@ -298,5 +300,23 @@ class Room
     public function setRoomName($roomName)
     {
         $this->roomName = $roomName;
+    }
+
+    public function getGUID(){
+        return $this->guid;
+    }
+
+    private function generateGUID(){
+        mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = chr(123)// "{"
+            .substr($charid, 0, 8).$hyphen
+            .substr($charid, 8, 4).$hyphen
+            .substr($charid,12, 4).$hyphen
+            .substr($charid,16, 4).$hyphen
+            .substr($charid,20,12)
+            .chr(125);// "}"
+        return $uuid;
     }
 }
