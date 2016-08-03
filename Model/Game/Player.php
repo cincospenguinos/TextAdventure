@@ -12,31 +12,28 @@ namespace LinkedWorldsCore;
 require_once 'Room.php';
 require_once 'Item.php';
 require_once 'Entity.php';
+require_once 'Attribute.php';
 
 class Player extends Entity
 {
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
     // TODO: Equippable items - how do?
     // TODO: Proper attributes.
-    // TODO: Setup health description stuff
-    private $username, $currentRoom, $inventory, $healthDescription;
+    private $username, $currentRoom, $inventory;
 
     /**
      * Player constructor.
      * @param $_username
      * @param $_startingRoom
      */
-    public function __construct($_username, $_startingRoom){
+    public function __construct($_username, $_startingRoom) {
         $this->inventory = [];
         $this->username = $_username;
         $this->currentRoom = $_startingRoom;
 
         // Base stats - by default they start at 5
         $this->level = 1;
-        $this->strength = 5;
-        $this->constitution = 5;
-        $this->dexterity = 5;
-        $this->intelligence = 5;
+        $this->attributes = [5, 5, 5, 5];
 
         $this->currentHitPoints = $this->maxHitPoints();
     }
@@ -213,7 +210,7 @@ class Player extends Entity
 
     public function physicalToHit()
     {
-        return 0.1 * (3.0 * $this->dexterity / 7.0) + $this->level * 0.02 + 0.3;
+        return 0.1 * (3.0 * $this->attributes[Attribute::Dexterity] / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -223,7 +220,7 @@ class Player extends Entity
      */
     public function physicalDamage()
     {
-        return 1 + mt_rand(1, 2 * $this->strength / 3) + $this->level;
+        return 1 + mt_rand(1, 2 * $this->attributes[Attribute::Strength] / 3) + $this->level;
     }
 
     /**
@@ -234,7 +231,7 @@ class Player extends Entity
      */
     public function spellToHit()
     {
-        return 0.1 * (3.0 * $this->constitution / 7.0) + $this->level * 0.02 + 0.3;
+        return 0.1 * (3.0 * $this->attributes[Attribute::Constitution] / 7.0) + $this->level * 0.02 + 0.3;
     }
 
     /**
@@ -244,7 +241,7 @@ class Player extends Entity
      */
     public function spellDamage()
     {
-        1 + mt_rand(2 * $this->intelligence / 3) + $this->level;
+        return 1 + mt_rand(2 * $this->attributes[Attribute::Intelligence] / 3) + $this->level;
     }
 
     /**
@@ -254,7 +251,7 @@ class Player extends Entity
      */
     public function evasiveness()
     {
-        ((2.0 * $this->dexterity) / 3.0 + $this->intelligence / 3.0) * 0.0625 + ($this->level - 1) * 0.02;
+        return ((2.0 * $this->attributes[Attribute::Dexterity]) / 3.0 + $this->attributes[Attribute::Intelligence] / 3.0) * 0.0625 + ($this->level - 1) * 0.02;
     }
 
     /**
@@ -264,6 +261,6 @@ class Player extends Entity
      */
     public function maxHitPoints()
     {
-        return (5 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
+        return (5 * $this->attributes[Attribute::Constitution]) / 4 + $this->attributes[Attribute::Strength] / 4 + 2 * ($this->level - 1);
     }
 }

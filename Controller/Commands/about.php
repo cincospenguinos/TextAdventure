@@ -4,7 +4,7 @@
  *
  * TODO: Decide how the about command will work - does it say anything about the dungeon?
  *
- *~ describes information about this dungeon. Click <a href='../../about.php'>here</a> to learn more about the game.
+ *~ describes information about this dungeon. Click <a href='../../about.php' target='_blank'>here</a> to learn more about the game as a whole.
  *
  * User: Andre LaFleur
  * Date: 5/29/16

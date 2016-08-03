@@ -13,8 +13,9 @@ abstract class Entity
 {
     // TODO: Spells?
     // TODO: Inventory at top level?
-    // TODO: Proper attributes. Use an enum. This will make equipment much easier.
-    protected $strength, $constitution, $dexterity, $intelligence, $currentHitPoints, $isDead, $level;
+    // TODO: Equippables at top level?
+    protected $attributes = [0, 0, 0, 0];
+    protected $currentHitPoints, $isDead, $level;
 
     /**
      * Checks to see if this entity hits a physical attack on the target provided.
