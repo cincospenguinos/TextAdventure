@@ -3,10 +3,7 @@
  * Manages all of the combat.
  *
  *~ attack [target] - attack the target provided.
- *
- * TODO: THIS COMMAND REQUIRES COMBAT!
  */
-
 $monsterName = str_replace('attack ', '', $command);
 $monster = $player->getCurrentRoom()->getMonster($monsterName);
 
@@ -22,3 +19,5 @@ if(isset($monster)){
 } else {
     $data['response'] = 'I cannot find that monster there.';
 }
+
+require_once 'monster_combat.php';

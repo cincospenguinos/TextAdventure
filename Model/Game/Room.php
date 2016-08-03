@@ -201,6 +201,7 @@ class Room
      */
     public function addMonster($monster){
         $this->monstersInRoom[strtolower($monster->getName())] = $monster;
+        error_log('Has monster?' . $this->hasMonster($monster->getName()));
     }
 
     /**
@@ -245,6 +246,22 @@ class Room
     }
 
     /**
+     * Returns the entire collection of monsters.
+     *
+     * @return array
+     */
+    public function allHostileMonsters(){
+        $monsters = [];
+
+        foreach($this->monstersInRoom as $monster){
+            if($monster->isHostile() && !$monster->isDead())
+                array_push($monsters, $monster);
+        }
+
+        return $monsters;
+    }
+
+    /**
      * Returns the description of this room.
      *
      * @return string
@@ -260,8 +277,6 @@ class Room
      */
     public function setDescription($description)
     {
-        // TODO: type checking?
-
         $this->description = $description;
     }
 

@@ -24,7 +24,12 @@ class Monster extends Entity
         $this->isHostile = $_isHostile;
 
         $this->aliases = [];
-        $this->currentHitPoints = 3;
+
+        // TODO: Fix this
+        $this->currentHitPoints = $this->maxHitPoints();
+        $this->dexterity = 3;
+        $this->strength = 2;
+        $this->constitution = 4;
     }
 
     public function physicalToHit()

@@ -18,7 +18,8 @@ class Player extends Entity
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
     // TODO: Equippable items - how do?
     // TODO: Proper attributes.
-    private $username, $currentRoom, $inventory;
+    // TODO: Setup health description stuff
+    private $username, $currentRoom, $inventory, $healthDescription;
 
     /**
      * Player constructor.

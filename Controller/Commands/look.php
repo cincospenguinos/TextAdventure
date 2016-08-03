@@ -4,8 +4,6 @@
  *
  *~ look, look [item] - describes the room or the item provided
  *
- * TODO: THIS COMMAND REQUIRES COMBAT!
- *
  * User: Andre LaFleur
  * Date: 5/25/16
  * Time: 9:53 PM
@@ -26,3 +24,5 @@ if(strpos($command, 'look at') !== false) {
 } else {
     $data['response'] = "I'm afraid I don't understand what you meant by \"$command\".";
 }
+
+require_once 'monster_combat.php';

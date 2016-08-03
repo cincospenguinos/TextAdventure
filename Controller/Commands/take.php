@@ -4,8 +4,6 @@
  *
  *~ take [item] - take an item from the current room
  *
- * TODO: THIS COMMAND REQUIRES COMBAT!
- *
  * User: Andre LaFleur
  * Date: 5/28/16
  * Time: 9:46 PM
@@ -18,3 +16,5 @@ if($player->takeItem($item))
     $data['response'] = 'Taken.';
 else
     $data['response'] = "I couldn't find the thing \"$item\" here.";
+
+require_once 'monster_combat.php';
