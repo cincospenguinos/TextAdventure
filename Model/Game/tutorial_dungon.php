@@ -3,6 +3,8 @@
  * A simple file that is designed to create a full on tutorial dungeon. Promises that the variable $dungeon will be
  * the first room of the tutorial dungeon in its complete form.
  *
+ * TODO: Migrate to dungeon format.
+ *
  * User: tsvetok
  * Date: 5/28/16
  * Time: 10:30 PM
@@ -10,6 +12,7 @@
 require_once 'Room.php';
 require_once 'Item.php';
 require_once 'Direction.php';
+require_once 'Monster.php';
 
 // Setup all of the rooms
 $garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .
@@ -33,6 +36,9 @@ $greatHall = new \LinkedWorldsCore\Room("Great Hall", "You are standing in a roo
 $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in front of an altar, in a destroyed thrown room. The altar seems to have been hastily put together, built of stone " .
     "and mud. A portal, infinite and silent, swirls about on the north wall of the room. It beckons you in its silence; move forward only when ready.");
 
+// Put together some monsters.
+$cultist = new \LinkedWorldsCore\Monster(1, 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
+
 // Put together all of the items.
 $strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.");
 $strangeFruit->addAlias('fruit');
@@ -43,6 +49,9 @@ $tome = new \LinkedWorldsCore\Item("Spell Tome - Spirit Arrow", "A dusty tome de
 $tome->addAlias('tome');
 $tome->addAlias('book');
 $tome->addAlias('spell book');
+
+// Add the monsters
+$mysticShrine->addMonster($cultist);
 
 // Throw in all the items
 $garden->addItem($strangeFruit);

@@ -11,6 +11,7 @@ namespace LinkedWorldsCore;
 
 require_once 'Direction.php';
 require_once 'Item.php';
+require_once 'Monster.php';
 
 class Room
 {
@@ -19,7 +20,7 @@ class Room
      * $itemsInRoom will always, ALWAYS use the lower case item names as keys mapping to item objects.
      * If we don't do it that way, then we're all ducked. Or more challengin code needs to be written.
      */
-    private $roomName, $exits, $description, $itemsInRoom;
+    private $roomName, $exits, $description, $itemsInRoom, $monstersInRoom;
 
     public function __construct($_roomName, $_description)
     {
@@ -27,6 +28,7 @@ class Room
         $this->exits = [];
         $this->description = $_description;
         $this->itemsInRoom = [];
+        $this->monstersInRoom = [];
     }
 
     /**
@@ -38,8 +40,12 @@ class Room
     public function look(){
         $description = $this->description;
 
-        foreach($this->itemsInRoom as $item){
+        foreach($this->itemsInRoom as $item) {
             $description .= " You see a " . strtolower($item->getItemName()) . " here.";
+        }
+
+        foreach($this->monstersInRoom as $monster){
+            $description .= " There is a " . $monster->getName() . " here.";
         }
 
         return $description;
@@ -47,6 +53,8 @@ class Room
 
     /**
      * Returns the description of the item matching the item name provided.
+     *
+     * TODO: Look at monster?
      *
      * @param $itemName
      * @return string or null
@@ -175,6 +183,43 @@ class Room
         }
 
         return null;
+    }
+
+    /**
+     * Adds the monster passed to the collection.
+     *
+     * @param $monster
+     */
+    public function addMonster($monster){
+        $this->monstersInRoom[strtolower($monster->getName())] = $monster;
+    }
+
+    /**
+     * Returns true if the monster with the name passed exists in this room, or if it matches an alias.
+     *
+     * @param $monsterName
+     * @return bool
+     */
+    public function hasMonster($monsterName){
+        $monsterName = strtolower($monsterName);
+        if(isset($this->monstersInRoom[strtolower($monsterName)]))
+            return true;
+
+        foreach($this->monstersInRoom as $item){
+            if($item->hasAlias($monsterName))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes the monster matching the name passed.
+     *
+     * @param $monsterName
+     */
+    public function removeMonster($monsterName){
+        unset($this->monstersInRoom[strtolower($monsterName)]);
     }
 
     /**

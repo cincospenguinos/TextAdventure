@@ -13,10 +13,16 @@ require_once 'Entity.php';
 class Monster extends Entity
 {
     // TODO: Testing
+    private $isHostile, $name, $description, $aliases;
 
-    public function __construct($_level)
+    public function __construct($_level, $_name, $_description, $_isHostile = true)
     {
         $this->level = $_level;
+        $this->name = $_name;
+        $this->description = $_description;
+        $this->isHostile = $_isHostile;
+
+        $this->aliases = [];
     }
 
     public function physicalToHit()
@@ -72,5 +78,65 @@ class Monster extends Entity
     public function maxHitPoints()
     {
         return (3 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHostile()
+    {
+        return $this->isHostile;
+    }
+
+    /**
+     * @param boolean $isHostile
+     */
+    public function setHostile($isHostile)
+    {
+        $this->isHostile = $isHostile;
+    }
+
+    /**
+     * Returns true if the alias passed exists in the collection of aliases for this item.
+     *
+     * @param $alias
+     * @return bool
+     */
+    public function hasAlias($alias){
+        return isset($this->aliases[strtolower($alias)]);
+    }
+
+    /**
+     * Adds the alias passed
+     *
+     * @param $alias
+     */
+    public function addAlias($alias){
+        $this->aliases[strtolower($alias)] = 1;
+    }
+
+    /**
+     * Removes the alias matching the name provided, given that it exists.
+     *
+     * @param $alias
+     */
+    public function removeAlias($alias){
+        unset($this->aliases[strtolower($alias)]);
     }
 }
