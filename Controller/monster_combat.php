@@ -6,9 +6,7 @@
  * Date: 8/2/16
  * Time: 6:52 PM
  */
-error_log('Do we have any monsters? ' . sizeof($player->getCurrentRoom()->allHostileMonsters()));
-$monsters = $player->getCurrentRoom()->allHostileMonsters();
-foreach($monsters as $monster) {
+foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
     $data['response'] .= "<br/>The " . strtolower($monster->getName()) . " attacks ";
 
     if($monster->attack($player)){
