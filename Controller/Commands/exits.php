@@ -14,7 +14,6 @@ $directions = $player->getCurrentRoom()->getAllExitDirections();
 $resp = "Exits: ";
 
 foreach($directions as $direction) {
-    error_log("What the fuck man. {$direction}");
     $resp .= \LinkedWorldsCore\Direction::toString($direction) . ", ";
 }
 
