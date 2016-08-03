@@ -81,6 +81,34 @@ class Monster extends Entity
     }
 
     /**
+     * Returns true if the alias passed exists in the collection of aliases for this item.
+     *
+     * @param $alias
+     * @return bool
+     */
+    public function hasAlias($alias){
+        return isset($this->aliases[strtolower($alias)]);
+    }
+
+    /**
+     * Adds the alias passed
+     *
+     * @param $alias
+     */
+    public function addAlias($alias){
+        $this->aliases[strtolower($alias)] = 1;
+    }
+
+    /**
+     * Removes the alias matching the name provided, given that it exists.
+     *
+     * @param $alias
+     */
+    public function removeAlias($alias){
+        unset($this->aliases[strtolower($alias)]);
+    }
+
+    /**
      * @return mixed
      */
     public function getName()
@@ -113,30 +141,18 @@ class Monster extends Entity
     }
 
     /**
-     * Returns true if the alias passed exists in the collection of aliases for this item.
-     *
-     * @param $alias
-     * @return bool
+     * @return mixed
      */
-    public function hasAlias($alias){
-        return isset($this->aliases[strtolower($alias)]);
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
-     * Adds the alias passed
-     *
-     * @param $alias
+     * @param mixed $description
      */
-    public function addAlias($alias){
-        $this->aliases[strtolower($alias)] = 1;
-    }
-
-    /**
-     * Removes the alias matching the name provided, given that it exists.
-     *
-     * @param $alias
-     */
-    public function removeAlias($alias){
-        unset($this->aliases[strtolower($alias)]);
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

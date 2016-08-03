@@ -9,13 +9,13 @@
  */
 
 if(strpos($command, 'look at') !== false) {
-    $item = str_replace('look at ', '', $command);
-    $response = $player->lookAt($item);
+    $thing = str_replace('look at ', '', $command);
+    $response = $player->lookAt($thing);
 
     if(is_null($response))
-        $data['response'] = "I don't see anything here that matches the name \"$item\".";
+        $data['response'] = "I don't see anything here that matches the name \"$thing\".";
     else
-        $data['response'] = "<p>" . htmlspecialchars($player->lookAt($item)) . "</p>";
+        $data['response'] = "<p>" . htmlspecialchars($player->lookAt($thing)) . "</p>";
 } else if(strcmp($command, 'look') === 0){
     $roomName = $player->getCurrentRoomName();
     $description = $player->look();

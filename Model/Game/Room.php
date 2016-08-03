@@ -52,23 +52,29 @@ class Room
     }
 
     /**
-     * Returns the description of the item matching the item name provided.
+     * Returns the description of the item or the monster matching the name provided.
      *
-     * TODO: Look at monster?
-     *
-     * @param $itemName
+     * @param $name
      * @return string or null
      */
-    public function lookAt($itemName){
-        $itemName = strtolower($itemName);
+    public function lookAt($name){
+        $name = strtolower($name);
 
-        if(isset($this->itemsInRoom[$itemName]))
-            return $this->itemsInRoom[$itemName]->getDescription();
+        if(isset($this->itemsInRoom[$name]))
+            return $this->itemsInRoom[$name]->getDescription();
 
         // Don't forget to check for item aliases!
         foreach($this->itemsInRoom as $item)
-            if($item->hasAlias($itemName))
+            if($item->hasAlias($name))
                 return $item->getDescription();
+
+        if(isset($this->monstersInRoom[$name]))
+            return $this->monstersInRoom[$name]->getDescription();
+
+        // Don't forget to check for item aliases!
+        foreach($this->monstersInRoom as $monster)
+            if($monster->hasAlias($name))
+                return $monster->getDescription();
 
         return null;
     }
