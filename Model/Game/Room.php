@@ -44,8 +44,11 @@ class Room
             $description .= " You see a " . strtolower($item->getItemName()) . " here.";
         }
 
-        foreach($this->monstersInRoom as $monster){
-            $description .= " There is a " . $monster->getName() . " here.";
+        foreach($this->monstersInRoom as $monster) {
+            if($monster->isDead())
+                $description .= " There is the corpse of a " . strtolower($monster->getName()) . " here.";
+            else
+                $description .= " There is a " . strtolower($monster->getName()) . " here.";
         }
 
         return $description;
@@ -208,7 +211,7 @@ class Room
      */
     public function hasMonster($monsterName){
         $monsterName = strtolower($monsterName);
-        if(isset($this->monstersInRoom[strtolower($monsterName)]))
+        if(isset($this->monstersInRoom[$monsterName]))
             return true;
 
         foreach($this->monstersInRoom as $item){
@@ -217,6 +220,19 @@ class Room
         }
 
         return false;
+    }
+
+    public function getMonster($monsterName){
+        $monsterName = strtolower($monsterName);
+        if(isset($this->monstersInRoom[$monsterName]))
+            return $this->monstersInRoom[$monsterName];
+
+        foreach($this->monstersInRoom as $monster){
+            if($monster->hasAlias($monsterName))
+                return $monster;
+        }
+
+        return null;
     }
 
     /**

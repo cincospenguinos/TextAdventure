@@ -13,6 +13,7 @@ abstract class Entity
 {
     // TODO: Spells?
     // TODO: Inventory at top level?
+    // TODO: Proper attributes. Use an enum. This will make equipment much easier.
     protected $strength, $constitution, $dexterity, $intelligence, $currentHitPoints, $isDead, $level;
 
     /**
@@ -89,8 +90,120 @@ abstract class Entity
      */
     public function takeDamage($amount){
         $this->currentHitPoints -= $amount;
-        $this->isDead = $this->currentHitPoints > 0;
+        $this->isDead = $this->currentHitPoints < 0;
 
         return $this->isDead;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStrength()
+    {
+        return $this->strength;
+    }
+
+    /**
+     * @param mixed $strength
+     */
+    public function setStrength($strength)
+    {
+        $this->strength = $strength;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstitution()
+    {
+        return $this->constitution;
+    }
+
+    /**
+     * @param mixed $constitution
+     */
+    public function setConstitution($constitution)
+    {
+        $this->constitution = $constitution;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDexterity()
+    {
+        return $this->dexterity;
+    }
+
+    /**
+     * @param mixed $dexterity
+     */
+    public function setDexterity($dexterity)
+    {
+        $this->dexterity = $dexterity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIntelligence()
+    {
+        return $this->intelligence;
+    }
+
+    /**
+     * @param mixed $intelligence
+     */
+    public function setIntelligence($intelligence)
+    {
+        $this->intelligence = $intelligence;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrentHitPoints()
+    {
+        return $this->currentHitPoints;
+    }
+
+    /**
+     * @param mixed $currentHitPoints
+     */
+    public function setCurrentHitPoints($currentHitPoints)
+    {
+        $this->currentHitPoints = $currentHitPoints;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isDead()
+    {
+        return $this->isDead;
+    }
+
+    /**
+     * @param mixed $isDead
+     */
+    public function setIsDead($isDead)
+    {
+        $this->isDead = $isDead;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param mixed $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
     }
 }

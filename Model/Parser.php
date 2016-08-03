@@ -43,8 +43,11 @@ class Parser
                 return 'inventory';
             case (strcmp($command, 'about') === 0):
                 return 'about';
-            case (strcmp($command, 'exits') == 0):
+            case (strcmp($command, 'exits') === 0):
                 return 'exits';
+            case (strcmp($command, 'attack') === 0):
+            case (strcmp($command, 'kill') === 0):
+                return 'attack';
             default:
                 return null;
         }

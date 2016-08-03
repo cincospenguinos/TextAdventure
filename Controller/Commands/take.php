@@ -3,6 +3,9 @@
  * Manages the 'take' or 'get' command.
  *
  *~ take [item] - take an item from the current room
+ *
+ * TODO: THIS COMMAND REQUIRES COMBAT!
+ *
  * User: Andre LaFleur
  * Date: 5/28/16
  * Time: 9:46 PM

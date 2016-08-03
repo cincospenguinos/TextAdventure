@@ -2,7 +2,7 @@
 
 The way commands work is quite straightforward:
 
-1. The commands endpoint REST endpoint "command.php" manages all of the player commands. It uses the parser to figure
+1. The commands endpoint "command.php" manages all of the player commands. It uses the parser to figure
 out what command it is, and then includes the file that matches that command.
 2. The file that matches that command is located in "Controller/Commands/" directory. You can think of it as calling
 a function, as there are certain conditions that are promised with a command file and certain results each command
@@ -15,8 +15,7 @@ file promises.
 3. After the command file executes, the $data array is expected to be full and is converted to JSON and sent to the
 client.
 
-Whenever creating a new command, the contract described above must apply to that command. Under no exceptions should
-any of these be broken, most especially the information below concerning the help command.
+When you create a new command, please follow the requirements above. If you do not, your command will not work!
 
 ## The Help Command
 

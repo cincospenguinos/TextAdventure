@@ -13,6 +13,7 @@ require_once 'Entity.php';
 class Monster extends Entity
 {
     // TODO: Testing
+    // TODO: Attributes
     private $isHostile, $name, $description, $aliases;
 
     public function __construct($_level, $_name, $_description, $_isHostile = true)
@@ -23,6 +24,7 @@ class Monster extends Entity
         $this->isHostile = $_isHostile;
 
         $this->aliases = [];
+        $this->currentHitPoints = 3;
     }
 
     public function physicalToHit()

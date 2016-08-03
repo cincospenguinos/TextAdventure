@@ -4,6 +4,8 @@
  *
  *~ show all exits from current room
  *
+ * TODO: THIS COMMAND REQUIRES COMBAT!
+ *
  * Created by PhpStorm.
  * User: tsvetok
  * Date: 7/21/16

@@ -17,7 +17,7 @@ class Player extends Entity
 {
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
     // TODO: Equippable items - how do?
-    // TODO: Modify stats to accommodate weapons
+    // TODO: Proper attributes.
     private $username, $currentRoom, $inventory;
 
     /**
