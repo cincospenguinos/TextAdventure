@@ -12,6 +12,9 @@ namespace LinkedWorldsCore;
 
 class Item
 {
+    // TODO: Add another description variable for when an item appears in a room
+    // TODO: Make item be unable to be picked up and stuff.
+
     /*
      * $aliases is a list of other names (case insensitive) that this Item can be referred to by. Example: Player
      * wants to take the Key of Gondor. An alias of Key of Gondor is "key," so if the player enters the command

@@ -13,6 +13,10 @@ require_once 'Room.php';
 require_once 'Item.php';
 require_once 'Direction.php';
 require_once 'Monster.php';
+require_once 'Dungeon.php';
+
+// Create the dungeon
+$dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'The tutorial dungeon.');
 
 // Setup all of the rooms
 $garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .

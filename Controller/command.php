@@ -14,6 +14,8 @@ require_once '../Model/Game/Player.php';
 require_once '../Model/Game/Direction.php';
 require_once '../Model/Game/Room.php';
 
+// TODO: Set a different endpoint for commands in the void? Like maybe a different set of commands?
+
 // If there is ever a GET request, just show the API page.
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
     include '../View/api.php';

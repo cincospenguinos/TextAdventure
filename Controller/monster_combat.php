@@ -6,6 +6,9 @@
  * Date: 8/2/16
  * Time: 6:52 PM
  */
+
+// TODO: Is there a better way to manage this
+
 foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
     $data['response'] .= "<br/>The " . strtolower($monster->getName()) . " attacks ";
 
@@ -21,4 +24,4 @@ foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
     }
 }
 
-// TODO: What happens at death, especially during the tutorial dungeon? Do we set you up to go back to the beginning?
+// TODO: Manage death - player loses everything that is not aetherial and returns to the void, without XP

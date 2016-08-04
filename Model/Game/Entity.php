@@ -13,6 +13,7 @@ abstract class Entity
 {
     // TODO: Spells?
     // TODO: Inventory at top level?
+    // TODO: Make an inventory class and include it here
     // TODO: Equippables at top level?
     protected $attributes = [0, 0, 0, 0];
     protected $currentHitPoints, $isDead, $level;

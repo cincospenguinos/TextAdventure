@@ -8,6 +8,8 @@
  * Time: 4:04 PM
  */
 
+// TODO: When someone exits to the void, we should calculate experience points and let them level up?
+
 $command = trim(str_replace('go', '', $command));
 
 if(\LinkedWorldsCore\Direction::isDirectionString($command)){
