@@ -43,7 +43,7 @@ class Room
         $description = $this->description;
 
         foreach($this->itemsInRoom as $item) {
-            $description .= " You see a " . strtolower($item->getItemName()) . " here.";
+            $description .= " You see a " . strtolower($item->getItemName()) . " here."; // TODO: Better grammar
         }
 
         foreach($this->monstersInRoom as $monster) {
@@ -95,15 +95,6 @@ class Room
             return $this->exits[$direction];
 
         return null;
-    }
-
-    /**
-     * Returns an array of all the directions that this room has an exit through.
-     *
-     * @return array
-     */
-    public function getAllExitDirections(){
-        return array_keys($this->exits);
     }
 
     /**

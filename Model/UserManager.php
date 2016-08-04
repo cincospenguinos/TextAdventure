@@ -24,7 +24,7 @@ class UserManager
      */
     public static function generateNewPlayer($username){
         $dungeon = null;
-        include 'Game/tutorial_dungon.php';
+        include 'Game/tutorial_dungeon.php';
         $player = new \LinkedWorldsCore\Player($username, $dungeon);
 
         return $player;

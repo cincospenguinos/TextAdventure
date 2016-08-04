@@ -8,7 +8,6 @@
  * Date: 5/25/16
  * Time: 9:53 PM
  */
-
 if(strpos($command, 'look at') !== false) {
     $thing = str_replace('look at ', '', $command);
     $response = $player->lookAt($thing);
@@ -17,6 +16,8 @@ if(strpos($command, 'look at') !== false) {
         $data['response'] = "I don't see anything here that matches the name \"$thing\".";
     else
         $data['response'] = "<p>" . htmlspecialchars($player->lookAt($thing)) . "</p>";
+
+    require_once 'monster_combat.php'; // We will only trigger combat after looking at something
 } else if(strcmp($command, 'look') === 0){
     $roomName = $player->getCurrentRoomName();
     $description = $player->look();
@@ -24,5 +25,3 @@ if(strpos($command, 'look at') !== false) {
 } else {
     $data['response'] = "I'm afraid I don't understand what you meant by \"$command\".";
 }
-
-require_once 'monster_combat.php';

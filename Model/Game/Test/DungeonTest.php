@@ -17,11 +17,11 @@ class DungeonTest extends PHPUnit_Framework_TestCase
      * Test the constructor
      */
     public function testConstructor(){
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
     }
 
     public function testAddRoom(){
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $dungeon->addRoom($room);
 
@@ -29,7 +29,7 @@ class DungeonTest extends PHPUnit_Framework_TestCase
     }
 
     public function testRemoveRoom(){
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $dungeon->addRoom($room);
         $dungeon->removeRoom($room);
@@ -38,7 +38,7 @@ class DungeonTest extends PHPUnit_Framework_TestCase
     }
 
     public function testAddExitToRoom(){
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $otherRoom = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
 
@@ -52,7 +52,7 @@ class DungeonTest extends PHPUnit_Framework_TestCase
     }
 
     public function testRemoveExitFromRoom(){
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $otherRoom = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
 
@@ -68,7 +68,7 @@ class DungeonTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveRoomAndExits(){
         // When I remove a room from a dungeon, I expect all exits to that room to be removed as well
-        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon');
+        $dungeon = new \LinkedWorldsCore\Dungeon('Some dungeon', 'A simple dungeon', 'Herb');
         $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
         $otherRoom = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
 

@@ -8,7 +8,7 @@
  * Time: 4:04 PM
  */
 
-// TODO: When someone exits to the void, we should calculate experience points and let them level up?
+// TODO: When someone exits to the void, calculate XP, add a level up notice if necessary, and free everything from memory.
 
 $command = trim(str_replace('go', '', $command));
 

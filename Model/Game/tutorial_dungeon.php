@@ -16,7 +16,7 @@ require_once 'Monster.php';
 require_once 'Dungeon.php';
 
 // Create the dungeon
-$dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'The tutorial dungeon.');
+$dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן', 'יהוה');
 
 // Setup all of the rooms
 $garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .
@@ -62,35 +62,30 @@ $garden->addItem($strangeFruit);
 $mysticShrine->addItem($artifact);
 $library->addItem($tome);
 
+// Add all of the rooms
+$dungeon->addRooms([$garden, $frontOfHouse, $livingRoom, $backOfHouse, $cellar, $mysticShrine, $forest, $smallCabin, $library, $greatHall, $throneRoom]);
+
 // Connect all of the rooms
-$garden->addExit(\LinkedWorldsCore\Direction::East, $frontOfHouse);
+$dungeon->addExit($garden, $frontOfHouse, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($frontOfHouse, $backOfHouse, \LinkedWorldsCore\Direction::South);
+$dungeon->addExit($backOfHouse, $frontOfHouse, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($backOfHouse, $frontOfHouse, \LinkedWorldsCore\Direction::West);
+$dungeon->addExit($backOfHouse, $livingRoom, \LinkedWorldsCore\Direction::North);
+$dungeon->addExit($backOfHouse, $forest, \LinkedWorldsCore\Direction::South);
+$dungeon->addExit($livingRoom, $backOfHouse, \LinkedWorldsCore\Direction::South);
+$dungeon->addExit($livingRoom, $cellar, \LinkedWorldsCore\Direction::Down);
+$dungeon->addExit($cellar, $livingRoom, \LinkedWorldsCore\Direction::Up);
+$dungeon->addExit($cellar, $mysticShrine, \LinkedWorldsCore\Direction::Down);
+$dungeon->addExit($mysticShrine, $cellar, \LinkedWorldsCore\Direction::Up);
+$dungeon->addExit($forest, $backOfHouse, \LinkedWorldsCore\Direction::North);
+$dungeon->addExit($forest, $smallCabin, \LinkedWorldsCore\Direction::South);
+$dungeon->addExit($smallCabin, $forest, \LinkedWorldsCore\Direction::North);
+$dungeon->addExit($smallCabin, $library, \LinkedWorldsCore\Direction::Down);
+$dungeon->addExit($library, $smallCabin, \LinkedWorldsCore\Direction::Up);
+$dungeon->addExit($library, $greatHall, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($greatHall, $library, \LinkedWorldsCore\Direction::West);
+$dungeon->addExit($greatHall, $throneRoom, \LinkedWorldsCore\Direction::Up);
+$dungeon->addExit($throneRoom, $greatHall, \LinkedWorldsCore\Direction::Down);
 
-$frontOfHouse->addExit(\LinkedWorldsCore\Direction::South, $backOfHouse);
-
-$backOfHouse->addExit(\LinkedWorldsCore\Direction::East, $frontOfHouse);
-$backOfHouse->addExit(\LinkedWorldsCore\Direction::West, $frontOfHouse);
-$backOfHouse->addExit(\LinkedWorldsCore\Direction::North, $livingRoom);
-$backOfHouse->addExit(\LinkedWorldsCore\Direction::South, $forest);
-
-$livingRoom->addExit(\LinkedWorldsCore\Direction::South, $backOfHouse);
-$livingRoom->addExit(\LinkedWorldsCore\Direction::Down, $cellar);
-
-$cellar->addExit(\LinkedWorldsCore\Direction::Up, $livingRoom);
-$cellar->addExit(\LinkedWorldsCore\Direction::Down, $mysticShrine);
-
-$mysticShrine->addExit(\LinkedWorldsCore\Direction::Up, $cellar);
-
-$forest->addExit(\LinkedWorldsCore\Direction::North, $backOfHouse);
-$forest->addExit(\LinkedWorldsCore\Direction::South, $smallCabin);
-
-$smallCabin->addExit(\LinkedWorldsCore\Direction::North, $forest);
-$smallCabin->addExit(\LinkedWorldsCore\Direction::Down, $library);
-
-$library->addExit(\LinkedWorldsCore\Direction::Up, $smallCabin);
-$library->addExit(\LinkedWorldsCore\Direction::East, $greatHall);
-
-$greatHall->addExit(\LinkedWorldsCore\Direction::West, $library);
-$greatHall->addExit(\LinkedWorldsCore\Direction::Up, $throneRoom);
-
-// Ensure that the dungeon begins at the garden
-$dungeon = $garden;
+// Set the start room
+$dungeon->setStartRoom($garden);

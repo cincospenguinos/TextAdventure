@@ -14,7 +14,8 @@ class Monster extends Entity
 {
     // TODO: Testing
     // TODO: Attributes
-    private $isHostile, $name, $description, $aliases;
+    // TODO: Calculate level based off of attributes
+    private $isHostile, $name, $description, $aliases, $strength, $constitution, $dexterity, $intelligence;
 
     public function __construct($_level, $_name, $_description, $_isHostile = true)
     {
@@ -27,6 +28,7 @@ class Monster extends Entity
 
         // TODO: Fix this
         $this->currentHitPoints = $this->maxHitPoints();
+        $this->strength = 1;
         $this->dexterity = 3;
         $this->strength = 2;
         $this->constitution = 4;

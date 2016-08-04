@@ -13,29 +13,31 @@ require_once 'Room.php';
 require_once 'Item.php';
 require_once 'Entity.php';
 require_once 'Attribute.php';
+require_once 'Dungeon.php';
 
 class Player extends Entity
 {
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
     // TODO: Equippable items - how do?
-    // TODO: Proper attributes.
-    private $username, $currentRoom, $inventory;
+    private $username, $currentRoom, $inventory, $currentDungeon;
 
     /**
      * Player constructor.
      * @param $_username
      * @param $_startingRoom
      */
-    public function __construct($_username, $_startingRoom) {
+    public function __construct($_username, $_dungeon) {
         $this->inventory = [];
         $this->username = $_username;
-        $this->currentRoom = $_startingRoom;
+        $this->currentDungeon = $_dungeon;
+        $this->currentRoom = $_dungeon->getStartRoom();
 
         // Base stats - by default they start at 5
         $this->level = 1;
         $this->attributes = [5, 5, 5, 5];
-
         $this->currentHitPoints = $this->maxHitPoints();
+
+        error_log("[DEBUG] Start room set? " . isset($this->currentRoom));
     }
 
     /**
@@ -46,13 +48,13 @@ class Player extends Entity
      * @return bool
      */
     public function goDirection($direction){
-        $room = $this->currentRoom->goDirection($direction);
+        $room = $this->currentDungeon->getNextRoom($this->currentRoom, $direction);
 
-        if(!is_null($room)){
+        if(!$room){
+            return false;
+        } else {
             $this->currentRoom = $room;
             return true;
-        } else {
-            return false;
         }
     }
 
@@ -196,6 +198,10 @@ class Player extends Entity
      */
     public function getCurrentRoom(){
         return $this->currentRoom;
+    }
+
+    public function getAllExitDirections(){
+        return $this->currentDungeon->getAllExitDirections($this->currentRoom);
     }
 
     /**

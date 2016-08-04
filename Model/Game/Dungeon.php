@@ -21,12 +21,17 @@ namespace LinkedWorldsCore;
 class Dungeon
 {
 
-    private $rooms, $dungeonName, $dungeonDescription, $startRoom;
+    private $rooms, $dungeonCreator, $dungeonName, $dungeonDescription, $startRoom;
 
-    public function __construct($_dungeonName, $_dungeonDescription){
+    public function __construct($_dungeonName, $_dungeonDescription, $_dungeonCreator){
         $this->rooms = [];
         $this->dungeonName = $_dungeonName;
         $this->dungeonDescription = $_dungeonDescription;
+        $this->dungeonCreator = $_dungeonCreator;
+    }
+
+    public function getStartRoom(){
+        return $this->startRoom;
     }
 
     public function setStartRoom($room){
@@ -40,6 +45,17 @@ class Dungeon
      */
     public function addRoom($room){
         $this->rooms[$room->getGUID()] = [];
+    }
+
+    /**
+     * Adds the whole collection of rooms provided to this dungeon.
+     *
+     * @param $rooms
+     */
+    public function addRooms($rooms){
+        foreach($rooms as $room){
+            $this->addRoom($room);
+        }
     }
 
     /**
@@ -135,11 +151,25 @@ class Dungeon
     /**
      * Returns true if this dungeon is "legal."
      *
-     * TODO: I don't know if this is necessary - should check and see if there is an exit to the void and if it's possible to get there.
+     * TODO: This. Eventually.
      *
      * @return bool
      */
     public function isLegalDungeon(){
         return true;
+    }
+
+    public function getAllRooms(){
+        // TODO: This is for debugging. Remove it when pushing to production
+        return $this->rooms;
+    }
+
+    public function getAllExitDirections($room){
+        error_log("[DEBUG] Rooms in dungeon: " . print_r($this->rooms, true));
+
+        if(!isset($this->rooms[$room->getGUID()]))
+            return [];
+
+        return array_keys($this->rooms[$room->getGUID()]);
     }
 }

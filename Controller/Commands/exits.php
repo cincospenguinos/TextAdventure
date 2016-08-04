@@ -10,7 +10,7 @@
  * Time: 9:43 PM
  */
 
-$directions = $player->getCurrentRoom()->getAllExitDirections();
+$directions = $player->getAllExitDirections();
 $resp = "Exits: ";
 
 foreach($directions as $direction) {
