@@ -163,7 +163,7 @@ class Player extends Entity
 
     /**
      * Equips the item provided given that the player has the item matching the name provided and
-     * that the item is equippable.
+     * that the item is equippable. Returns true if equipped.
      *
      * @param $itemName
      * @return bool
@@ -208,6 +208,9 @@ class Player extends Entity
         return $this->currentRoom->getRoomName();
     }
 
+    /**
+     * @return float
+     */
     public function physicalToHit()
     {
         return 0.1 * (3.0 * $this->attributes[Attribute::Dexterity] / 7.0) + $this->level * 0.02 + 0.3;

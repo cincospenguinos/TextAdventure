@@ -13,7 +13,7 @@ abstract class Entity
 {
     // TODO: Spells?
     // TODO: Inventory at top level?
-    // TODO: Make an inventory class and include it here
+    // TODO: Make an inventory class and include it here - Inventory can be used to manage weight - maybe do this.
     // TODO: Equippables at top level?
     protected $attributes = [0, 0, 0, 0];
     protected $currentHitPoints, $isDead, $level;
@@ -102,15 +102,14 @@ abstract class Entity
      */
     public function getStrength()
     {
-        return $this->strength;
+        return $this->attributes[Attribute::Strength];
     }
 
     /**
-     * @param mixed $strength
+     * @param $strength
      */
-    public function setStrength($strength)
-    {
-        $this->strength = $strength;
+    public function setStrength($strength){
+        $this->attributes[Attribute::Strength] = $strength;
     }
 
     /**
@@ -118,15 +117,14 @@ abstract class Entity
      */
     public function getConstitution()
     {
-        return $this->constitution;
+        return $this->attributes[Attribute::Constitution];
     }
 
     /**
-     * @param mixed $constitution
+     * @param $constitution
      */
-    public function setConstitution($constitution)
-    {
-        $this->constitution = $constitution;
+    public function setConstitution($constitution){
+        $this->attributes[Attribute::Strength] = $constitution;
     }
 
     /**
@@ -134,15 +132,14 @@ abstract class Entity
      */
     public function getDexterity()
     {
-        return $this->dexterity;
+        return $this->attributes[Attribute::Dexterity];
     }
 
     /**
-     * @param mixed $dexterity
+     * @param $dexterity
      */
-    public function setDexterity($dexterity)
-    {
-        $this->dexterity = $dexterity;
+    public function setDexterity($dexterity){
+        $this->attributes[Attribute::Strength] = $dexterity;
     }
 
     /**
@@ -150,15 +147,14 @@ abstract class Entity
      */
     public function getIntelligence()
     {
-        return $this->intelligence;
+        return $this->attributes[Attribute::Intelligence];
     }
 
     /**
-     * @param mixed $intelligence
+     * @param $intelligence
      */
-    public function setIntelligence($intelligence)
-    {
-        $this->intelligence = $intelligence;
+    public function setIntelligence($intelligence){
+        $this->attributes[Attribute::Strength] = $intelligence;
     }
 
     /**
@@ -170,14 +166,6 @@ abstract class Entity
     }
 
     /**
-     * @param mixed $currentHitPoints
-     */
-    public function setCurrentHitPoints($currentHitPoints)
-    {
-        $this->currentHitPoints = $currentHitPoints;
-    }
-
-    /**
      * @return mixed
      */
     public function isDead()
@@ -186,11 +174,11 @@ abstract class Entity
     }
 
     /**
-     * @param mixed $isDead
+     * Revives this entity at full health.
      */
-    public function setIsDead($isDead)
-    {
-        $this->isDead = $isDead;
+    public function revive(){
+        $this->isDead = false;
+        $this->currentHitPoints = $this->maxHitPoints();
     }
 
     /**
@@ -199,13 +187,5 @@ abstract class Entity
     public function getLevel()
     {
         return $this->level;
-    }
-
-    /**
-     * @param mixed $level
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
     }
 }

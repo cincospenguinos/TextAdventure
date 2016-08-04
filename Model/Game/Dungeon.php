@@ -13,7 +13,6 @@ namespace LinkedWorldsCore;
  *
  * Holds a collection of rooms as well as all of the meta data associated with a given dungeon.
  *
- * TODO: Use this class instead of just one room and a janky DAG. Implement a linked-list style DAG here.
  * TODO: IDEA! What if the user creating the dungeon simply set their "final room" to have an exit to The Void?
  * TODO: Should the player simply have a "current dungeon" associated with them? Or just their current room, and a reference to a dungeon? Figure out the DB stuff man.
  *
@@ -59,15 +58,15 @@ class Dungeon
     /**
      * Returns the room connected to $previous room at the direction provided, or false if there isn't a room that way.
      *
-     * @param $previousRoom
+     * @param $currentRoom
      * @param $direction
      * @return bool
      */
-    public function getNextRoom($previousRoom, $direction){
-        if($direction < 0 || !isset($this->rooms[$previousRoom->getGUID()]) || !isset($this->rooms[$previousRoom->getGUID()][$direction]))
+    public function getNextRoom($currentRoom, $direction){
+        if($direction < 0 || !isset($this->rooms[$currentRoom->getGUID()]) || !isset($this->rooms[$currentRoom->getGUID()][$direction]))
             return false;
 
-        return $this->rooms[$previousRoom->getGUID()][$direction];
+        return $this->rooms[$currentRoom->getGUID()][$direction];
     }
 
     /**
