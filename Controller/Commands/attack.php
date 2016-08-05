@@ -3,6 +3,7 @@
  * Manages all of the combat.
  *
  *~ attack [target] - attack the target provided.
+ * TODO: Figure out nice output for all the combat
  */
 $monsterName = str_replace('attack ', '', $command);
 $monsterName = str_replace('kill ', '', $monsterName);

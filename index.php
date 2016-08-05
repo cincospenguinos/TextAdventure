@@ -13,11 +13,12 @@ echo "<!DOCTYPE HTML>
         <noscript>
             <p>Javascript is necessary to play this game. Please enable javascript on this page.</p>
         </noscript>
-        <div id=\"content_container\">
-            <div id='response_container'></div>
-            <div id='commandPrompt'>
+        <div id='content_container'>
+            <div id='response_container'>
+            </div>
+            <div id='command_prompt'>
                 <span>&gt;</span>
-                <input type='text' id='playerCommand' autofocus/>
+                <input type='text' id='player_command' autofocus/>
             </div>
         </div>
     </body>

@@ -63,7 +63,7 @@ $data = [];
 $archCommand = Parser::getArchCommand($command);
 
 if(is_null($archCommand))
-    $data['response'] = "I'm afraid I don't understand. Type the command \"<strong>help</strong>\" for a list of commands.";
+    $data['response'] = "<div class='misunderstand_response'>I'm afraid I don't understand. Type the command \"<strong>help</strong>\" for a list of commands.</div>";
 else
     include 'Commands/' . $archCommand . '.php';
 

@@ -20,8 +20,8 @@ if(\LinkedWorldsCore\Direction::isDirectionString($command)){
         $command = 'look';
         include 'look.php';
     } else {
-        $data['response'] = 'There is no exit that direction.';
+        $data['response'] = '<div class="go_response">There is no exit that direction.</div>';
     }
 } else {
-    $data['response'] = 'I do not understand that.';
+    $data['response'] = '<div class="go_response">I do not understand that.</div>';
 }

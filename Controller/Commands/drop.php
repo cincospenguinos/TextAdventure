@@ -12,8 +12,8 @@
 $item = str_replace('drop ', '', $command);
 
 if($player->dropItem($item))
-    $data['response'] = 'Dropped.';
+    $data['response'] = '<div class=dropped_response>Dropped.</div>';
 else
-    $data['response'] = 'You are not currently carrying that item.';
+    $data['response'] = '<div class=dropped_response>You are not currently carrying that item.</div>';
 
 require_once 'monster_combat.php';

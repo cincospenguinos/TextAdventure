@@ -12,4 +12,6 @@
  */
 
 $dungeon = $player->getCurrentDungeon();
-$data['response'] = "<i>" . $dungeon->getDungeonName() . "</i><br/>Created by " . $dungeon->getDungeonCreator() . "<br/><br/>" . $dungeon->getDungeonDescription();
+$data['response'] = "<div class='about_dungeon'><i>" . $dungeon->getDungeonName() .
+    "</i><br/>Created by " . $dungeon->getDungeonCreator() .
+    "<br/><br/>" . $dungeon->getDungeonDescription() . "</div>";

@@ -11,7 +11,9 @@
 
 $inventory = $player->getItemList();
 
-$data['response'] = 'Your list of items:<br/><br/>';
+$data['response'] = '<div class="response">Your list of items:<br/><br/>';
 
 foreach($inventory as $item)
     $data['response'] .= htmlspecialchars($item) . "<br/>";
+
+$data['response'] .= '</div>';

@@ -10,7 +10,7 @@
     overflow-y: auto;
 }
 
-#commandPrompt {
+#command_prompt {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -22,7 +22,20 @@
     padding-right: 0.5%;
 }
 
-#playerCommand {
+#player_command {
     border: none;
     width: 90%;
+}
+
+.room_name {
+    width: 49%;
+}
+
+.exits_list {
+    width: 49%;
+    text-align: right;
+}
+
+.room_name, .exits_list {
+    display: inline-block;
 }

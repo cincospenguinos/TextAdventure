@@ -2,6 +2,7 @@
 /**
  * Manages monster attacks.
  *
+ * TODO: Figure out nice output for all the combat
  * User: tsvetok
  * Date: 8/2/16
  * Time: 6:52 PM

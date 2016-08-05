@@ -15,7 +15,7 @@ $item = str_replace('get ', '', $command);
 $resp = $player->takeItem($item);
 
 if($resp === true) // Because no type checking. Gee, thanks PHP 5.6.
-    $data['response'] = 'Taken.';
+    $data['response'] = '<div class="response">Taken.</div>';
 else
     $data['response'] = $resp;
 

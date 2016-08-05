@@ -57,8 +57,8 @@ $(document).ready(function(){
 
     $(document).keydown(function(event){
         if(event.which === ENTER_KEY) {
-            var command = $('#playerCommand').val();
-            $('#playerCommand').val('');
+            var command = $('#player_command').val();
+            $('#player_command').val('');
 
             if(command.toLowerCase() === 'clear') {
                 $('#response_container').empty();
@@ -76,13 +76,14 @@ $(document).ready(function(){
                 $('#response_container').append(response.response);
                 $('#response_container').scrollTop($('body')[0].scrollHeight);
             }, function(response){
-                $('#response_container').append("<p>An error occurred.</p>");
+                // TODO: Something better than this
+                $('#response_container').append("An error occurred.");
                 $('#response_container').scrollTop($('body')[0].scrollHeight);
             });
         }
     });
 
     $(document).click(function(){
-        $('#playerCommand').select();
+        $('#player_command').select();
     });
 });

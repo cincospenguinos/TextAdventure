@@ -20,6 +20,6 @@ foreach($directions as $direction) {
 $resp = trim($resp, ', ');
 $resp .= ".";
 
-$data['response'] = $resp;
+$data['response'] = "<div class='exits_response'>{$resp}</div>";
 
 require_once 'monster_combat.php';
