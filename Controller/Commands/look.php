@@ -3,7 +3,7 @@
  * Manages the look command in PHP. Grabs the user from APC and does all the shiz they need to.
  *
  *~ look, look [item] - describes the room or the item provided
- *# <strong>look</strong>, or <strong>look at [item]</strong> provides a description of the room or the item requested, respectively.
+ *# <strong>look</strong>, or <strong>look at [target]</strong> provides a description of the room or the target requested, respectively.
  *
  * User: Andre LaFleur
  * Date: 5/25/16

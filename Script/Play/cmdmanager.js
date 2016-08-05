@@ -74,7 +74,7 @@ $(document).ready(function(){
             submitCommand(data, function(response){
                 response = $.parseJSON(response);
                 $('#response_container').append(response.response);
-                $('#response_container').scrollTop($('body')[0].scrollHeight);
+                $(document).scrollTop($('body')[0].scrollHeight);
             }, function(response){
                 // TODO: Something better than this
                 $('#response_container').append("An error occurred.");

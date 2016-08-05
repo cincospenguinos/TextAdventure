@@ -12,7 +12,7 @@ The repository for the Text Adventure we're building.
 * memcached needs to be used instead of APC because APC is deprecated. So that needs to be installed.
     * Actually, we may not even need memcached. Using sessions works alright. We can consider it if the game ever gets super popular.
 
-## Playtesting Information
+## Notes from Play Testing
 
 The following are some notes given to me from friends I showed the game to. They are organized into four categories: things that
 need to be fixed, things that I should consider fixing, things that are good about the game that I need to preserver, and
@@ -21,11 +21,11 @@ notes that are a bit subjective and may need more exploring.
 ### Things to fix
 
 * Unclear about where you stand Health-wise
+    * This one is a bit tricky. How do we indicate health? Should there be a "health" command? Or just "look at self"?
 * Can’t look at a lot of things
-* You are unable to see past commands entered, some way to see that would be good.
-* Would be helpful to have what exits you can go to along with the room description. I just ended up typing “exits” at most of the rooms anyway
+    * This could be due to there not being many things to look at, or more things need more descriptions.
 * Questioning the authenticity of how or why some of the things are where they are
-    * Stefano explained this to mean that some things in the tutorial felt out of place. Like a castle under a cabin.
+    * Stefano explained this to mean that some things in the tutorial felt out of place. Like a castle under a cabin doesn't seem reasonable.
 
 ### Things to consider
 
@@ -44,7 +44,3 @@ notes that are a bit subjective and may need more exploring.
     * We should definitely implement a "loot the corpes" feature
 
 ### Things to explore
-
-* Both east and west go the front of house, which can lead to confusion
-* No mention of great hall exit in library
-    * Those two I think came about due to an inconsistency in describing the exits from room to room.
