@@ -3,6 +3,8 @@
  * Manages monster attacks.
  *
  * TODO: Figure out nice output for all the combat
+ * TODO: Include health information after being hit by an enemy
+ *
  * User: tsvetok
  * Date: 8/2/16
  * Time: 6:52 PM

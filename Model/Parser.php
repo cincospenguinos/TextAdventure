@@ -48,6 +48,8 @@ class Parser
             case (strcmp($command, 'attack') === 0):
             case (strcmp($command, 'kill') === 0):
                 return 'attack';
+            case (strcmp($command, 'health') === 0):
+                return 'health';
             default:
                 return null;
         }

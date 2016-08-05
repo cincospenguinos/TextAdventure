@@ -267,6 +267,11 @@ class Player extends Entity
         return ((2.0 * $this->attributes[Attribute::Dexterity]) / 3.0 + $this->attributes[Attribute::Intelligence] / 3.0) * 0.0625 + ($this->level - 1) * 0.02;
     }
 
+    public function getCurrentHitPoints()
+    {
+        return $this->currentHitPoints;
+    }
+
     /**
      * Returns the maximum hitpoints for this entity.
      *

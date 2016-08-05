@@ -20,8 +20,6 @@ notes that are a bit subjective and may need more exploring.
 
 ### Things to fix
 
-* Unclear about where you stand Health-wise
-    * This one is a bit tricky. How do we indicate health? Should there be a "health" command? Or just "look at self"?
 * Can’t look at a lot of things
     * This could be due to there not being many things to look at, or more things need more descriptions.
 * Questioning the authenticity of how or why some of the things are where they are
