@@ -50,9 +50,9 @@ $(document).ready(function(){
 
     submitCommand(data, function(response){
         response = $.parseJSON(response);
-        $('#response').append(response.response + "<br/>");
+        $('#response_container').append(response.response + "<br/>");
     }, function(response){
-        $('#response').append(response.response + "<br/>");
+        $('#response_container').append(response.response + "<br/>");
     });
 
     $(document).keydown(function(event){
@@ -61,7 +61,7 @@ $(document).ready(function(){
             $('#playerCommand').val('');
 
             if(command.toLowerCase() === 'clear') {
-                $('#response').empty();
+                $('#response_container').empty();
                 return;
             }
 
@@ -73,11 +73,11 @@ $(document).ready(function(){
 
             submitCommand(data, function(response){
                 response = $.parseJSON(response);
-                $('#response').append(response.response);
-                $('#response').scrollTop($('body')[0].scrollHeight);
+                $('#response_container').append(response.response);
+                $('#response_container').scrollTop($('body')[0].scrollHeight);
             }, function(response){
-                $('#response').append("<p>An error occurred.</p>");
-                $('#response').scrollTop($('body')[0].scrollHeight);
+                $('#response_container').append("<p>An error occurred.</p>");
+                $('#response_container').scrollTop($('body')[0].scrollHeight);
             });
         }
     });

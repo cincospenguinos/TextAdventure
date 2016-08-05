@@ -17,7 +17,7 @@ require_once '../Model/Game/Room.php';
 // TODO: Set a different endpoint for commands in the void? Like maybe a different set of commands?
 
 // If there is ever a GET request, just show the API page.
-if($_SERVER['REQUEST_METHOD'] === 'GET'){
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
     include '../View/api.php';
     exit();
 }
@@ -50,7 +50,11 @@ $command = htmlspecialchars($_POST['command']);
 // If there isn't a player associated with this session, then we need to put him in there.
 if(!isset($_SESSION[$username])) {
     $_SESSION[$username] = UserManager::generateNewPlayer($username);
+    $_SESSION['command_count'] = 0;
 }
+
+// If we got this far, we have a legit command and response. So increment the command count
+$_SESSION['command_count'] += 1;
 
 // Get the player object out of the session
 $player = $_SESSION[$username];
@@ -65,6 +69,6 @@ else
 
 // Throw the json string back at them
 $data['result'] = 'success';
-$data['response'] = "<p>" . $data['response'] . "</p>";
+$data['response'] = "<div class='response' id='response{$_SESSION['command_count']}'><span class='command_prompt_span'>&gt;</span>{$command}<br/>" . $data['response'] . "</div>";
 $data = json_encode($data);
 echo $data;
