@@ -8,7 +8,8 @@ echo '<!DOCTYPE html>
     <title>About</title>
 </head>
 <body>
-<h1>A Game</h1>
-<p>Andre, Quinn and Jordan are building a web game. That\'s all this is.</p>
+<h1>The Wandering Gods</h1>
+<p>You awaken in a garden with nothing. No memories, no past, nothing. The path lies open before you, and far off in the distance you can
+feel something beckoning you forward.</p>
 </body>
 </html>';

@@ -24,11 +24,10 @@ $frontOfHouse = new \LinkedWorldsCore\Room("Front of a House", "You are in front
 $backOfHouse = new \LinkedWorldsCore\Room("Back of a House", "You are in the back of the house. There is an open window which you can move through by going north.");
 $livingRoom = new \LinkedWorldsCore\Room("Living Room", "You are standing inside a living room. The moonlight shines upon the furniture, and exposes a trap door " .
     "in the corner of the room.");
-$cellar = new \LinkedWorldsCore\Room("Cellar", "The cool, musty air rests on your shoulders as you descend into the cellar. There are wooden crates cast about the floor. " .
-    "You can see dim light emanating further down the cellar.");
+$cellar = new \LinkedWorldsCore\Room("Cellar", "The cool, musty air rests on your shoulders as you descend into the cellar. You can see dim light emanating further down the cellar.");
 $mysticShrine = new \LinkedWorldsCore\Room("Secret Shrine", "You are standing in a room with a dirt floor, dug out through the back wall of the cellar.");
 $forest = new \LinkedWorldsCore\Room("Forest", "You are standing in a thick forest, where the moon is blocked out due to the tall trees. You see a light southwards in the distance.");
-$smallCabin = new \LinkedWorldsCore\Room("Small Cabin", "You are standing in front of a log cabin. Smoke is coming from its chimney. The door is open and there is a passage " .
+$smallCabin = new \LinkedWorldsCore\Room("Small Cabin", "You are standing in front of a log cabin. Smoke is coming from its chimney. The door is open and you can see a passage " .
     "leading downwards inside.");
 $library = new \LinkedWorldsCore\Room("Library", "Mountains of ruined tomes flood the room, stacked and stuffed in bookshelves that loom above you.");
 $greatHall = new \LinkedWorldsCore\Room("Great Hall", "You are standing in a room that seems to have been a great hall for a king. Rubble blocks the path to the east wing, but a broken " .
