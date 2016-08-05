@@ -5,7 +5,7 @@
  *~ attack [target] - attack the target provided.
  */
 $monsterName = str_replace('attack ', '', $command);
-$monsterName = str_replace('kill ', '', $command);
+$monsterName = str_replace('kill ', '', $monsterName);
 $monster = $player->getCurrentRoom()->getMonster($monsterName);
 
 if(isset($monster)){
