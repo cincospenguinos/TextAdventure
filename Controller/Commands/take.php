@@ -3,6 +3,7 @@
  * Manages the 'take' or 'get' command.
  *
  *~ take [item] - take an item from the current room
+ *# <strong>take [item]</strong> removes the item from the current room and adds it to your inventory, if the item is available.
  *
  * User: Andre LaFleur
  * Date: 5/28/16

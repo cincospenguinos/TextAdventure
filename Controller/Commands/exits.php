@@ -3,6 +3,7 @@
  * Shows the exits for the current room
  *
  *~ show all exits from current room
+ *# <strong>exits</strong> will simply list all of the available exits from the current space.
  *
  * Created by PhpStorm.
  * User: tsvetok

@@ -3,6 +3,9 @@
  * Provides the list of items the player is currently holding.
  *
  *~ shows the items you are carrying
+ *# <strong>inventory</strong> shows what items you are carrying.
+ *
+ * TODO: Add stats command to let people view stats on a specific item?
  *
  * User: Andre LaFleur
  * Date: 5/28/16

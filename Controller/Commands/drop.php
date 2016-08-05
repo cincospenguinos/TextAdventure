@@ -3,6 +3,7 @@
  * Manages the drop command for the game.
  *
  *~ drop [item] - drops an item you are carrying
+ *# <strong>drop [item]</strong> will drop whatever item you are carrying that matches that name
  *
  * User: Andre LaFleur
  * Date: 5/28/16

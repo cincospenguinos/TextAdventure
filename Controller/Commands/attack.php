@@ -3,6 +3,8 @@
  * Manages all of the combat.
  *
  *~ attack [target] - attack the target provided.
+ *# <strong>attack [target]</strong> will throw a physical attack at the target provided.
+ *
  * TODO: Figure out nice output for all the combat
  */
 $monsterName = str_replace('attack ', '', $command);
@@ -18,8 +20,8 @@ if(isset($monster)){
     } else {
         $data['response'] = $monsterName . ' dodged the attack.';
     }
+
+    require_once 'monster_combat.php';
 } else {
     $data['response'] = 'I cannot find that monster there.';
 }
-
-require_once 'monster_combat.php';

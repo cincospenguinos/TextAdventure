@@ -37,8 +37,6 @@ class Room
         $description = $this->description;
 
         foreach($this->itemsInRoom as $item) {
-            error_log("[DEBUG] Items in look(): " . print_r($this->itemsInRoom, true));
-
             if(null !== $item->getLookDescription()){
                 $description .= " " . $item->getLookDescription();
             } else {

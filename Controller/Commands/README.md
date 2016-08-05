@@ -33,3 +33,7 @@ comment:
 The line that will be shown to the user is the line in the comment that begins with a tilde character ('~'). Simply
 include some line in your command file's comments somewhere that has this to ensure that the help command can properly
 represent each of the different commands.
+
+The help command also provides more specific information about each command when requested. This is pulled from the file
+itself, which takes the comment line that startes with the octothorp character ('#'). That informaton is dumped directly
+to the user.

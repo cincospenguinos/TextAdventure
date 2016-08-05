@@ -69,6 +69,6 @@ else
 
 // Throw the json string back at them
 $data['result'] = 'success';
-$data['response'] = "<div class='response' id='response{$_SESSION['command_count']}'><span class='command_prompt_span'>&gt;</span>{$command}<br/>" . $data['response'] . "</div>";
+$data['response'] = "<div class='response' id='response{$_SESSION['command_count']}'><span class='command_prompt_span'>&gt;</span>{$command}<br/>" . $data['response'] . "</div><br/>";
 $data = json_encode($data);
 echo $data;

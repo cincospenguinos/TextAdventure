@@ -3,6 +3,7 @@
  * Script managing going in some direction.
  *
  *~ go [direction] - moves you to the direction provided
+ *# <strong>go [direction]</strong>, or just <strong>[direction]</strong> makes you move to the next room in that direction.
  * User: tsvetok
  * Date: 5/28/16
  * Time: 4:04 PM
