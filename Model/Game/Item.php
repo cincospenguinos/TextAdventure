@@ -14,23 +14,20 @@ class Item
 {
     // TODO: Add another description variable for when an item appears in a room
     // TODO: Make item be unable to be picked up and stuff.
+    private $itemName, $lookAtDescription, $lookDescription, $aliases, $canEquip, $canTake, $whenEquipped;
+    // $lookDescription is the description shown in the string that comes from the "look" command
 
-    /*
-     * $aliases is a list of other names (case insensitive) that this Item can be referred to by. Example: Player
-     * wants to take the Key of Gondor. An alias of Key of Gondor is "key," so if the player enters the command
-     * "take key" then the parser will know that the player is referring to the key of Gondor.
-     *
-     * $whenEquipped is just a collection of attributes to modify when the item gets equipped.
-     */
-    private $itemName, $description, $aliases, $canEquip, $whenEquipped;
-
-    public function __construct($_itemName, $_description, $_canEquip = false)
+    public function __construct($_itemName, $_lookAtDescription, $_lookDescription = null, $_canEquip = false, $_canTake = true)
     {
         $this->itemName = $_itemName;
-        $this->description = $_description;
+        $this->lookAtDescription = $_lookAtDescription;
         $this->canEquip = $_canEquip;
+        $this->canTake = $_canTake;
         $this->aliases = [];
         $this->whenEquipped = [];
+
+        if(isset($_lookDescription))
+            $this->lookDescription = $_lookDescription;
     }
 
     /**
@@ -40,7 +37,7 @@ class Item
      * @return Item
      */
     public function copy(){
-        $newItem = new Item($this->itemName, $this->description);
+        $newItem = new Item($this->itemName, $this->lookAtDescription);
         $newItem->aliases = $this->aliases;
         return $newItem;
     }
@@ -100,12 +97,12 @@ class Item
         $this->canEquip = $equip;
     }
 
-    public function getDescription(){
-        return $this->description;
+    public function getLookAtDescription(){
+        return $this->lookAtDescription;
     }
 
-    public function setDescription($description){
-        $this->description = $description;
+    public function setLookAtDescription($lookAtDescription){
+        $this->lookAtDescription = $lookAtDescription;
     }
 
     public function getItemName()
@@ -116,5 +113,13 @@ class Item
     public function setItemName($itemName)
     {
         $this->itemName = $itemName;
+    }
+
+    public function getLookDescription(){
+        return $this->lookDescription;
+    }
+
+    public function isRemovable(){
+        return $this->canTake;
     }
 }

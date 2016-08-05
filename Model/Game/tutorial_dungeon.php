@@ -3,8 +3,6 @@
  * A simple file that is designed to create a full on tutorial dungeon. Promises that the variable $dungeon will be
  * the first room of the tutorial dungeon in its complete form.
  *
- * TODO: Migrate to dungeon format.
- *
  * User: tsvetok
  * Date: 5/28/16
  * Time: 10:30 PM
@@ -20,8 +18,7 @@ $dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן', 'י�
 
 // Setup all of the rooms
 $garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .
-    "with fruits of all kinds hanging off of them. There appears to be a beaten path in front of you, descending downward toward the bright " .
-    "sun in the east.");
+    "with fruits of all kinds hanging off of them. There appears to be a beaten path in front of you, descending downward away from the bright setting sun.");
 $frontOfHouse = new \LinkedWorldsCore\Room("Front of a House", "You are in front of a white house whose front door is nailed shut. The house appears " .
     "to be abandoned, standing ominously in the dim light of the moon.");
 $backOfHouse = new \LinkedWorldsCore\Room("Back of a House", "You are in the back of the house. There is an open window which you can move through by going north.");
@@ -29,8 +26,7 @@ $livingRoom = new \LinkedWorldsCore\Room("Living Room", "You are standing inside
     "in the corner of the room.");
 $cellar = new \LinkedWorldsCore\Room("Cellar", "The cool, musty air rests on your shoulders as you descend into the cellar. There are wooden crates cast about the floor. " .
     "You can see dim light emanating further down the cellar.");
-$mysticShrine = new \LinkedWorldsCore\Room("Secret Shrine", "You are standing in a room with a dirt floor, dug out through the back wall of the cellar. A stone statue, " .
-    "depicting a man holding a strange fruit, stands in the middle of the room.");
+$mysticShrine = new \LinkedWorldsCore\Room("Secret Shrine", "You are standing in a room with a dirt floor, dug out through the back wall of the cellar.");
 $forest = new \LinkedWorldsCore\Room("Forest", "You are standing in a thick forest, where the moon is blocked out due to the tall trees. You see a light southwards in the distance.");
 $smallCabin = new \LinkedWorldsCore\Room("Small Cabin", "You are standing in front of a log cabin. Smoke is coming from its chimney. The door is open and there is a passage " .
     "leading downwards inside.");
@@ -44,15 +40,20 @@ $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in fro
 $cultist = new \LinkedWorldsCore\Monster(1, 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
 
 // Put together all of the items.
-$strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.");
+$strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.", 'You see a strange looking fruit lying on the ground.');
 $strangeFruit->addAlias('fruit');
 
 $artifact = new \LinkedWorldsCore\Item("Artifact", "A small stone statue of a boy wearing an apron, holding a dagger in one hand and an acacia twig in the other.");
 
-$tome = new \LinkedWorldsCore\Item("Spell Tome - Spirit Arrow", "A dusty tome describing the method to cast the spell Spirit Arrow.");
+$tome = new \LinkedWorldsCore\Item("Spell Tome - Spirit Arrow", "A dusty tome describing the method to cast the spell Spirit Arrow.", "You see a spell book, lying open.");
 $tome->addAlias('tome');
 $tome->addAlias('book');
 $tome->addAlias('spell book');
+$tome->addAlias('spell tome');
+
+$statue = new \LinkedWorldsCore\Item("Man Statue", "A stone statue of a man holding a fruit in his hand. It is cracked from the right shoulder down to the belly.",
+    "A stone statue of a man rests near the far wall.", false, false);
+$statue->addAlias('statue');
 
 // Add the monsters
 $mysticShrine->addMonster($cultist);
@@ -60,6 +61,7 @@ $mysticShrine->addMonster($cultist);
 // Throw in all the items
 $garden->addItem($strangeFruit);
 $mysticShrine->addItem($artifact);
+$mysticShrine->addItem($statue);
 $library->addItem($tome);
 
 // Add all of the rooms

@@ -12,9 +12,11 @@
 $command = str_replace('take ', '', $command);
 $item = str_replace('get ', '', $command);
 
-if($player->takeItem($item))
+$resp = $player->takeItem($item);
+
+if($resp) // TODO: This should trigger if and only if $player->takeItem() returns true
     $data['response'] = 'Taken.';
 else
-    $data['response'] = "I couldn't find the thing \"$item\" here.";
+    $data['response'] = $resp;
 
 require_once 'monster_combat.php';

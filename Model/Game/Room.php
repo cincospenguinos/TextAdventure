@@ -15,17 +15,11 @@ require_once 'Monster.php';
 
 class Room
 {
-    /*
-     * $exits is an array mapping directions to rooms (like a graph)
-     * $itemsInRoom will always, ALWAYS use the lower case item names as keys mapping to item objects.
-     * If we don't do it that way, then we're all ducked. Or more challengin code needs to be written.
-     */
-    private $roomName, $exits, $description, $itemsInRoom, $monstersInRoom, $guid;
+    private $roomName, $description, $itemsInRoom, $monstersInRoom, $guid;
 
     public function __construct($_roomName, $_description)
     {
         $this->roomName = $_roomName;
-        $this->exits = [];
         $this->description = $_description;
         $this->itemsInRoom = [];
         $this->monstersInRoom = [];
@@ -34,7 +28,7 @@ class Room
     }
 
     /**
-     * Returns the description of the room as well as descriptions of the exits.
+     * Returns the description of the room.
      *
      * @return string
      * @throws \TypeError
@@ -43,7 +37,11 @@ class Room
         $description = $this->description;
 
         foreach($this->itemsInRoom as $item) {
-            $description .= " You see a " . strtolower($item->getItemName()) . " here."; // TODO: Better grammar
+            if(null !== $item->getLookDescription()){
+                $description .= " " . $item->getLookDescription();
+            } else {
+                $description .= " You see a " . strtolower($item->getItemName()) . " here."; // TODO: Better grammar
+            }
         }
 
         foreach($this->monstersInRoom as $monster) {
@@ -66,12 +64,12 @@ class Room
         $name = strtolower($name);
 
         if(isset($this->itemsInRoom[$name]))
-            return $this->itemsInRoom[$name]->getDescription();
+            return $this->itemsInRoom[$name]->getLookAtDescription();
 
         // Don't forget to check for item aliases!
         foreach($this->itemsInRoom as $item)
             if($item->hasAlias($name))
-                return $item->getDescription();
+                return $item->getLookAtDescription();
 
         if(isset($this->monstersInRoom[$name]))
             return $this->monstersInRoom[$name]->getDescription();
@@ -82,54 +80,6 @@ class Room
                 return $monster->getDescription();
 
         return null;
-    }
-
-    /**
-     * Returns the room in the direction provided.
-     *
-     * @param $direction
-     * @return Room object, or null
-     */
-    public function goDirection($direction){
-        if(isset($this->exits[$direction]))
-            return $this->exits[$direction];
-
-        return null;
-    }
-
-    /**
-     * Adds an exit in this room to the next room.
-     *
-     * @param $direction
-     * @param $room
-     * @throws \TypeError if $direction is not a number
-     */
-    public function addExit($direction, $room){
-         if(!is_numeric($direction))
-             throw new \TypeError("\$direction must be a numeric identifier!");
-
-        $this->exits[$direction] = $room;
-    }
-
-    public function hasExit($direction){
-        if(!is_numeric($direction))
-            throw new \TypeError("\$direction must be a numeric identifier!");
-
-        return isset($this->exits[$direction]);
-    }
-
-    /**
-     * Removes the exit in the given direction, whether it exists or not. Throws TypeError
-     * if the direction passed is not a numeric identifier.
-     *
-     * @param $direction
-     * @throws \TypeError
-     */
-    public function removeExit($direction){
-        if(!is_numeric($direction))
-            throw new \TypeError("\$direction must be a numeric identifier!");
-
-        unset($this->exits[$direction]);
     }
 
     /**
@@ -165,20 +115,25 @@ class Room
     /**
      * Removes the item from the collection of items in this room. Returns that item if it exists
      * or null if it does not exist. Seeks first to match the name of the item and if that fails
-     * checks all the aliases of all the items.
+     * checks all the aliases of all the items. Returns false if the item cannot be taken.
      *
      * @param $itemName
-     * @return Item|null
+     * @return Item|null|false
      */
     public function removeItem($itemName) {
         $itemName = strtolower($itemName);
 
         if(isset($this->itemsInRoom[$itemName])) {
+            if(!$this->itemsInRoom[$itemName]->isRemovable())
+                return false;
+
             $itemToBeRemoved = $this->itemsInRoom[$itemName]->copy();
             unset($this->itemsInRoom[$itemName]);
             return $itemToBeRemoved;
         } else {
             foreach($this->itemsInRoom as $item){
+                if(!$item->isRemovable())
+                    return false;
                 if($item->hasAlias($itemName))
                     return $item;
             }
@@ -194,7 +149,6 @@ class Room
      */
     public function addMonster($monster){
         $this->monstersInRoom[strtolower($monster->getName())] = $monster;
-        error_log('Has monster?' . $this->hasMonster($monster->getName()));
     }
 
     /**

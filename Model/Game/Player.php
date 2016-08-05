@@ -36,8 +36,6 @@ class Player extends Entity
         $this->level = 1;
         $this->attributes = [5, 5, 5, 5];
         $this->currentHitPoints = $this->maxHitPoints();
-
-        error_log("[DEBUG] Start room set? " . isset($this->currentRoom));
     }
 
     /**
@@ -78,12 +76,12 @@ class Player extends Entity
      */
     public function lookAt($itemName) {
         if(isset($this->inventory[strtolower($itemName)]))
-            return $this->inventory[strtolower($itemName)]->getDescription();
+            return $this->inventory[strtolower($itemName)]->getLookAtDescription();
 
         // Don't forget to check for item aliases!
         foreach($this->inventory as $item)
             if($item->hasAlias($itemName))
-                return $item->getDescription();
+                return $item->getLookAtDescription();
 
         $description = $this->currentRoom->lookAt($itemName);
 
@@ -119,7 +117,9 @@ class Player extends Entity
         $item = $this->currentRoom->removeItem($itemName);
 
         if(is_null($item))
-            return false;
+            return "The item \"{$itemName}\" could not be found.";
+        else if(!$item)
+            return 'That item cannot be taken.';
 
         $this->inventory[strtolower($item->getItemName())] = $item;
         return true;

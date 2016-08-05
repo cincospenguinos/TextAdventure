@@ -165,8 +165,6 @@ class Dungeon
     }
 
     public function getAllExitDirections($room){
-        error_log("[DEBUG] Rooms in dungeon: " . print_r($this->rooms, true));
-
         if(!isset($this->rooms[$room->getGUID()]))
             return [];
 
