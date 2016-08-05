@@ -37,6 +37,8 @@ class Room
         $description = $this->description;
 
         foreach($this->itemsInRoom as $item) {
+            error_log("[DEBUG] Items in look(): " . print_r($this->itemsInRoom, true));
+
             if(null !== $item->getLookDescription()){
                 $description .= " " . $item->getLookDescription();
             } else {
@@ -131,11 +133,13 @@ class Room
             unset($this->itemsInRoom[$itemName]);
             return $itemToBeRemoved;
         } else {
-            foreach($this->itemsInRoom as $item){
-                if(!$item->isRemovable())
+            foreach($this->itemsInRoom as $item) {
+                if (!$item->isRemovable())
                     return false;
-                if($item->hasAlias($itemName))
+                if ($item->hasAlias($itemName)) {
+                    unset($this->itemsInRoom[strtolower($item->getItemName())]);
                     return $item;
+                }
             }
         }
 
