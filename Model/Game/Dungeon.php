@@ -14,7 +14,6 @@ namespace LinkedWorldsCore;
  * Holds a collection of rooms as well as all of the meta data associated with a given dungeon.
  *
  * TODO: IDEA! What if the user creating the dungeon simply set their "final room" to have an exit to The Void?
- * TODO: Should the player simply have a "current dungeon" associated with them? Or just their current room, and a reference to a dungeon? Figure out the DB stuff man.
  *
  * @package LinkedWorldsCore
  */
@@ -169,5 +168,17 @@ class Dungeon
             return [];
 
         return array_keys($this->rooms[$room->getGUID()]);
+    }
+
+    public function getDungeonName(){
+        return $this->dungeonName;
+    }
+
+    public function getDungeonDescription(){
+        return $this->dungeonDescription;
+    }
+
+    public function getDungeonCreator(){
+        return $this->dungeonCreator;
     }
 }

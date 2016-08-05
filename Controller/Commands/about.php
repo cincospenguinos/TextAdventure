@@ -11,4 +11,5 @@
  * Time: 2:28 PM
  */
 
-$data['response'] = 'This is a game Andre made.';
+$dungeon = $player->getCurrentDungeon();
+$data['response'] = "<i>" . $dungeon->getDungeonName() . "</i><br/>Created by " . $dungeon->getDungeonCreator() . "<br/><br/>" . $dungeon->getDungeonDescription();

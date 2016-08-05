@@ -14,7 +14,7 @@ require_once 'Monster.php';
 require_once 'Dungeon.php';
 
 // Create the dungeon
-$dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן', 'יהוה');
+$dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן האבוד', 'יהוה');
 
 // Setup all of the rooms
 $garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .

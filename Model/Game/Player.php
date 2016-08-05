@@ -204,6 +204,10 @@ class Player extends Entity
         return $this->currentDungeon->getAllExitDirections($this->currentRoom);
     }
 
+    public function getCurrentDungeon() {
+        return $this->currentDungeon;
+    }
+
     /**
      * Returns just the name of the current room.
      *
