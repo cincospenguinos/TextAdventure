@@ -2,7 +2,6 @@
  * cmdmanager.js
  *
  * TODO: Username/password?
- * TODO: All of this all over again.
  *
  * Manages all of the client-side commands - obtaining them, sending and receiving them, etc.
  */

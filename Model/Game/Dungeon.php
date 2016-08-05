@@ -119,8 +119,6 @@ class Dungeon
         return true;
     }
 
-    // TODO: Should hasExit() be used to check if one room is connected to another, or just that one room has an exit in a direction?
-
     /**
      * Returns true if the room has an exit in the direction passed.
      *
@@ -156,11 +154,6 @@ class Dungeon
      */
     public function isLegalDungeon(){
         return true;
-    }
-
-    public function getAllRooms(){
-        // TODO: This is for debugging. Remove it when pushing to production
-        return $this->rooms;
     }
 
     public function getAllExitDirections($room){

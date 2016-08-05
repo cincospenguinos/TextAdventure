@@ -4,7 +4,7 @@
 require_relative '../arena'
 
 # The templates
-# TODO: Found a bug; readjust these values to accomodate for the bug fix
+# TODO: Rebalance to accomodate bug fix
 fighter = Player.new(8, 3, 6, 3)  # high low - -
 rogue = Player.new(5, 4, 7, 4)    # - - high low
 cleric = Player.new(5, 7, 3, 5)   # - high low -

@@ -34,6 +34,7 @@ class Room
      * @throws \TypeError
      */
     public function look(){
+        // TODO: Move this out to the controller. It will clean the code up quite a bit
         $description = $this->description;
 
         foreach($this->itemsInRoom as $item) {
@@ -61,6 +62,7 @@ class Room
      * @return string or null
      */
     public function lookAt($name){
+        // TODO: Move this out to the controller. It will clean the code up quite a bit
         $name = strtolower($name);
 
         if(isset($this->itemsInRoom[$name]))

@@ -1,5 +1,6 @@
 <?php
 
+// TODO: Redo all of this. Seriously consider kicking jsPlumb (their documentation sucks balls)
 echo '<!DOCTYPE html>
 <html lang="en">
 <head>

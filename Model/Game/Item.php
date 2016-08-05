@@ -12,10 +12,9 @@ namespace LinkedWorldsCore;
 
 class Item
 {
-    // TODO: Add another description variable for when an item appears in a room
-    // TODO: Make item be unable to be picked up and stuff.
     private $itemName, $lookAtDescription, $lookDescription, $aliases, $canEquip, $canTake, $whenEquipped;
     // $lookDescription is the description shown in the string that comes from the "look" command
+    // $lookAtDescription is the description shown when the player looks at the item specifically"
 
     public function __construct($_itemName, $_lookAtDescription, $_lookDescription = null, $_canEquip = false, $_canTake = true)
     {

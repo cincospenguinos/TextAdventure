@@ -9,7 +9,6 @@
  * Date: 5/26/16
  * Time: 8:38 PM
  */
-// TODO: Set this up to also offer more specific information about each command
 $helpCommand = explode(' ', strtolower($command));
 
 $data['response'] = '<div class="help_response">';
