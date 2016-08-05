@@ -11,7 +11,6 @@
  */
 // TODO: Set this up to also offer more specific information about each command
 $helpCommand = explode(' ', strtolower($command));
-error_log("[DEBUG] The helpCommand array: " . print_r($helpCommand, true));
 
 $data['response'] = '<div class="help_response">';
 if(sizeof($helpCommand) === 1){
@@ -43,18 +42,15 @@ if(sizeof($helpCommand) === 1){
 
     foreach(glob('Commands/*.php') as $file) {
         $isFile = strpos($file, $helpCommand) !== false;
-        error_log("[DEBUG] Is it {$file}? {$isFile}");
 
         if(strpos($file, $helpCommand) !== false) {
             $handler = fopen(realpath($file), 'r');
-            error_log("[DEBUG] Found the proper command!");
             if($handler){
                 $lineExists = false;
 
                 while(($line = fgets($handler)) !== false){
                     if(strpos($line, '*#') !== false){
                         $data['response'] = str_replace('*#', '', $line);
-                        error_log("[DEBUG] Response: {$data['response']}");
                         $lineExists = true;
                         break;
                     }
