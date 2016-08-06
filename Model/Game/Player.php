@@ -19,7 +19,7 @@ require_once 'Weapon.php';
 class Player extends Entity
 {
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
-    private $username, $currentRoom, $inventory, $currentDungeon, $handSlots;
+    private $username, $currentRoom, $currentDungeon, $handSlots;
 
     /**
      * Player constructor.
@@ -27,7 +27,6 @@ class Player extends Entity
      * @param $_startingRoom
      */
     public function __construct($_username, $_dungeon) {
-        $this->inventory = [];
         $this->username = $_username;
         $this->currentDungeon = $_dungeon;
         $this->currentRoom = $_dungeon->getStartRoom();
@@ -87,6 +86,53 @@ class Player extends Entity
         $description = $this->currentRoom->lookAt($itemName);
 
         return $description;
+    }
+
+    /**
+     * Takes the item matching the item name passed from the current room.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function takeItem($itemName){
+        $item = $this->currentRoom->removeItem($itemName);
+
+        if(is_null($item))
+            return "The item \"{$itemName}\" could not be found.";
+        else if(!$item)
+            return 'That item cannot be taken.';
+
+        $this->inventory[strtolower($item->getName())] = $item;
+        return true;
+    }
+
+    /**
+     * Drops the item matching the name passed into the current room. Returns true if successful and returns
+     * false if the item does not exist in the player's inventory.
+     *
+     * @param $itemName
+     * @return bool
+     */
+    public function dropItem($itemName){
+        $itemName = strtolower($itemName);
+
+        if(isset($this->inventory[$itemName])){
+            $this->currentRoom->addItem($this->inventory[$itemName]);
+            unset($this->inventory[$itemName]);
+            return true;
+        }
+
+        // Check by alias
+        foreach($this->inventory as $item){
+            if($item->hasAlias($itemName)){
+                $itemName = strtolower($item->getName());
+                $this->currentRoom->addItem($this->inventory[$itemName]);
+                unset($this->inventory[$itemName]);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

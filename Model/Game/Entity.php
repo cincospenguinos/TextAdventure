@@ -58,53 +58,6 @@ abstract class Entity
     }
 
     /**
-     * Takes the item matching the item name passed from the current room.
-     *
-     * @param $itemName
-     * @return bool
-     */
-    public function takeItem($itemName){
-        $item = $this->currentRoom->removeItem($itemName);
-
-        if(is_null($item))
-            return "The item \"{$itemName}\" could not be found.";
-        else if(!$item)
-            return 'That item cannot be taken.';
-
-        $this->inventory[strtolower($item->getName())] = $item;
-        return true;
-    }
-
-    /**
-     * Drops the item matching the name passed into the current room. Returns true if successful and returns
-     * false if the item does not exist in the player's inventory.
-     *
-     * @param $itemName
-     * @return bool
-     */
-    public function dropItem($itemName){
-        $itemName = strtolower($itemName);
-
-        if(isset($this->inventory[$itemName])){
-            $this->currentRoom->addItem($this->inventory[$itemName]);
-            unset($this->inventory[$itemName]);
-            return true;
-        }
-
-        // Check by alias
-        foreach($this->inventory as $item){
-            if($item->hasAlias($itemName)){
-                $itemName = strtolower($item->getName());
-                $this->currentRoom->addItem($this->inventory[$itemName]);
-                unset($this->inventory[$itemName]);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Gives the item passed directly to the player, independent of anything around happening in the game.
      *
      * @param $item

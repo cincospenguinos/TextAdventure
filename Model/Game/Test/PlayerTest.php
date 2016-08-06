@@ -6,6 +6,7 @@
  * Time: 9:49 PM
  */
 
+require_once '../Dungeon.php';
 require_once '../Room.php';
 require_once '../Player.php';
 require_once '../Direction.php';
@@ -19,11 +20,14 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
     private $playerOne, $dungeonOne;
 
     public function setUp(){
-        $this->dungeonOne = new LinkedWorldsCore\Room("Room 1", "This is the first room.");
-        $room = new LinkedWorldsCore\Room("Room 2", "This is the second room.");
+        $this->dungeonOne = new \LinkedWorldsCore\Dungeon("Dungeon", "A simple dungeon.", "Someone important");
+        $room = new LinkedWorldsCore\Room("Room 1", "This is the first room.");
+        $otherRoom = new \LinkedWorldsCore\Room("Room 2", "This is the second room.");
 
-        $room->addExit(LinkedWorldsCore\Direction::West, $this->dungeonOne);
-        $this->dungeonOne->addExit(\LinkedWorldsCore\Direction::East, $room);
+        $this->dungeonOne->addRooms([$room, $otherRoom]);
+        $this->dungeonOne->addExit($room, $otherRoom, \LinkedWorldsCore\Direction::East);
+        $this->dungeonOne->addExit($otherRoom, $room, \LinkedWorldsCore\Direction::West);
+        $this->dungeonOne->setStartRoom($room);
 
         $this->playerOne = new LinkedWorldsCore\Player("Player 1", $this->dungeonOne);
     }
@@ -37,8 +41,7 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
      * Just calls the constructor.
      */
     public function testPlayerConstructor(){
-        $room = new \LinkedWorldsCore\Room('Room', 'This is a room.');
-        $player = new \LinkedWorldsCore\Player('Player', $room);
+        $player = new \LinkedWorldsCore\Player('Player', $this->dungeonOne);
     }
 
     /**
@@ -71,7 +74,7 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
      * a description of that item.
      */
     public function testLookAtItemInRoom(){
-        $this->dungeonOne->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $this->dungeonOne->getStartRoom()->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
         $description = $this->playerOne->lookAt('Item');
 
         $this->assertFalse(is_null($description));
@@ -91,11 +94,11 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
      * in the dungeon.
      */
     public function testPickUpItem(){
-        $this->dungeonOne->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
+        $this->dungeonOne->getStartRoom()->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
         $this->playerOne->takeItem('iTem'); // The item should still be obtained regardless of case
 
         $this->assertTrue($this->playerOne->hasItem('iteM'));
-        $this->assertFalse($this->dungeonOne->hasItem('Item'));
+        $this->assertFalse($this->dungeonOne->getStartRoom()->hasItem('Item'));
     }
 
     /**
@@ -105,7 +108,7 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
     public function testPickUpItemByAlias(){
         $item = new \LinkedWorldsCore\Item('Key of Gondor', 'The key belonging to the King of Gondor.');
         $item->addAlias('key');
-        $this->dungeonOne->addItem($item);
+        $this->playerOne->getCurrentRoom()->addItem($item);
         $this->playerOne->takeItem('key');
 
         $this->assertTrue($this->playerOne->hasItem('Key of Gondor'));
@@ -119,7 +122,7 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
     public function testLookAtItemByAlias() {
         $item = new \LinkedWorldsCore\Item('Key of Gondor', 'Some important key.');
         $item->addAlias('key');
-        $this->dungeonOne->addItem($item);
+        $this->playerOne->getCurrentRoom()->addItem($item);
         $result = $this->playerOne->lookAt('key');
 
         $this->assertFalse(is_null($result));
@@ -141,9 +144,9 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->playerOne->hasItem('implement'));
         $this->assertFalse($this->playerOne->hasItem('pencil'));
 
-        $this->assertTrue($this->dungeonOne->hasItem('pencil'));
-        $this->assertTrue($this->dungeonOne->hasItem('writing implement'));
-        $this->assertTrue($this->dungeonOne->hasItem('implement'));
+        $this->assertTrue($this->playerOne->getCurrentRoom()->hasItem('pencil'));
+        $this->assertTrue($this->playerOne->getCurrentRoom()->hasItem('writing implement'));
+        $this->assertTrue($this->playerOne->getCurrentRoom()->hasItem('implement'));
     }
 
     // TODO: Add methods for equipping
