@@ -17,8 +17,10 @@ require_once 'Dungeon.php';
 $dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן האבוד', 'יהוה');
 
 // Setup all of the rooms
-$garden = new \LinkedWorldsCore\Room("Garden", "You wake up in a bright and green garden. Thick trees and bushes are scattered all about, " .
-    "with fruits of all kinds hanging off of them. There appears to be a beaten path in front of you, descending downward away from the bright setting sun.");
+$garden1 = new \LinkedWorldsCore\Room("Garden", "The ruins of ancient structures lie about, darkened and cracked by time. A trail leads off to the east.");
+$garden2 = new \LinkedWorldsCore\Room("Garden", "A large waterfall roars, throwing water down to crash against the rocks. An east-west trail moves along the falls.");
+$garden3 = new \LinkedWorldsCore\Room("Garden", "Thick trees and bushes are scattered all about, with fruits of all kinds hanging off of them. The song of birds can be heard in the distance." .
+    " You hear the sound of rushing waters to the west. There appears to be a beaten path in front of you, descending downward away from the bright setting sun.");
 $frontOfHouse = new \LinkedWorldsCore\Room("Front of a House", "You are in front of a white house whose front door is nailed shut. The house appears " .
     "to be abandoned, standing ominously in the dim light of the moon.");
 $backOfHouse = new \LinkedWorldsCore\Room("Back of a House", "You are in the back of the house. There is an open window which you can move through by going north. A long row of " .
@@ -40,6 +42,12 @@ $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in fro
 $cultist = new \LinkedWorldsCore\Monster([3, 1, 6, 0], 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
 
 // Put together all of the items.
+$waterfall = new \LinkedWorldsCore\Item("Waterfall", "The falls are huge, dropping tons of water upon the smooth rocks below.", '', false, false);
+$waterfall->addAlias('falls');
+
+$rocks = new \LinkedWorldsCore\Item("Rocks", 'The rocks are smoothed over by years and years of the water smashing against it.', '', false, false);
+$rocks->addAlias('rock');
+
 $strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.", 'You see a strange looking fruit lying on the ground.');
 $strangeFruit->addAlias('fruit');
 
@@ -59,16 +67,22 @@ $statue->addAlias('statue');
 $mysticShrine->addMonster($cultist);
 
 // Throw in all the items
-$garden->addItem($strangeFruit);
+$garden2->addItem($waterfall);
+$garden2->addItem($rocks);
+$garden3->addItem($strangeFruit);
 $mysticShrine->addItem($artifact);
 $mysticShrine->addItem($statue);
 $library->addItem($tome);
 
 // Add all of the rooms
-$dungeon->addRooms([$garden, $frontOfHouse, $livingRoom, $backOfHouse, $cellar, $mysticShrine, $forest, $smallCabin, $library, $greatHall, $throneRoom]);
+$dungeon->addRooms([$garden1, $garden2, $garden3, $frontOfHouse, $livingRoom, $backOfHouse, $cellar, $mysticShrine, $forest, $smallCabin, $library, $greatHall, $throneRoom]);
 
 // Connect all of the rooms
-$dungeon->addExit($garden, $frontOfHouse, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($garden1, $garden2, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($garden2, $garden1, \LinkedWorldsCore\Direction::West);
+$dungeon->addExit($garden2, $garden3, \LinkedWorldsCore\Direction::East);
+$dungeon->addExit($garden3, $garden2, \LinkedWorldsCore\Direction::West);
+$dungeon->addExit($garden3, $frontOfHouse, \LinkedWorldsCore\Direction::East);
 $dungeon->addExit($frontOfHouse, $backOfHouse, \LinkedWorldsCore\Direction::South);
 $dungeon->addExit($backOfHouse, $frontOfHouse, \LinkedWorldsCore\Direction::East);
 $dungeon->addExit($backOfHouse, $frontOfHouse, \LinkedWorldsCore\Direction::West);
@@ -90,4 +104,4 @@ $dungeon->addExit($greatHall, $throneRoom, \LinkedWorldsCore\Direction::Up);
 $dungeon->addExit($throneRoom, $greatHall, \LinkedWorldsCore\Direction::Down);
 
 // Set the start room
-$dungeon->setStartRoom($garden);
+$dungeon->setStartRoom($garden1);

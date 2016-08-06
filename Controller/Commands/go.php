@@ -20,6 +20,7 @@ if(\LinkedWorldsCore\Direction::isDirectionString($command)){
         // We're going to throw the look command down now, as that will make us avoid adding extra code
         $command = 'look';
         include 'look.php';
+        $command = 'go';
     } else {
         $data['response'] = '<div class="go_response">There is no exit that direction.</div>';
     }
