@@ -13,6 +13,7 @@ require_once 'Attribute.php';
 
 class Monster extends Entity
 {
+    // TODO: Switch to factory design pattern?
     // TODO: Testing
     private $isHostile, $name, $description, $aliases;
 

@@ -8,7 +8,11 @@
 
 namespace LinkedWorldsCore;
 
-
+/**
+ * Class that manages the attribute scores for the game. Basically an enum with an extra function or two.
+ *
+ * @package LinkedWorldsCore
+ */
 abstract class Attribute
 {
     const Strength = 0;

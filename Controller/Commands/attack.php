@@ -15,17 +15,27 @@ $monsterName = str_replace('attack ', '', $command);
 $monsterName = str_replace('kill ', '', $monsterName);
 $monster = $player->getCurrentRoom()->getMonster($monsterName);
 
-if(isset($monster)){
-    if($player->attack($monster)){
-        $data['response'] = $monster->getName() . ' was hit! ';
+$data['response'] = '<div class="combat_response">';
 
-        if($monster->takeDamage($player->physicalDamage()))
-            $data['response'] = $monster->getName() . ' was killed!';
+// Now that we have everything we need, we can go ahead and manage the combat system here.
+if(isset($monster)){
+    $roll = mt_rand(1, 20);
+
+    if($roll <= 2){
+        // TODO: Disarm, trip, something bad happens
     } else {
-        $data['response'] = $monsterName . ' dodged the attack.';
+        $roll +=  $player->physicalToHit();
+
+        if ($roll > $monster->evasiveness()){
+            $data['response'] .= "You hit " . strtolower($monsterName) . ". ";
+            $monster->takeDamage($player->physicalDamage());
+            error_log("[DEBUG] Monster HP: " . $monster->getCurrentHitPoints());
+        } else {
+            $data['response'] .= "$monsterName dodged your attack.";
+        }
     }
 
-    require_once 'monster_combat.php';
+    include 'monster_combat.php';
 } else {
-    $data['response'] = 'I cannot find that monster there.';
+    $data['response'] .= 'I cannot find that target here.';
 }

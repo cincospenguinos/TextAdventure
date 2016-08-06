@@ -62,29 +62,6 @@ abstract class Entity
     public abstract function maxHitPoints();
 
     /**
-     * Make an attack on a given target. Optional paramaters available if a spell is being used.
-     *
-     * @param $target
-     * @param bool $isSpell
-     * @param null $spell
-     * @return boolean
-     */
-    public function attack($target, $isSpell = false, $spell = null) {
-        $roll = mt_rand(1, 20);
-
-        if ($isSpell){
-            $roll += $this->spellToHit();
-        } else {
-            $roll += $this->physicalToHit();
-        }
-
-        if ($roll > $target->evasiveness())
-            return true;
-
-        return false;
-    }
-
-    /**
      * Applies the damage amount provided to this entity. Returns true if this entity is dead.
      *
      * @param $amount

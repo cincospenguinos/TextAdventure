@@ -10,21 +10,25 @@
  * Time: 6:52 PM
  */
 
-// TODO: Is there a better way to manage this
+// TODO: Is there a better way to manage this?
 
 foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
-    $data['response'] .= "<br/>The " . strtolower($monster->getName()) . " attacks ";
+    $data['response'] .= "The " . strtolower($monster->getName()) . " attacks ";
+    $roll = mt_rand(1, 20);
 
-    if($monster->attack($player)){
-        $data['response'] .= "and it hit!";
-
-        if($player->takeDamage($monster->physicalDamage())) {
-            $data['response'] .= " And you're super dead!";
-            break;
-        }
+    if($roll <= 2){
+        // TODO: Some penalty
     } else {
-        $data['response'] .= "and it missed.";
+        $roll += $monster->physicalToHit();
+
+        if($roll > $player->evasiveness()){
+
+        } else {
+
+        }
     }
 }
+
+$data['response'] .= "</div>";
 
 // TODO: Manage death - player loses everything that is not aetherial and returns to the void, without XP
