@@ -10,9 +10,12 @@ require_once '../Room.php';
 require_once '../Player.php';
 require_once '../Direction.php';
 require_once '../Item.php';
+require_once '../Weapon.php';
 
 class PlayerTest extends \PHPUnit_Framework_TestCase
 {
+    // TODO: Redo all of the tests
+    // TODO: Add tests for equipping/unequipping weapons
     private $playerOne, $dungeonOne;
 
     public function setUp(){

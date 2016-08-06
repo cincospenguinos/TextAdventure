@@ -63,7 +63,7 @@ class RoomTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($room->hasItem('Item'));
         $this->assertFalse(is_null($item));
-        $this->assertTrue(strcmp($item->getItemName(), 'Item') === 0);
+        $this->assertTrue(strcmp($item->getName(), 'Item') === 0);
     }
 
     /**

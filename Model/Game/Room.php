@@ -41,7 +41,7 @@ class Room
             if(null !== $item->getLookDescription()){
                 $description .= " " . $item->getLookDescription();
             } else {
-                $description .= " You see a " . strtolower($item->getItemName()) . " here."; // TODO: Better grammar
+                $description .= " You see a " . strtolower($item->getName()) . " here."; // TODO: Better grammar
             }
         }
 
@@ -92,7 +92,7 @@ class Room
      * @param $item
      */
     public function addItem($item) {
-        $this->itemsInRoom[strtolower($item->getItemName())] = $item;
+        $this->itemsInRoom[strtolower($item->getName())] = $item;
     }
 
     /**
@@ -137,7 +137,7 @@ class Room
                 if (!$item->isRemovable())
                     return false;
                 if ($item->hasAlias($itemName)) {
-                    unset($this->itemsInRoom[strtolower($item->getItemName())]);
+                    unset($this->itemsInRoom[strtolower($item->getName())]);
                     return $item;
                 }
             }
@@ -255,6 +255,11 @@ class Room
         return $this->guid;
     }
 
+    /**
+     * Generates a GUID for this room.
+     *
+     * @return string
+     */
     private function generateGUID(){
         mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
         $charid = strtoupper(md5(uniqid(rand(), true)));

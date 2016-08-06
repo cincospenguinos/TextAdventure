@@ -15,6 +15,7 @@ class Monster extends Entity
 {
     // TODO: Switch to factory design pattern?
     // TODO: Testing
+    // TODO: Add ability to equip items and stuff
     private $isHostile, $name, $description, $aliases;
 
     public function __construct($_attributes, $_name, $_description, $_isHostile = true)

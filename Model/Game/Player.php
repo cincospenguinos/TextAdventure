@@ -14,12 +14,13 @@ require_once 'Item.php';
 require_once 'Entity.php';
 require_once 'Attribute.php';
 require_once 'Dungeon.php';
+require_once 'Weapon.php';
 
 class Player extends Entity
 {
     // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
     // TODO: Equippable items - how do?
-    private $username, $currentRoom, $inventory, $currentDungeon;
+    private $username, $currentRoom, $inventory, $currentDungeon, $handSlots, $equippedItems;
 
     /**
      * Player constructor.
@@ -36,6 +37,11 @@ class Player extends Entity
         $this->level = 1;
         $this->attributes = [5, 5, 5, 5];
         $this->currentHitPoints = $this->maxHitPoints();
+
+        // Everything to do with items
+        // TODO: Put this stuff into Entity
+        $this->handSlots = 2;
+        $this->equippedItems = [];
     }
 
     /**
@@ -108,7 +114,27 @@ class Player extends Entity
     }
 
     /**
-     * Takes the item matching the item name passed from the room provided.
+     * Returns the item matching the item name, or null if the player is not carrying it.
+     *
+     * @param $itemName
+     * @return mixed|null
+     */
+    public function getItem($itemName){
+        $itemName = strtolower($itemName);
+        if(isset($this->inventory[$itemName]))
+            return $this->inventory[$itemName];
+        else {
+            foreach($this->inventory as $item){
+                if($item->hasAlias($itemName))
+                    return $item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Takes the item matching the item name passed from the current room.
      *
      * @param $itemName
      * @return bool
@@ -121,7 +147,7 @@ class Player extends Entity
         else if(!$item)
             return 'That item cannot be taken.';
 
-        $this->inventory[strtolower($item->getItemName())] = $item;
+        $this->inventory[strtolower($item->getName())] = $item;
         return true;
     }
 
@@ -144,7 +170,7 @@ class Player extends Entity
         // Check by alias
         foreach($this->inventory as $item){
             if($item->hasAlias($itemName)){
-                $itemName = strtolower($item->getItemName());
+                $itemName = strtolower($item->getName());
                 $this->currentRoom->addItem($this->inventory[$itemName]);
                 unset($this->inventory[$itemName]);
                 return true;
@@ -160,20 +186,54 @@ class Player extends Entity
      * @param $item
      */
     public function giveItem($item){
-        $this->inventory[strtolower($item->getItemName())] = $item;
+        $this->inventory[strtolower($item->getName())] = $item;
     }
 
     /**
      * Equips the item provided given that the player has the item matching the name provided and
-     * that the item is equippable. Returns true if equipped.
+     * that the item is equippable. Returns true if equipped, or a string describing the issue if
+     * it could not be equipped.
      *
      * @param $itemName
      * @return bool
      */
-    public function equip($itemName){
-        // TODO: This
+    public function equip($itemName) {
+        $toEquip = null;
 
-        return false;
+        if(is_null($toEquip))
+            return 'That item could not be found on your person.';
+
+        if($toEquip instanceof Weapon){
+            if($this->handSlots - $toEquip->getHandSlots() >= 0){
+                $this->handSlots -= $toEquip->getHandSlots();
+            } else {
+                return 'You do not have enough hands to equip that item.';
+            }
+        }
+
+        $this->equippedItems[strtolower($toEquip->getName())];
+
+        return true;
+    }
+
+    /**
+     * Unequips the weapon matching the name provided. Returns true if it was unequipped, false if the item is not
+     * being carried.
+     *
+     * @param $itemName
+     * @return bool|string
+     */
+    public function unequip($itemName){
+        $toUnequip = $this->getItem($itemName);
+
+        if(is_null($toUnequip))
+            return false;
+
+        if($toUnequip instanceof Weapon)
+            $this->handSlots += $toUnequip->getHandSlots();
+
+        unset($this->equippedItems[strtolower($toUnequip->getName())]);
+        return true;
     }
 
     /**
@@ -185,11 +245,10 @@ class Player extends Entity
         $items = [];
 
         foreach($this->inventory as $item)
-            array_push($items, $item->getItemName());
+            array_push($items, $item->getName());
 
         return $items;
     }
-
 
     /**
      * Returns the current room this player is in.
@@ -219,11 +278,13 @@ class Player extends Entity
     }
 
     /**
+     * Returns physical to hit modifier.
+     *
      * @return int
      */
     public function physicalToHit()
     {
-        return Attribute::getModifier($this->getDexterity());
+        return Attribute::getModifier($this->getDexterity()) + $this->getAllEquippedModifiers(Attribute::PhysicalToHit);
     }
 
     /**
@@ -233,8 +294,7 @@ class Player extends Entity
      */
     public function physicalDamage()
     {
-        // TODO: Include weapon damage here
-        return mt_rand(1, 4) + Attribute::getModifier($this->getStrength());
+        return $this->rollWeaponDamage() + Attribute::getModifier($this->getStrength()) + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
     }
 
     /**
@@ -245,7 +305,7 @@ class Player extends Entity
      */
     public function spellToHit()
     {
-        return Attribute::getModifier($this->getConstitution());
+        return Attribute::getModifier($this->getConstitution()) + $this->getAllEquippedModifiers(Attribute::SpellToHit);
     }
 
     /**
@@ -255,8 +315,8 @@ class Player extends Entity
      */
     public function spellDamage()
     {
-        // TODO: Include weapon damage here
-        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence());
+        // TODO: Include the spell damage amount here - should change depending on the spell
+        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence()) + $this->getAllEquippedModifiers(Attribute::SpellDamage);
     }
 
     /**
@@ -282,5 +342,53 @@ class Player extends Entity
     public function maxHitPoints()
     {
         return 3 + $this->getConstitution() + Attribute::getModifier($this->getStrength());
+    }
+
+    /**
+     * Returns a weapon damage roll for the player. Returns the unarmed damage amount if the player doesn't have a
+     * weapon.
+     *
+     * @return int
+     */
+    private function rollWeaponDamage(){
+        $sum = 0;
+
+        foreach($this->equippedItems as $itemName){
+            $item = $this->inventory[$itemName];
+
+            if($item instanceof Weapon){
+                $sum += $item->rollDamage();
+            }
+        }
+
+        // If the player doesn't have a weapon, roll the disarmed damage amount, which is 1d4
+        if($sum === 0)
+            return mt_rand(1, 4);
+
+        return $sum;
+    }
+
+    /**
+     * Returns the sum ability modifier gained by all items equipped, given the ability to
+     * search for.
+     *
+     * Example: Player has a sword equipped with +1 damamage, and a shield with +1 damage and +1
+     * evasiveness. When this function is called requesting modifier for physical damage, this
+     * method will return two.
+     *
+     * @param $attribute
+     * @return integer
+     */
+    private function getAllEquippedModifiers($attribute){
+        $sum = 0;
+
+        foreach($this->equippedItems as $itemName){
+            $item = $this->inventory[$itemName];
+
+            if($item->hasEquipModifier($attribute))
+                $sum += $item->getEquipModifier($attribute);
+        }
+
+        return $sum;
     }
 }
