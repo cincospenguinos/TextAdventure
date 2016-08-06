@@ -8,12 +8,14 @@
 
 namespace LinkedWorldsCore;
 
+require_once 'Entity.php';
+
 /**
  * Class that manages all attacks and stuff. Meant to reduce the duplicated code.
  *
  * @package LinkedWorldsCore
  */
-abstract class AttackManager
+abstract class CombatManager
 {
     // The possible outcomes from combat
     const AttackerDisarmed = 0;
@@ -37,16 +39,27 @@ abstract class AttackManager
         $roll = mt_rand(1, 20);
 
         switch($roll){
-//            case 1: TODO: Manage disarming - weapons are needed first
+//            case 1:
 //            case 2:
-//                return AttackManager::AttackerDisarmed;
+//                // TODO: Manage disarming - how do?
+//                return CombatManager::AttackerDisarmed;
 //            case 18:
 //            case 19:
-//                return AttackManager::DefenderDisarmed;
+//                return CombatManager::DefenderDisarmed;
             case 20:
-                return AttackManager::CriticalHit;
+                $isSpell === true ? $defender->takeDamage($attacker->maxSpellDamage()) : $defender->takeDamage($attacker->maxPhysicalDamage());
+                return CombatManager::CriticalHit;
             default:
-                return AttackManager::DefaultHit;
+                if($isSpell === true)
+                    $roll += $attacker->spellToHit();
+                else
+                    $roll += $attacker->physicalToHit();
+
+                if($roll > $defender->evasiveness()){
+                    $isSpell === true ? $defender->takeDamage($attacker->spellDamage()) : $defender->takeDamage($attacker->physicalDamage());
+                    return CombatManager::DefaultHit;
+                } else
+                    return CombatManager::DefaultMiss;
         }
     }
 }

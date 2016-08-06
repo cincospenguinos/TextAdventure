@@ -174,6 +174,12 @@ class Room
         return false;
     }
 
+    /**
+     * Returns the monster matching the name or alias provided, if it is in this room. Otherwise, returns null.
+     *
+     * @param $monsterName
+     * @return mixed|null
+     */
     public function getMonster($monsterName){
         $monsterName = strtolower($monsterName);
         if(isset($this->monstersInRoom[$monsterName]))
@@ -197,7 +203,7 @@ class Room
     }
 
     /**
-     * Returns the entire collection of monsters.
+     * Returns the entire collection of hostile monsters who are not dead.
      *
      * @return array
      */

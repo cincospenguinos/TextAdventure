@@ -9,23 +9,29 @@
  * Date: 8/2/16
  * Time: 6:52 PM
  */
-
-// TODO: Is there a better way to manage this?
+require_once '../Model/Game/CombatManager.php';
 
 foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
     $data['response'] .= "The " . strtolower($monster->getName()) . " attacks ";
-    $roll = mt_rand(1, 20);
+    $result = \LinkedWorldsCore\CombatManager::attack($monster, $player); // TODO: Casting spells?
 
-    if($roll <= 2){
-        // TODO: Some penalty
-    } else {
-        $roll += $monster->physicalToHit();
+    switch($result){
+        case \LinkedWorldsCore\CombatManager::AttackerDisarmed:
+            $data['response'] .= " and you parried.";
+            break;
+        case \LinkedWorldsCore\CombatManager::DefaultMiss:
+            $data['response'] .= " and misses";
+            break;
+        case \LinkedWorldsCore\CombatManager::DefaultHit:
+            $data['response'] .= "and hits!";
+            break;
+        case \LinkedWorldsCore\CombatManager::CriticalHit:
+            $data['response'] .= "and scores a critical hit!";
+            break;
+    }
 
-        if($roll > $player->evasiveness()){
-
-        } else {
-
-        }
+    if($player->isDead()){
+        $data['response'] .= ' You are super dead.';
     }
 }
 

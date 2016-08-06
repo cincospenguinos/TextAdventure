@@ -314,6 +314,15 @@ abstract class Entity
     }
 
     /**
+     * Returns this Entity's max spell damage.
+     * @return int
+     */
+    public function maxSpellDamage(){
+        // TODO: This
+        return 0;
+    }
+
+    /**
      * Returns a weapon damage roll for the player. Returns the unarmed damage amount if the player doesn't have a
      * weapon.
      *
