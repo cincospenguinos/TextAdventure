@@ -12,7 +12,7 @@ namespace LinkedWorldsCore;
 class Item
 {
     // TODO: Turn over to factory design pattern?
-    protected $itemName, $lookAtDescription, $lookDescription, $aliases, $canEquip, $canTake, $whenEquipped;
+    protected $itemName, $lookAtDescription, $lookDescription, $aliases, $canEquip, $canTake, $whenEquipped, $isAetherial;
 
     /**
      * Item constructor.
@@ -22,7 +22,7 @@ class Item
      * @param bool $_canEquip - whether or not this item is equippable
      * @param bool $_canTake - whether or not the player can pick up this item (AKA it is an environmental item)
      */
-    public function __construct($_itemName, $_lookAtDescription, $_lookDescription = null, $_canEquip = false, $_canTake = true)
+    public function __construct($_itemName, $_lookAtDescription, $_lookDescription = null, $_canEquip = false, $_canTake = true, $_aetherial = false)
     {
         $this->itemName = $_itemName;
         $this->lookAtDescription = $_lookAtDescription;
@@ -30,6 +30,7 @@ class Item
         $this->canTake = $_canTake;
         $this->aliases = [];
         $this->whenEquipped = [];
+        $this->isAetherial = $_aetherial;
 
         if(isset($_lookDescription))
             $this->lookDescription = $_lookDescription;
@@ -153,5 +154,14 @@ class Item
 
     public function isRemovable(){
         return $this->canTake;
+    }
+
+    /**
+     * Returns true if this is an aetherial weapon.
+     *
+     * @return bool
+     */
+    public function isAetherial(){
+        return $this->isAetherial;
     }
 }

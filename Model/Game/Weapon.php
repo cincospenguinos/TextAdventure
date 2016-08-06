@@ -24,10 +24,11 @@ class Weapon extends Item
      * @param $_damageAmount - how many "rolls" this weapon should make
      * @param $_damageType - what kind of "roll" this weapon should make
      * @param $_handSlots - the number of "hand slots" this weapon takes (1 or 2)
+     * @param $_aetherial - whether or not this item is aetherial
      */
-    public function __construct($_weaponName, $_lookAtDescription, $_damageAmount, $_damageType, $_handSlots, $_lookDescription = null)
+    public function __construct($_weaponName, $_lookAtDescription, $_damageAmount, $_damageType, $_handSlots, $_lookDescription = null, $_aetherial = false)
     {
-        parent::__construct($_weaponName, $_lookAtDescription, $_lookDescription, true, true);
+        parent::__construct($_weaponName, $_lookAtDescription, $_lookDescription, true, true, $_aetherial);
 
         $this->handSlots = $_handSlots;
         $this->damageAmount = $_damageAmount;

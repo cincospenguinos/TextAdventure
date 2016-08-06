@@ -23,7 +23,7 @@ $frontOfHouse = new \LinkedWorldsCore\Room("Front of a House", "You are in front
     "to be abandoned, standing ominously in the dim light of the moon.");
 $backOfHouse = new \LinkedWorldsCore\Room("Back of a House", "You are in the back of the house. There is an open window which you can move through by going north. A long row of " .
     "wide trees with a trail leading into them is south.");
-$livingRoom = new \LinkedWorldsCore\Room("Living Room", "You are standing inside a living room. The moonlight shines upon the furniture, and exposes a trap door " .
+$livingRoom = new \LinkedWorldsCore\Room("Living Room", "You are standing inside a living room. The moonlight shines upon the floor exposing a trap door " .
     "in the corner of the room.");
 $cellar = new \LinkedWorldsCore\Room("Cellar", "The cool, musty air rests on your shoulders as you descend into the cellar. You can see dim light emanating further down the cellar.");
 $mysticShrine = new \LinkedWorldsCore\Room("Secret Shrine", "You are standing in a room with a dirt floor, dug out through the back wall of the cellar.");

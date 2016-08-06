@@ -31,10 +31,10 @@ if(isset($monster)){
             $data['response'] .= "The " . strtolower($monster->getName()) . " dodged your attack. ";
             break;
         case \LinkedWorldsCore\CombatManager::DefaultHit:
-            $data['response'] .= "You hit the " . strtolower($monsterName) . ". ";
+            $data['response'] .= "You hit the " . strtolower($monster->getName()) . ". ";
             break;
         case \LinkedWorldsCore\CombatManager::CriticalHit:
-            $data['response'] .= "Critical hit! $monsterName is reeling! ";
+            $data['response'] .= "Critical hit! The " . strtolower($monster->getName()) . " is reeling! ";
             break;
     }
 

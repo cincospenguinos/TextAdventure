@@ -2,7 +2,6 @@
 /**
  * Manages monster attacks.
  *
- * TODO: Figure out nice output for all the combat
  * TODO: Include health information after being hit by an enemy
  *
  * User: tsvetok
@@ -20,10 +19,10 @@ foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
             $data['response'] .= " and you parried.";
             break;
         case \LinkedWorldsCore\CombatManager::DefaultMiss:
-            $data['response'] .= " and misses";
+            $data['response'] .= " and misses.";
             break;
         case \LinkedWorldsCore\CombatManager::DefaultHit:
-            $data['response'] .= "and hits!";
+            $data['response'] .= "and hits!<br/>";
             break;
         case \LinkedWorldsCore\CombatManager::CriticalHit:
             $data['response'] .= "and scores a critical hit!";
@@ -31,10 +30,9 @@ foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
     }
 
     if($player->isDead()){
+        // TODO: Manage death - player loses everything that is not aetherial and returns to the void, without XP
         $data['response'] .= ' You are super dead.';
     }
 }
 
 $data['response'] .= "</div>";
-
-// TODO: Manage death - player loses everything that is not aetherial and returns to the void, without XP

@@ -10,7 +10,7 @@
  * Time: 6:49 AM
  */
 
-$data['response'] = '<div class="player_health_response">';
+$data['response'] .= '<div class="player_health_response">';
 
 $currentHP = $player->getCurrentHitPoints();
 $maxHP = $player->maxHitPoints();
