@@ -37,7 +37,7 @@ $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in fro
     "and mud. A portal, infinite and silent, swirls about on the north wall of the room. It beckons you in its silence; move forward only when ready.");
 
 // Put together some monsters.
-$cultist = new \LinkedWorldsCore\Monster([2, 2, 2, 2], 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
+$cultist = new \LinkedWorldsCore\Monster([3, 1, 6, 0], 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
 
 // Put together all of the items.
 $strangeFruit = new \LinkedWorldsCore\Item("Strange Fruit", "A fist sized fruit, shaped like a sphere, with a smooth blue skin.", 'You see a strange looking fruit lying on the ground.');
