@@ -3,6 +3,8 @@
  * A simple file that is designed to create a full on tutorial dungeon. Promises that the variable $dungeon will be
  * the first room of the tutorial dungeon in its complete form.
  *
+ * TODO: Redesign this
+ *
  * User: tsvetok
  * Date: 5/28/16
  * Time: 10:30 PM
@@ -12,6 +14,8 @@ require_once 'Item.php';
 require_once 'Direction.php';
 require_once 'Monster.php';
 require_once 'Dungeon.php';
+require_once 'Weapon.php';
+require_once 'Attribute.php';
 
 // Create the dungeon
 $dungeon = new \LinkedWorldsCore\Dungeon('The World Before', 'גן עדן האבוד', 'יהוה');
@@ -38,9 +42,6 @@ $greatHall = new \LinkedWorldsCore\Room("Great Hall", "You are standing in a roo
 $throneRoom = new \LinkedWorldsCore\Room("Throne Room", "You are standing in front of an altar, in a destroyed thrown room. The altar seems to have been hastily put together, built of stone " .
     "and mud. A portal, infinite and silent, swirls about on the north wall of the room. It beckons you in its silence; move forward only when ready.");
 
-// Put together some monsters.
-$cultist = new \LinkedWorldsCore\Monster([3, 1, 6, 0], 'Cultist', 'A masked humanoid in a dark cloak, holding a dagger.');
-
 // Put together all of the items.
 $waterfall = new \LinkedWorldsCore\Item("Waterfall", "The falls are huge, dropping tons of water upon the smooth rocks below.", '', false, false);
 $waterfall->addAlias('falls');
@@ -53,6 +54,9 @@ $strangeFruit->addAlias('fruit');
 
 $artifact = new \LinkedWorldsCore\Item("Artifact", "A small stone statue of a boy wearing an apron, holding a dagger in one hand and an acacia twig in the other.");
 
+$dagger = new \LinkedWorldsCore\Weapon("Dagger", "A rusty dagger with a simple leather handle", 1, 4, 1);
+$dagger->setEquipModifier(\LinkedWorldsCore\Attribute::PhysicalToHit, 1);
+
 $tome = new \LinkedWorldsCore\Item("Spell Tome - Spirit Arrow", "A dusty tome describing the method to cast the spell Spirit Arrow.", "You see a spell book, lying open.");
 $tome->addAlias('tome');
 $tome->addAlias('book');
@@ -62,6 +66,11 @@ $tome->addAlias('spell tome');
 $statue = new \LinkedWorldsCore\Item("Man Statue", "A stone statue of a man holding a fruit in his hand. It is cracked from the right shoulder down to the belly.",
     "A stone statue of a man rests near the far wall.", false, false);
 $statue->addAlias('statue');
+
+// Put together some monsters.
+$cultist = new \LinkedWorldsCore\Monster([3, 1, 6, 0], 'Cultist', 'A masked humanoid in a dark cloak');
+$cultist->giveItem($dagger);
+$cultist->equip('dagger');
 
 // Add the monsters
 $mysticShrine->addMonster($cultist);

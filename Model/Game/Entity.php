@@ -59,6 +59,24 @@ abstract class Entity
     }
 
     /**
+     * Removes the item passed from the Entity's inventory and returns it, or returns null if it does
+     * not exit.
+     *
+     * @param $itemName
+     * @return mixed|null
+     */
+    public function removeItem($itemName){
+        $item = $this->getItem($itemName);
+
+        if (isset($item)){
+            unset($this->inventory[strtolower($item->getName())]);
+            return $item;
+        }
+
+        return null;
+    }
+
+    /**
      * Gives the item passed directly to the player, independent of anything around happening in the game.
      *
      * @param $item
@@ -73,7 +91,7 @@ abstract class Entity
      * it could not be equipped.
      *
      * @param $itemName
-     * @return bool
+     * @return bool|string
      */
     public function equip($itemName) {
         $toEquip = $this->getItem($itemName);

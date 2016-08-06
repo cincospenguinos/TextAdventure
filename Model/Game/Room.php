@@ -203,6 +203,22 @@ class Room
     }
 
     /**
+     * If the monster matching the name provided is dead, takes the entire inventory and drops it on the ground.
+     * Otherwise, this method does nothing.
+     *
+     * @param $monsterName
+     */
+    public function monsterKilled($monsterName) {
+        $monster = $this->getMonster($monsterName);
+
+        if(isset($monster) && $monster->isDead()){
+            foreach($monster->getItemList() as $item){
+                $this->addItem($monster->removeItem($item));
+            }
+        }
+    }
+
+    /**
      * Returns the entire collection of hostile monsters who are not dead.
      *
      * @return array

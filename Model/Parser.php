@@ -52,6 +52,8 @@ class Parser
                 return 'attack';
             case (strcmp($command, 'health') === 0):
                 return 'health';
+            case (strcmp($command, 'equip') === 0):
+                return 'equip';
             default:
                 return null;
         }

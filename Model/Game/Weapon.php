@@ -53,8 +53,11 @@ class Weapon extends Item
         $damage = 0;
         $counter = 0;
 
-        while ($counter < $this->damageAmount)
+        while ($counter < $this->damageAmount){
             $damage += mt_rand(1, $this->damageType);
+            $counter += 1;
+        }
+
 
         return $damage;
     }

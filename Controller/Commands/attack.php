@@ -5,11 +5,9 @@
  *~ attack [target] - attack the target provided.
  *# <strong>attack [target]</strong> will throw a physical attack at the target provided.
  *
- * TODO: Figure out nice output for all the combat
- * TODO: Disarming? Penalties on low rolls?
- * TODO: Move attack method code out into the controller
  * TODO: Add multiple strings to describe the action, rather than "so and so was hit"
  * TODO: Smarter AI - if the AI drops its weapon, it picks it up. If the player drops its weapon, the AI picks it up.
+ * TODO: If an enemy dies, drop their stuff on the ground
  */
 require_once '../Model/Game/CombatManager.php';
 
@@ -38,8 +36,10 @@ if(isset($monster)){
             break;
     }
 
-    if($monster->isDead())
+    if($monster->isDead()){
         $data['response'] .= $monster->getName() . " was killed! ";
+        $player->getCurrentRoom()->monsterKilled($monster->getName());
+    }
 
     include 'monster_combat.php';
 } else {

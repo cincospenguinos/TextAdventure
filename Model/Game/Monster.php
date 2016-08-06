@@ -28,6 +28,21 @@ class Monster extends Entity
         $this->setLevelFromAttributes();
     }
 
+    /**
+     * Gives this monster damage, and drops all their equipped items upon death.
+     *
+     * @param $amount
+     * @return bool
+     */
+    public function takeDamage($amount){
+        parent::takeDamage($amount);
+
+        if($this->isDead)
+            $this->equippedItems = [];
+
+        return $this->isDead;
+    }
+
     public function physicalToHit()
     {
         return Attribute::getModifier($this->getDexterity()) / 2 + $this->getAllEquippedModifiers(Attribute::PhysicalToHit);
