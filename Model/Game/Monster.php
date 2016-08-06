@@ -15,7 +15,6 @@ class Monster extends Entity
 {
     // TODO: Switch to factory design pattern?
     // TODO: Testing
-    // TODO: Add ability to equip items and stuff
     private $isHostile, $name, $description, $aliases;
 
     public function __construct($_attributes, $_name, $_description, $_isHostile = true)
@@ -31,7 +30,7 @@ class Monster extends Entity
 
     public function physicalToHit()
     {
-        return Attribute::getModifier($this->getDexterity()) / 2;
+        return Attribute::getModifier($this->getDexterity()) / 2 + $this->getAllEquippedModifiers(Attribute::PhysicalToHit);
     }
 
     /**
@@ -41,8 +40,7 @@ class Monster extends Entity
      */
     public function physicalDamage()
     {
-        // TODO: Include weapon damage here
-        return (mt_rand(1, 4) + Attribute::getModifier($this->getStrength())) / 2;
+        return ($this->rollWeaponDamage() + Attribute::getModifier($this->getStrength())) / 2 + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
     }
 
     /**
@@ -52,7 +50,7 @@ class Monster extends Entity
      */
     public function spellToHit()
     {
-        return Attribute::getModifier($this->getConstitution()) / 2;
+        return Attribute::getModifier($this->getConstitution()) / 2 + $this->getAllEquippedModifiers(Attribute::SpellToHit);
     }
 
     /**
@@ -62,8 +60,8 @@ class Monster extends Entity
      */
     public function spellDamage()
     {
-        // TODO: Include weapon damage here
-        return (mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence())) / 2;
+        // TODO: How will we do spell damage from weapons?
+        return (mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence())) / 2 + $this->getAllEquippedModifiers(Attribute::SpellDamage);
     }
 
     /**
@@ -73,7 +71,7 @@ class Monster extends Entity
      */
     public function evasiveness()
     {
-        return (3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence())) / 2;
+        return (3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence())) / 2 + $this->getAllEquippedModifiers(Attribute::Evasiveness);
     }
 
     /**
@@ -83,7 +81,7 @@ class Monster extends Entity
      */
     public function maxHitPoints()
     {
-        return (3 + $this->getConstitution() + Attribute::getModifier($this->getStrength())) / 2;
+        return (3 + $this->getConstitution() + Attribute::getModifier($this->getStrength())) / 2 + $this->getAllEquippedModifiers(Attribute::MaxHitPoints);
     }
 
     /**
@@ -164,6 +162,8 @@ class Monster extends Entity
 
     /**
      * Sets the level from the attributes amount.
+     *
+     * TODO: Balance this
      */
     private function setLevelFromAttributes(){
         $this->level = 0;
