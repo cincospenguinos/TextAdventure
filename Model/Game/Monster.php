@@ -14,8 +14,6 @@ require_once 'Attribute.php';
 class Monster extends Entity
 {
     // TODO: Testing
-    // TODO: Attributes
-    // TODO: Calculate level based off of attributes
     private $isHostile, $name, $description, $aliases;
 
     public function __construct($_attributes, $_name, $_description, $_isHostile = true)
@@ -31,7 +29,7 @@ class Monster extends Entity
 
     public function physicalToHit()
     {
-        return Attribute::getModifier($this->getDexterity());
+        return Attribute::getModifier($this->getDexterity()) / 2;
     }
 
     /**
@@ -42,7 +40,7 @@ class Monster extends Entity
     public function physicalDamage()
     {
         // TODO: Include weapon damage here
-        return mt_rand(1, 4) + Attribute::getModifier($this->getStrength());
+        return (mt_rand(1, 4) + Attribute::getModifier($this->getStrength())) / 2;
     }
 
     /**
@@ -52,7 +50,7 @@ class Monster extends Entity
      */
     public function spellToHit()
     {
-        return Attribute::getModifier($this->getConstitution());
+        return Attribute::getModifier($this->getConstitution()) / 2;
     }
 
     /**
@@ -63,7 +61,7 @@ class Monster extends Entity
     public function spellDamage()
     {
         // TODO: Include weapon damage here
-        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence());
+        return (mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence())) / 2;
     }
 
     /**
@@ -73,7 +71,7 @@ class Monster extends Entity
      */
     public function evasiveness()
     {
-        return 3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence());
+        return (3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence())) / 2;
     }
 
     /**
@@ -83,7 +81,7 @@ class Monster extends Entity
      */
     public function maxHitPoints()
     {
-        return 3 + $this->getConstitution() + Attribute::getModifier($this->getStrength());
+        return (3 + $this->getConstitution() + Attribute::getModifier($this->getStrength())) / 2;
     }
 
     /**
@@ -169,7 +167,7 @@ class Monster extends Entity
         $this->level = 0;
         $counter = 1;
         $sum = array_sum($this->attributes);
-        while($this->level + $counter * 3 < $sum){
+        while($this->level + $counter * 3 < 9 - $sum){
             $this->level += 1;
             $counter += 1;
         }
