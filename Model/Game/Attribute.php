@@ -21,4 +21,14 @@ abstract class Attribute
     const PhysicalToHit = 7;
     const Evasiveness = 8;
     const SpellDamage = 9;
+
+    /**
+     * Returns the modifier of the score passed
+     *
+     * @param $attributeScore
+     * @return int
+     */
+    public static function getModifier ($attributeScore) {
+        return round((($attributeScore - 6) / 2)) * 1;
+    }
 }

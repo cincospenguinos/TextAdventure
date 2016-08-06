@@ -12,9 +12,9 @@ namespace LinkedWorldsCore;
 abstract class Entity
 {
     // TODO: Spells?
-    // TODO: Inventory at top level?
     // TODO: Make an inventory class and include it here - Inventory can be used to manage weight - maybe do this.
     // TODO: Equippables at top level?
+    // TODO: Let's migrate over to a d20 based system instead of this janky one.
     protected $attributes = [0, 0, 0, 0];
     protected $currentHitPoints, $isDead, $level;
 
@@ -70,7 +70,7 @@ abstract class Entity
      * @return boolean
      */
     public function attack($target, $isSpell = false, $spell = null) {
-        $roll = mt_rand() / mt_getrandmax();
+        $roll = mt_rand(1, 20);
 
         if ($isSpell){
             $roll += $this->spellToHit();

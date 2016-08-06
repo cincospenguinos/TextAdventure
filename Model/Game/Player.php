@@ -219,11 +219,11 @@ class Player extends Entity
     }
 
     /**
-     * @return float
+     * @return int
      */
     public function physicalToHit()
     {
-        return 0.1 * (3.0 * $this->attributes[Attribute::Dexterity] / 7.0) + $this->level * 0.02 + 0.3;
+        return Attribute::getModifier($this->getDexterity());
     }
 
     /**
@@ -233,7 +233,8 @@ class Player extends Entity
      */
     public function physicalDamage()
     {
-        return 1 + mt_rand(1, 2 * $this->attributes[Attribute::Strength] / 3) + $this->level;
+        // TODO: Include weapon damage here
+        return mt_rand(1, 4) + Attribute::getModifier($this->getStrength());
     }
 
     /**
@@ -244,7 +245,7 @@ class Player extends Entity
      */
     public function spellToHit()
     {
-        return 0.1 * (3.0 * $this->attributes[Attribute::Constitution] / 7.0) + $this->level * 0.02 + 0.3;
+        return Attribute::getModifier($this->getConstitution());
     }
 
     /**
@@ -254,7 +255,8 @@ class Player extends Entity
      */
     public function spellDamage()
     {
-        return 1 + mt_rand(2 * $this->attributes[Attribute::Intelligence] / 3) + $this->level;
+        // TODO: Include weapon damage here
+        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence());
     }
 
     /**
@@ -264,7 +266,7 @@ class Player extends Entity
      */
     public function evasiveness()
     {
-        return ((2.0 * $this->attributes[Attribute::Dexterity]) / 3.0 + $this->attributes[Attribute::Intelligence] / 3.0) * 0.0625 + ($this->level - 1) * 0.02;
+        return 3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence());
     }
 
     public function getCurrentHitPoints()
@@ -279,6 +281,6 @@ class Player extends Entity
      */
     public function maxHitPoints()
     {
-        return (5 * $this->attributes[Attribute::Constitution]) / 4 + $this->attributes[Attribute::Strength] / 4 + 2 * ($this->level - 1);
+        return 3 + $this->getConstitution() + Attribute::getModifier($this->getStrength());
     }
 }

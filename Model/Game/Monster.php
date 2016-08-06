@@ -9,34 +9,29 @@
 namespace LinkedWorldsCore;
 
 require_once 'Entity.php';
+require_once 'Attribute.php';
 
 class Monster extends Entity
 {
     // TODO: Testing
     // TODO: Attributes
     // TODO: Calculate level based off of attributes
-    private $isHostile, $name, $description, $aliases, $strength, $constitution, $dexterity, $intelligence;
+    private $isHostile, $name, $description, $aliases;
 
-    public function __construct($_level, $_name, $_description, $_isHostile = true)
+    public function __construct($_attributes, $_name, $_description, $_isHostile = true)
     {
-        $this->level = $_level;
         $this->name = $_name;
         $this->description = $_description;
         $this->isHostile = $_isHostile;
-
         $this->aliases = [];
-
-        // TODO: Fix this
+        $this->attributes = $_attributes;
         $this->currentHitPoints = $this->maxHitPoints();
-        $this->strength = 1;
-        $this->dexterity = 3;
-        $this->strength = 2;
-        $this->constitution = 4;
+        $this->setLevelFromAttributes();
     }
 
     public function physicalToHit()
     {
-        return 0.1 * (3.0 * $this->dexterity / 7.0) + $this->level * 0.02 + 0.3;
+        return Attribute::getModifier($this->getDexterity());
     }
 
     /**
@@ -46,7 +41,8 @@ class Monster extends Entity
      */
     public function physicalDamage()
     {
-        return 1 + mt_rand(1, $this->strength / 2) + $this->level;
+        // TODO: Include weapon damage here
+        return mt_rand(1, 4) + Attribute::getModifier($this->getStrength());
     }
 
     /**
@@ -56,7 +52,7 @@ class Monster extends Entity
      */
     public function spellToHit()
     {
-        return 0.1 * (3.0 * $this->constitution / 7.0) + $this->level * 0.02 + 0.3;
+        return Attribute::getModifier($this->getConstitution());
     }
 
     /**
@@ -66,7 +62,8 @@ class Monster extends Entity
      */
     public function spellDamage()
     {
-        return 1 + mt_rand(1, $this->intelligence / 2) + $this->level;
+        // TODO: Include weapon damage here
+        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence());
     }
 
     /**
@@ -76,7 +73,7 @@ class Monster extends Entity
      */
     public function evasiveness()
     {
-        return (2 * $this->dexterity / 3.0 + $this->intelligence / 3.0) * 0.02 + ($this->level - 1) * 0.02;
+        return 3 + $this->getDexterity() + Attribute::getModifier($this->getIntelligence());
     }
 
     /**
@@ -86,7 +83,7 @@ class Monster extends Entity
      */
     public function maxHitPoints()
     {
-        return (3 * $this->constitution) / 4 + $this->strength / 4 + 2 * ($this->level - 1);
+        return 3 + $this->getConstitution() + Attribute::getModifier($this->getStrength());
     }
 
     /**
@@ -163,5 +160,18 @@ class Monster extends Entity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * Sets the level from the attributes amount.
+     */
+    private function setLevelFromAttributes(){
+        $this->level = 0;
+        $counter = 1;
+        $sum = array_sum($this->attributes);
+        while($this->level + $counter * 3 < $sum){
+            $this->level += 1;
+            $counter += 1;
+        }
     }
 }
