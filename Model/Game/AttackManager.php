@@ -22,6 +22,17 @@ abstract class AttackManager
     const DefenderDisarmed = 3;
     const CriticalHit = 4;
 
+    /**
+     * Makes a single attack from the attacker provided to the defender. Manages spell attacks
+     * as well as physical ones, but defaults to physical attacks. Returns an integer representing
+     * the outcome to the attack itself.
+     *
+     * @param $attacker
+     * @param $defender
+     * @param bool $isSpell
+     * @param null $spell
+     * @return int
+     */
     public static function attack($attacker, $defender, $isSpell = false, $spell = null){
         $roll = mt_rand(1, 20);
 

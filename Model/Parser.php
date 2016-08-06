@@ -14,6 +14,8 @@ class Parser
     /**
      * Returns the arch command string from the human input provided.
      *
+     * TODO: Add disarm command
+     *
      * @param $humanInput
      * @return string|null
      */

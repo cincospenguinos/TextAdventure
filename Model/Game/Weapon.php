@@ -32,6 +32,11 @@ class Weapon extends Item
         $this->handSlots = $_handSlots;
     }
 
+    /**
+     * Returns the number of hand slots that this weapon takes up.
+     *
+     * @return int
+     */
     public function handSlots(){
         return $this->handSlots;
     }
@@ -44,9 +49,9 @@ class Weapon extends Item
     public function rollDamage(){
         $damage = 0;
         $counter = 0;
-        while($counter < $this->damageAmount){
+
+        while ($counter < $this->damageAmount)
             $damage += mt_rand(1, $this->damageType);
-        }
 
         return $damage;
     }
