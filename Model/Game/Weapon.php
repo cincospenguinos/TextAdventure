@@ -21,8 +21,8 @@ class Weapon extends Item
      * @param $_weaponName - name of weapon
      * @param $_lookAtDescription - what is shown when the player looks at the weapon
      * @param null $_lookDescription - what is shown when the weapon is sitting in the room
-     * @param null $_damageAmount - how many "rolls" this weapon should make
-     * @param bool $_damageType - what kind of "roll" this weapon should make
+     * @param $_damageAmount - how many "rolls" this weapon should make
+     * @param $_damageType - what kind of "roll" this weapon should make
      * @param $_handSlots - the number of "hand slots" this weapon takes (1 or 2)
      */
     public function __construct($_weaponName, $_lookAtDescription, $_damageAmount, $_damageType, $_handSlots, $_lookDescription = null)
@@ -30,6 +30,8 @@ class Weapon extends Item
         parent::__construct($_weaponName, $_lookAtDescription, $_lookDescription, true, true);
 
         $this->handSlots = $_handSlots;
+        $this->damageAmount = $_damageAmount;
+        $this->damageType = $_damageType;
     }
 
     /**
@@ -37,7 +39,7 @@ class Weapon extends Item
      *
      * @return int
      */
-    public function handSlots(){
+    public function getHandSlots(){
         return $this->handSlots;
     }
 

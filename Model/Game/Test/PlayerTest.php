@@ -149,5 +149,81 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->playerOne->getCurrentRoom()->hasItem('implement'));
     }
 
-    // TODO: Add methods for equipping
+    /**
+     * When I attempt to pick up an item that is not available, I should be told I cannot.
+     */
+    public function testPickUpEnvironmentItem(){
+        $item = new \LinkedWorldsCore\Item('Writing Implement', 'A simple writing implement.', null, false, false);
+        $this->playerOne->getCurrentRoom()->addItem($item);
+
+        $this->assertTrue(is_string($this->playerOne->takeItem('Writing Implement')));
+    }
+
+    /**
+     * When I attempt to equip an item, I expect that it will be equipped.
+     */
+    public function testEquipItem(){
+        $item = new \LinkedWorldsCore\Item('Pendant', 'A pendant.', null, true, true);
+        $this->playerOne->getCurrentRoom()->addItem($item);
+        $this->playerOne->takeItem('pendant');
+        $this->assertTrue($this->playerOne->hasItem('pendant'));
+
+        $hasEquipped = $this->playerOne->equip('pendant');
+
+        $this->assertFalse(is_string($hasEquipped));
+    }
+
+    /**
+     * When I attempt to equip an item that is not able to be equipped, I expect to be told that that is the case.
+     */
+    public function testCannotEquipItem(){
+        $item = new \LinkedWorldsCore\Item('Object', 'An object', null);
+        $this->playerOne->getCurrentRoom()->addItem($item);
+        $this->assertTrue(is_string($this->playerOne->equip('object')));
+        $this->playerOne->takeItem('object');
+        $this->assertTrue(is_string($this->playerOne->equip('object')));
+    }
+
+    /**
+     * When I attempt to unequip an item, I expect that it will be unequipped.
+     */
+    public function testUnequipItem(){
+        $item = new \LinkedWorldsCore\Item('Pendant', 'A pendant.', null, true, true);
+        $this->playerOne->getCurrentRoom()->addItem($item);
+        $this->playerOne->takeItem('pendant');
+        $this->assertTrue($this->playerOne->hasItem('pendant'));
+
+        $hasEquipped = $this->playerOne->equip('pendant');
+
+        $this->assertFalse(is_string($hasEquipped));
+        $this->assertTrue($this->playerOne->unequip('pendant'));
+        $this->assertFalse(in_array('pendant', $this->playerOne->getEquippedItemNames()));
+    }
+
+    public function testEquipItemWithBonuses(){
+        $item = new \LinkedWorldsCore\Item('Pendant', 'A pendant.', null, true, true);
+        $item->setEquipModifier(\LinkedWorldsCore\Attribute::Constitution, 2);
+        $this->playerOne->getCurrentRoom()->addItem($item);
+
+        $preCon = $this->playerOne->getConstitution();
+        $this->playerOne->takeItem('pendant');
+        $this->playerOne->equip('pendant');
+        $postCon = $this->playerOne->getConstitution();
+
+        $this->assertTrue($preCon !== $postCon);
+    }
+
+    /**
+     * When I attempt to equip a weapon, I expect to be equipped.
+     */
+    public function testEquipWeapon(){
+        $weapon = new \LinkedWorldsCore\Weapon('Dagger', 'A simple daggar.', 1, 6, 1);
+        $this->playerOne->giveItem($weapon);
+
+        $preDamage = $this->playerOne->maxPhysicalDamage();
+        $this->playerOne->equip('Dagger');
+        $postDamage = $this->playerOne->maxPhysicalDamage();
+
+        $this->assertTrue($preDamage !== $postDamage);
+    }
 }

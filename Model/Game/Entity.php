@@ -16,6 +16,7 @@ abstract class Entity
     protected $attributes = [0, 0, 0, 0];
     protected $inventory = [];
     protected $equippedItems = [];
+    protected $handSlots = 2; // TODO: Make sure this is in Monster as well!
     protected $currentHitPoints, $isDead, $level;
 
     /**
@@ -78,7 +79,10 @@ abstract class Entity
         $toEquip = $this->getItem($itemName);
 
         if(is_null($toEquip))
-            return 'That item could not be found on your person.';
+            return 'You do not seem to be carrying that item.';
+
+        if($toEquip->canEquip() === false)
+            return 'You cannot equip that item.';
 
         if($toEquip instanceof Weapon){
             if($this->handSlots - $toEquip->getHandSlots() >= 0){
@@ -88,7 +92,7 @@ abstract class Entity
             }
         }
 
-        $this->equippedItems[strtolower($toEquip->getName())];
+        array_push($this->equippedItems, strtolower($toEquip->getName()));
 
         return true;
     }
@@ -109,7 +113,7 @@ abstract class Entity
         if($toUnequip instanceof Weapon)
             $this->handSlots += $toUnequip->getHandSlots();
 
-        unset($this->equippedItems[strtolower($toUnequip->getName())]);
+        $this->equippedItems = array_diff($this->equippedItems, [strtolower($toUnequip->getName())]);
         return true;
     }
 
@@ -284,6 +288,29 @@ abstract class Entity
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function getEquippedItemNames(){
+        return $this->equippedItems;
+    }
+
+    /**
+     * Returns this Entity's max physical damage.
+     *
+     * @return int
+     */
+    public function maxPhysicalDamage(){
+        $sum = 0;
+
+        foreach($this->equippedItems as $itemName){
+            $item = $this->inventory[$itemName];
+
+            if($item instanceof Weapon){
+                $sum += $item->getMaxDamage();
+            }
+        }
+
+        return $sum;
     }
 
     /**

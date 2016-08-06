@@ -138,6 +138,10 @@ class Item
         return $this->itemName;
     }
 
+    public function canEquip(){
+        return $this->canEquip;
+    }
+
     public function setItemName($itemName)
     {
         $this->itemName = $itemName;

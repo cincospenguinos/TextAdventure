@@ -18,13 +18,14 @@ require_once 'Weapon.php';
 
 class Player extends Entity
 {
-    // TODO: More tests --> look up coverage testing with PhpStorm & PHPUnit
-    private $username, $currentRoom, $currentDungeon, $handSlots;
+    // TODO: Look up coverage testing with PhpStorm & PHPUnit
+    private $username, $currentRoom, $currentDungeon;
 
     /**
      * Player constructor.
      * @param $_username
-     * @param $_startingRoom
+     * @param $_dungeon
+     * @internal param $_startingRoom
      */
     public function __construct($_username, $_dungeon) {
         $this->username = $_username;

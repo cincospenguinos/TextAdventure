@@ -129,7 +129,7 @@ class Room
             if(!$this->itemsInRoom[$itemName]->isRemovable())
                 return false;
 
-            $itemToBeRemoved = $this->itemsInRoom[$itemName]->copy();
+            $itemToBeRemoved = $this->itemsInRoom[$itemName];
             unset($this->itemsInRoom[$itemName]);
             return $itemToBeRemoved;
         } else {
