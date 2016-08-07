@@ -28,63 +28,6 @@ class Room
     }
 
     /**
-     * Returns the description of the room.
-     *
-     * @return string
-     * @throws \TypeError
-     */
-    public function look(){
-        // TODO: Move this out to the controller. It will clean the code up quite a bit
-        $description = $this->description;
-
-        foreach($this->itemsInRoom as $item) {
-            if(null !== $item->getLookDescription()){
-                $description .= " " . $item->getLookDescription();
-            } else {
-                $description .= " You see a " . strtolower($item->getName()) . " here."; // TODO: Better grammar
-            }
-        }
-
-        foreach($this->monstersInRoom as $monster) {
-            if($monster->isDead())
-                $description .= " There is the corpse of a " . strtolower($monster->getName()) . " here.";
-            else
-                $description .= " There is a " . strtolower($monster->getName()) . " here.";
-        }
-
-        return $description;
-    }
-
-    /**
-     * Returns the description of the item or the monster matching the name provided.
-     *
-     * @param $name
-     * @return string or null
-     */
-    public function lookAt($name){
-        // TODO: Move this out to the controller. It will clean the code up quite a bit
-        $name = strtolower($name);
-
-        if(isset($this->itemsInRoom[$name]))
-            return $this->itemsInRoom[$name]->getLookAtDescription();
-
-        // Don't forget to check for item aliases!
-        foreach($this->itemsInRoom as $item)
-            if($item->hasAlias($name))
-                return $item->getLookAtDescription();
-
-        if(isset($this->monstersInRoom[$name]))
-            return $this->monstersInRoom[$name]->getDescription();
-
-        // Don't forget to check for item aliases!
-        foreach($this->monstersInRoom as $monster)
-            if($monster->hasAlias($name))
-                return $monster->getDescription();
-
-        return null;
-    }
-
-    /**
      * Adds the item passed into the array.
      *
      * TODO: Should an error be thrown if an item with that name already exists? How should we manage copies?

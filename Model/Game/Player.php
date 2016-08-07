@@ -58,38 +58,6 @@ class Player extends Entity
     }
 
     /**
-     * Returns the description of the current room.
-     *
-     * @return string
-     */
-    public function look(){
-        return $this->currentRoom->look();
-    }
-
-    /**
-     * Returns the description of the item matching the name provided, either in the player's
-     * inventory or in the room itself.
-     *
-     * TODO: What about the case where there are two items of the same name?
-     *
-     * @param $itemName
-     * @return string or null
-     */
-    public function lookAt($itemName) {
-        if(isset($this->inventory[strtolower($itemName)]))
-            return $this->inventory[strtolower($itemName)]->getLookAtDescription();
-
-        // Don't forget to check for item aliases!
-        foreach($this->inventory as $item)
-            if($item->hasAlias($itemName))
-                return $item->getLookAtDescription();
-
-        $description = $this->currentRoom->lookAt($itemName);
-
-        return $description;
-    }
-
-    /**
      * Takes the item matching the item name passed from the current room.
      *
      * @param $itemName

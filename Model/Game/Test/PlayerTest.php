@@ -58,38 +58,6 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * When I look at an item and the name of the item matches an item in my inventory, I should
-     * receive the description of that item.
-     */
-    public function testLookAtItemInInventory(){
-        $this->playerOne->giveItem(new \LinkedWorldsCore\Item('Item', 'description'));
-        $this->assertTrue($this->playerOne->hasItem('Item'));
-        
-        $description = $this->playerOne->lookAt('Item');
-        $this->assertTrue(strcmp($description, 'description') === 0);
-    }
-
-    /**
-     * When I look at an item and it is in the room instead of in my inventory, I should receive
-     * a description of that item.
-     */
-    public function testLookAtItemInRoom(){
-        $this->dungeonOne->getStartRoom()->addItem(new \LinkedWorldsCore\Item('Item', 'description'));
-        $description = $this->playerOne->lookAt('Item');
-
-        $this->assertFalse(is_null($description));
-        $this->assertTrue(strcmp($description, 'description') === 0);
-    }
-
-    /**
-     * When I attempt to look at an item that does not exist, I'm given null instead of a description.
-     */
-    public function testLookAtItemThatDoesNotExist(){
-        $description = $this->playerOne->lookAt('Item');
-        $this->assertTrue(is_null($description));
-    }
-
-    /**
      * When I pick up an item in the dungeon, I expect the item to be in my inventory and not on the floor
      * in the dungeon.
      */
@@ -113,20 +81,6 @@ class PlayerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->playerOne->hasItem('Key of Gondor'));
         $this->assertTrue($this->playerOne->hasItem('key'));
-    }
-
-    /**
-     * When I attempt to look at an item in the world, I expect to be given the description if I use one of
-     * its aliases.
-     */
-    public function testLookAtItemByAlias() {
-        $item = new \LinkedWorldsCore\Item('Key of Gondor', 'Some important key.');
-        $item->addAlias('key');
-        $this->playerOne->getCurrentRoom()->addItem($item);
-        $result = $this->playerOne->lookAt('key');
-
-        $this->assertFalse(is_null($result));
-        $this->assertTrue(strcmp($result, 'Some important key.') === 0);
     }
 
     /**

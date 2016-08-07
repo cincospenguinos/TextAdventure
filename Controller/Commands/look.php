@@ -10,13 +10,48 @@
  * Time: 9:53 PM
  */
 if(strpos($command, 'look at') !== false) {
-    $thing = str_replace('look at ', '', $command);
-    $response = $player->lookAt($thing);
+    $thing = strtolower(str_replace('look at ', '', $command));
+    $room = $player->getCurrentRoom();
+    $thingDescription = null;
 
-    if(is_null($response))
-        $data['response'] = "I don't see anything here that matches the name \"$thing\".";
+    if(isset($room->getAllItems()[$thing])) {
+        $thingDescription = $room->getAllItems()[$thing]->getLookAtDescription();
+        error_log("[DEBUG] Got thing from things array");
+    }
+
+    error_log("[DEBUG] Thing description: $thingDescription");
+
+    if(is_null($thingDescription)){
+        foreach($room->getAllItems() as $item)
+            if($item->hasAlias($thing)) {
+                $thingDescription = $item->getLookAtDescription();
+                error_log("[DEBUG] Got thing from alias");
+            }
+    }
+
+    error_log("[DEBUG] Thing description: $thingDescription");
+
+    if(is_null($thingDescription)){
+        if(isset($room->getAllMonsters()[$thing])) {
+            $thingDescription = $room->getAllMonsters()[$thing]->getDescription();
+            error_log("[DEBUG] Got thing from monsters array");
+        }
+    }
+
+    error_log("[DEBUG] Thing description: $thingDescription");
+
+    if(is_null($thingDescription)){
+        foreach($room->getAllMonsters() as $monster)
+            if($monster->hasAlias($thing))
+                $thingDescription = $monster->getDescription();
+    }
+
+    error_log("[DEBUG] Thing description: $thingDescription");
+
+    if(is_null($thingDescription))
+        $data['response'] = "I don't see anything here that matches the name \"$thingDescription\".";
     else
-        $data['response'] = "<div class='item_description'>" . htmlspecialchars($player->lookAt($thing)) . "</div>";
+        $data['response'] = "<div class='thing_description'>" . htmlspecialchars($thingDescription) . "</div>";
 
     require_once 'monster_combat.php'; // We will only trigger combat after looking at something
 } else if(strcmp($command, 'look') === 0){

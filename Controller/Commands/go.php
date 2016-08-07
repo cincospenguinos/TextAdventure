@@ -18,9 +18,10 @@ if(\LinkedWorldsCore\Direction::isDirectionString($command)){
 
     if($player->goDirection($direction)){
         // We're going to throw the look command down now, as that will make us avoid adding extra code
+        $oldCommand = $command;
         $command = 'look';
         include 'look.php';
-        $command = 'go';
+        $command = $oldCommand;
     } else {
         $data['response'] = '<div class="go_response">There is no exit that direction.</div>';
     }
