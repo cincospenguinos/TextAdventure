@@ -246,6 +246,10 @@ abstract class Entity
         return $this->attributes[Attribute::Intelligence] + $this->getAllEquippedModifiers(Attribute::Intelligence);
     }
 
+    public abstract function rollPhysicalDamage();
+
+    public abstract function rollSpellDamage();
+
     /**
      * @param $strength
      */

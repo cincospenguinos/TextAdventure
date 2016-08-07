@@ -16,10 +16,7 @@ if(strpos($command, 'look at') !== false) {
 
     if(isset($room->getAllItems()[$thing])) {
         $thingDescription = $room->getAllItems()[$thing]->getLookAtDescription();
-        error_log("[DEBUG] Got thing from things array");
     }
-
-    error_log("[DEBUG] Thing description: $thingDescription");
 
     if(is_null($thingDescription)){
         foreach($room->getAllItems() as $item)
@@ -29,16 +26,11 @@ if(strpos($command, 'look at') !== false) {
             }
     }
 
-    error_log("[DEBUG] Thing description: $thingDescription");
-
     if(is_null($thingDescription)){
         if(isset($room->getAllMonsters()[$thing])) {
             $thingDescription = $room->getAllMonsters()[$thing]->getDescription();
-            error_log("[DEBUG] Got thing from monsters array");
         }
     }
-
-    error_log("[DEBUG] Thing description: $thingDescription");
 
     if(is_null($thingDescription)){
         foreach($room->getAllMonsters() as $monster)
@@ -46,7 +38,6 @@ if(strpos($command, 'look at') !== false) {
                 $thingDescription = $monster->getDescription();
     }
 
-    error_log("[DEBUG] Thing description: $thingDescription");
 
     if(is_null($thingDescription))
         $data['response'] = "I don't see anything here that matches the name \"$thingDescription\".";

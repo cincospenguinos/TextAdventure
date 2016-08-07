@@ -148,7 +148,11 @@ class Player extends Entity
      */
     public function physicalDamage()
     {
-        return $this->rollWeaponDamage() + Attribute::getModifier($this->getStrength()) + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
+        return Attribute::getModifier($this->getStrength()) + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
+    }
+
+    public function rollPhysicalDamage(){
+        return $this->rollWeaponDamage() + $this->physicalDamage();
     }
 
     /**
@@ -169,8 +173,12 @@ class Player extends Entity
      */
     public function spellDamage()
     {
+        return Attribute::getModifier($this->getIntelligence()) + $this->getAllEquippedModifiers(Attribute::SpellDamage);
+    }
+
+    public function rollSpellDamage(){
         // TODO: Include the spell damage amount here - should change depending on the spell
-        return mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence()) + $this->getAllEquippedModifiers(Attribute::SpellDamage);
+        return mt_rand(1, 4) + $this->spellDamage();
     }
 
     /**

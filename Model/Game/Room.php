@@ -58,6 +58,25 @@ class Room
     }
 
     /**
+     * Returns the item matching the name provided, or null if that item cannot be found.
+     *
+     * @param $itemName
+     * @return mixed|null
+     */
+    public function getItem($itemName){
+        $itemName = strtolower($itemName);
+        if(isset($this->itemsInRoom[$itemName]))
+            return $this->itemsInRoom[$itemName];
+
+        foreach($this->itemsInRoom as $item){
+            if($item->hasAlias($itemName))
+                return $item;
+        }
+
+        return null;
+    }
+
+    /**
      * Removes the item from the collection of items in this room. Returns that item if it exists
      * or null if it does not exist. Seeks first to match the name of the item and if that fails
      * checks all the aliases of all the items. Returns false if the item cannot be taken.

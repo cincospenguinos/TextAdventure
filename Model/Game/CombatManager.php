@@ -56,7 +56,7 @@ abstract class CombatManager
                     $roll += $attacker->physicalToHit();
 
                 if($roll > $defender->evasiveness()){
-                    $isSpell === true ? $defender->takeDamage($attacker->spellDamage()) : $defender->takeDamage($attacker->physicalDamage());
+                    $isSpell === true ? $defender->takeDamage($attacker->rollSpellDamage()) : $defender->takeDamage($attacker->rollPhysicalDamage());
                     return CombatManager::DefaultHit;
                 } else
                     return CombatManager::DefaultMiss;

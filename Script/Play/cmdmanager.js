@@ -49,9 +49,9 @@ $(document).ready(function(){
 
     submitCommand(data, function(response){
         response = $.parseJSON(response);
-        $('#response_container').append(response.response + "<br/>");
+        $('#response_container').append(response.response + "");
     }, function(response){
-        $('#response_container').append(response.response + "<br/>");
+        $('#response_container').append(response.response + "");
     });
 
     $(document).keydown(function(event){

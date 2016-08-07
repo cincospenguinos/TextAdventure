@@ -6,6 +6,7 @@
  *# <strong>inventory</strong> shows what items you are carrying.
  *
  * TODO: Add stats command to let people view stats on a specific item?
+ * TODO: Show whether or not each item is a Weapon or is equippable
  *
  * User: Andre LaFleur
  * Date: 5/28/16

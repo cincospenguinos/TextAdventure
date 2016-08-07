@@ -66,18 +66,13 @@ class RoomTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(strcmp($item->getName(), 'Item') === 0);
     }
 
-    /**
-     * When I attempt to look at an item in the room by its alias, I expect to be
-     * given the description of that item.
-     */
-    public function testLookAtItemInRoomByAlias(){
-        $room = new \LinkedWorldsCore\Room('A Room', 'A very simple room.');
-        $item = new \LinkedWorldsCore\Item('Item', 'A very simple item.');
-        $item->addAlias('thing');
+    public function testGetItem(){
+        $room = new \LinkedWorldsCore\Room("A Room", 'A simple room.');
+        $item = new \LinkedWorldsCore\Item('Thing', 'A simple thing.');
         $room->addItem($item);
+        $thing = $room->getItem('thing');
 
-        $result = $room->lookAt('thing');
-        $this->assertFalse(is_null($result));
-        $this->assertTrue(strcmp($result, 'A very simple item.') === 0);
+        $this->assertFalse(is_null($thing));
+        $this->assertTrue($thing->getName() === 'Thing');
     }
 }

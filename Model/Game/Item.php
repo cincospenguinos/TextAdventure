@@ -157,6 +157,15 @@ class Item
     }
 
     /**
+     * Returns an array of all the item modifiers.
+     *
+     * @return array
+     */
+    public function getItemModifiers(){
+        return $this->whenEquipped;
+    }
+
+    /**
      * Returns true if this is an aetherial weapon.
      *
      * @return bool

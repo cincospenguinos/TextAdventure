@@ -1,0 +1,19 @@
+
+
+/* Player attribute stuff */
+/* TODO: Nicer formatting for player attributes */
+.player_attributes {
+    width: 50%;
+    float: left;
+    margin: auto;
+    padding: 10px;
+}
+
+.player_independent_attributes {
+    width: 50%;
+    float: left;
+}
+
+.player_dependent_attributes {
+    margin-left: 15%;
+}

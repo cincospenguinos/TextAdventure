@@ -55,13 +55,13 @@ class Monster extends Entity
      */
     public function physicalDamage()
     {
-        return ($this->rollWeaponDamage() + Attribute::getModifier($this->getStrength())) / 2 + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
+        return Attribute::getModifier($this->getStrength()) / 2 + $this->getAllEquippedModifiers(Attribute::PhysicalDamage);
     }
 
     /**
      * Checks to see if this entity hits a spell attack on the target provided.
      *
-     * @return boolean
+     * @return int
      */
     public function spellToHit()
     {
@@ -75,8 +75,7 @@ class Monster extends Entity
      */
     public function spellDamage()
     {
-        // TODO: How will we do spell damage from weapons?
-        return (mt_rand(1, 4) + Attribute::getModifier($this->getIntelligence())) / 2 + $this->getAllEquippedModifiers(Attribute::SpellDamage);
+        return (Attribute::getModifier($this->getIntelligence())) / 2 + $this->getAllEquippedModifiers(Attribute::SpellDamage);
     }
 
     /**
@@ -188,5 +187,17 @@ class Monster extends Entity
             $this->level += 1;
             $counter += 1;
         }
+    }
+
+    public function rollPhysicalDamage()
+    {
+        // TODO: Half weapon damage?
+        return $this->rollWeaponDamage() / 2 + $this->physicalDamage();
+    }
+
+    public function rollSpellDamage()
+    {
+        // TODO: Half weapon damage?
+        return mt_rand(1, 4) / 2 + $this->spellDamage();
     }
 }

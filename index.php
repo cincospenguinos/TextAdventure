@@ -1,11 +1,13 @@
 <?php
 
+// TODO: Switch over from simple jquery to jsquery UI.
 echo "<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset='UTF-8'/>
         <title>Not all who wander are lost</title>
         <link rel='stylesheet' type='text/css' href='View/Style/global_stylesheet.css'/>
+        <link rel='stylesheet' type='text/css' href='View/Style/play_stylesheet.css'/>
         <script type='text/javascript' src='Script/lib/jquery.min.js'></script>
         <script type='text/javascript' src='Script/Play/cmdmanager.js'></script>
     </head>
