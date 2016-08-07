@@ -25,6 +25,7 @@ notes that are a bit subjective and may need more exploring.
 * Questioning the authenticity of how or why some of the things are where they are
     * Stefano explained this to mean that some things in the tutorial felt out of place. Like a castle under a cabin doesn't seem reasonable.
 * Spacing on the index page should be reworked. Have larger margins on each side.
+* It is that it is too short, small, etc.
 
 ### Things to consider
 
@@ -44,5 +45,6 @@ notes that are a bit subjective and may need more exploring.
 * Bolded text that states what room you’re in is a big help, although it (and its flavor text) does get a bit hard to find amongst the other text.
 * When re-looking at the secret shrine room, the “corpse of the cultist” is a nice touch.
     * We should definitely implement a "loot the corpes" feature
+* I didn't get lost at all because I felt it was described better
 
 ### Things to explore

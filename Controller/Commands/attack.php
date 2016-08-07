@@ -7,7 +7,6 @@
  *
  * TODO: Add multiple strings to describe the action, rather than "so and so was hit"
  * TODO: Smarter AI - if the AI drops its weapon, it picks it up. If the player drops its weapon, the AI picks it up.
- * TODO: If an enemy dies, drop their stuff on the ground
  */
 require_once '../Model/Game/CombatManager.php';
 

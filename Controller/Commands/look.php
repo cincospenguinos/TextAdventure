@@ -22,7 +22,6 @@ if(strpos($command, 'look at') !== false) {
 } else if(strcmp($command, 'look') === 0){
     $roomName = $player->getCurrentRoom()->getRoomName();
     $exits = $player->getAllExitDirections();
-    $description = htmlspecialchars($player->look());
     $response = "<div class='room_info_header'><div class='room_name'><strong>" . htmlspecialchars($roomName) . "</strong></div><div class='exits_list'><strong>Exits: </strong>";
 
     foreach($exits as $exit){
@@ -30,6 +29,25 @@ if(strpos($command, 'look at') !== false) {
     }
 
     $response = trim($response, ', ');
+
+    $room = $player->getCurrentRoom();
+    $description = $room->getDescription();
+
+    foreach($room->getAllItems() as $item) {
+        if(null !== $item->getLookDescription()){
+            $description .= " " . $item->getLookDescription();
+        } else {
+            $description .= " You see a " . strtolower($item->getName()) . " here."; // TODO: Better grammar
+        }
+    }
+
+    foreach($room->getAllMonsters() as $monster) {
+        if($monster->isDead())
+            $description .= " There is the corpse of a " . strtolower($monster->getName()) . " here.";
+        else
+            $description .= " There is a " . strtolower($monster->getName()) . " here.";
+    }
+
     $response .= "</div></div><div class='room_description'>{$description}</div>";
     $data['response'] = $response;
 } else {

@@ -2,8 +2,6 @@
 /**
  * Manages monster attacks.
  *
- * TODO: Include health information after being hit by an enemy
- *
  * User: tsvetok
  * Date: 8/2/16
  * Time: 6:52 PM
@@ -22,7 +20,7 @@ foreach($player->getCurrentRoom()->allHostileMonsters() as $monster) {
             $data['response'] .= " and misses.";
             break;
         case \LinkedWorldsCore\CombatManager::DefaultHit:
-            $data['response'] .= "and hits!<br/>";
+            $data['response'] .= "and hits!";
             break;
         case \LinkedWorldsCore\CombatManager::CriticalHit:
             $data['response'] .= "and scores a critical hit!";

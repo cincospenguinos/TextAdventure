@@ -219,6 +219,13 @@ class Room
     }
 
     /**
+     * Returns all the monsters, whether or not they are hostile.
+     */
+    public function getAllMonsters(){
+        return $this->monstersInRoom;
+    }
+
+    /**
      * Returns the entire collection of hostile monsters who are not dead.
      *
      * @return array
@@ -271,6 +278,10 @@ class Room
     public function setRoomName($roomName)
     {
         $this->roomName = $roomName;
+    }
+
+    public function getAllItems(){
+        return $this->itemsInRoom;
     }
 
     public function getGUID(){
